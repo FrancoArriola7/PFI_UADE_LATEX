@@ -81,11 +81,15 @@
 %\titleformat{\subsection}
 %{\normalfont\ssecfnt\bfseries}{\thesubsection}{1em}{}
 
-%Se pide numeraci\'on de tablas en n\'umeros romanos
+% Se pide numeraci\'on de tablas en n\'umeros romanos
 \renewcommand{\thetable}{\thechapter.\Roman{table}}
 
 %Espaciado antes y despu\'es de una figura respecto del texto
 \setlength{\textfloatsep}{5pt}
+
+% Para notas
+\usepackage{todonotes}
+\newcommand{\Nico}[1]{\todo[color=green!30,inline]{\textbf{Nico:} #1}}
 
 % IMPORTANTE: En la entrega de UADE se pide en negro, pero visualmente es mejor trabajar con color
 \usepackage{hyperref}
