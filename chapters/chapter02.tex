@@ -334,7 +334,7 @@ Estos estudios confirman que los modelos neuronales como LSTM y Bi-LSTM superan 
     \label{tab:comparacion}
     \begin{tabular}{|p{2.9cm}|p{2cm}|p{3cm}|p{5cm}|}
         \hline
-        \textbf{Modelo / Solución} & \textbf{Tipo} & \textbf{Tecnologías principales} & \textbf{Limitaciones destacadas} \\
+        \textbf{Solución} & \textbf{Tipo} & \textbf{Tecnologías principales} & \textbf{Limitaciones destacadas} \\
         \hline
         SAP F\&R & Comercial & ARIMA, reglas heurísticas & Costoso, complejo \\
         \hline
@@ -369,3 +369,45 @@ El sistema propuesto en este proyecto se distingue de las soluciones analizadas 
 \end{itemize}
 
 
+\section{User Research}
+
+Para validar la propuesta y diseñar una herramienta que responda a problemáticas reales del entorno operativo, se llevó a cabo una instancia de investigación cualitativa centrada en usuarios representativos del mercado objetivo. La metodología consistió en entrevistas semi-estructuradas a actores clave del rubro de productos perecederos, con el objetivo de identificar necesidades, limitaciones tecnológicas actuales, y oportunidades de mejora en los procesos de planificación y producción diaria.
+
+\subsection{Entrevista a Bruno, dueño de la Confitería ``Salvador''}
+
+Con el objetivo de comprender de manera más profunda el contexto operativo de los pequeños comercios de productos perecederos, se entrevistó a Bruno, propietario de la confitería ``Salvador'', un negocio con más de 20 años de trayectoria en la ciudad. Esta entrevista buscó obtener información cualitativa para validar el desarrollo de una herramienta de predicción de demanda y conocer el grado de adopción tecnológica actual.
+
+La confitería Salvador se especializa en la venta de café y postres, y emplea a más de 10 personas. Bruno señaló que el café y productos relacionados son los más demandados, mientras que los postres presentan una menor rotación. Según indicó, los productos tienen una duración estimada de un día en inventario, lo que evidencia una rotación diaria muy alta y la necesidad de una planificación precisa.
+
+Respecto a la gestión operativa, cada local es responsable de su propia reposición de productos. La producción diaria se define en función de los faltantes observados y de estimaciones realizadas a partir del comportamiento histórico de ventas. Entre los factores considerados para estas estimaciones, se destacó la influencia de los fines de semana, dado que la demanda suele incrementarse en esos días.
+
+Bruno remarcó que la precisión en la estimación de la demanda es muy importante para el negocio, ya que permite evitar tanto el quiebre de stock como la sobreproducción. Si bien actualmente el desperdicio no representa un problema crítico, sí es una preocupación constante por sus implicancias en los costos y la eficiencia operativa.
+
+En cuanto a la tecnología utilizada, la confitería ya emplea el sistema Maxirest para la gestión de inventario y predicción básica de demanda. Sin embargo, Bruno manifestó su disposición a adoptar nuevas herramientas siempre que aporten mejoras tangibles, como la reducción de desperdicios o el incremento de ventas.
+
+Particularmente, se mostró interesado en una herramienta que permita predecir la demanda de forma más precisa incorporando datos históricos, variables climáticas y otros factores exógenos. Considera que una solución de este tipo le permitiría ajustar la producción diaria de manera más eficiente, reducir mermas y mejorar la toma de decisiones operativas.
+
+Este testimonio pone de manifiesto la necesidad de soluciones accesibles, basadas en inteligencia artificial, que puedan integrarse fácilmente en los procesos de pequeños comercios. Además, valida el enfoque propuesto por este proyecto, que busca dotar a estos actores de herramientas tecnológicas que mejoren la eficiencia y la sustentabilidad de sus operaciones.
+
+
+\subsection{Entrevista a Maria, dueña de ``Tiendas Naturales''}
+
+Con el objetivo de comprender mejor las dinámicas operativas y los desafíos específicos de los comercios que gestionan productos perecederos, se entrevistó a María, propietaria de \textit{Tiendas Naturales}, un negocio especializado en ofrecer productos saludables y menús ejecutivos. Esta entrevista tiene como propósito validar la efectividad de una herramienta de predicción de demanda diseñada para optimizar la producción y reducir el desperdicio de productos perecederos en comercios de características similares.
+
+\indent \textit{Tiendas Naturales} ha estado en funcionamiento durante 15 años y cuenta con un equipo comprometido de más de 10 empleados. Este establecimiento se especializa en ofrecer una variedad de productos saludables, que incluyen desde menús ejecutivos hasta opciones para meriendas y productos más ligeros para quienes buscan alternativas saludables a lo largo del día. Los menús ejecutivos son su producto principal, dada la alta demanda, aunque también comercializan jugos naturales, ensaladas y repostería saludable como parte de su oferta de meriendas.
+
+\indent A pesar de que las meriendas tienen una menor rotación, representan una parte importante de la oferta, especialmente en horas de la tarde. Los productos en inventario permanecen, en promedio, entre dos a tres días, lo que refleja una alta rotación. Esta dinámica permite mantener una oferta fresca y de calidad, aunque plantea el reto constante de prever con precisión la demanda para evitar pérdidas por sobreproducción o quiebres de stock.
+
+\indent María explicó que actualmente el manejo de inventarios no está automatizado, ya que no disponen de un sistema formal de gestión. La estimación de cantidades a producir o adquirir se basa mayormente en un análisis manual de las ventas pasadas. Este proceso depende del criterio y la experiencia del equipo, sin incorporar herramientas tecnológicas que integren variables externas como el clima o eventos especiales.
+
+\indent Este enfoque, si bien funcional en la práctica, presenta limitaciones frente a escenarios de alta variabilidad en la demanda. La ausencia de un sistema predictivo dificulta la anticipación a días de mayor demanda y eleva el riesgo de errores en la planificación. Aunque la experiencia del equipo permite mantener cierta regularidad, María reconoció que una herramienta más precisa y dinámica sería muy beneficiosa para mejorar la eficiencia operativa.
+
+\indent En la actualidad, la planificación de la producción se realiza observando las ventas anteriores y ajustando de acuerdo con patrones repetidos. No obstante, María destacó la necesidad de incorporar factores adicionales, como promociones, festividades o eventos locales, que pueden impactar significativamente en la demanda de ciertos productos.
+
+\indent En cuanto al desperdicio, si bien no es un problema crítico, la empresa experimenta ocasionalmente pérdidas por productos que no logran venderse a tiempo. Esto ocurre principalmente con jugos y postres, los cuales poseen una vida útil muy corta. Cada pérdida representa un impacto económico y operativo, subrayando la importancia de una mejor gestión preventiva basada en datos.
+
+\indent El negocio actualmente emplea un software de gastronomía que brinda funcionalidades básicas de control de inventario y ventas, pero no incorpora capacidades predictivas. María expresó que, si existiera una herramienta que permita reducir desperdicios y mejorar ventas mediante una estimación más precisa de la demanda, estaría dispuesta a adoptarla sin inconvenientes. Esta actitud positiva demuestra una clara apertura a la innovación tecnológica por parte del negocio.
+
+\indent Finalmente, al ser consultada sobre su interés en soluciones basadas en IA, María manifestó entusiasmo por contar con una herramienta que prediga la demanda usando datos históricos, condiciones climáticas y eventos externos. Según afirmó, esto le permitiría ajustar la producción a la demanda real, minimizar mermas, reducir costos operativos y mejorar la disponibilidad de productos en momentos clave.
+
+\indent En resumen, la entrevista a María refuerza la necesidad de soluciones tecnológicas accesibles y adaptables para la predicción de demanda en pequeños comercios, y valida el enfoque adoptado por este proyecto como una herramienta de mejora para la sostenibilidad y eficiencia operativa del sector.
