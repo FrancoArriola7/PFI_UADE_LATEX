@@ -1,21 +1,371 @@
 \chapter{Preliminares}\label{chapter02}
 
-\section{Nombre de la primera sección}
+\section{Objetivo General}
 
-Completar.
+Desarrollar una plataforma web de análisis y predicción basada en inteligencia artificial destinada a pequeños y medianos comercios que comercializan productos frescos y perecederos, con el propósito de optimizar la producción diaria mediante pronósticos de demanda, reducir el desperdicio de alimentos, ajustar la producción a la demanda real y maximizar los ingresos en el contexto de Buenos Aires 2025.\\
 
-\section{Nombre de la segunda sección}
+\noindent\textbf{Objetivos Específicos:}
 
-Completar.
+\begin{itemize}
+    \item Implementar un sistema de pronóstico diario por producto que combine modelos estadísticos clásicos y técnicas de IA, incorporando variables como historial de ventas, día de la semana, clima y feriados.
+    
+    \item Automatizar la captura de registros de venta mediante carga de imágenes y procesamiento con modelos de visión o LLMs, eliminando la carga manual y mejorando la calidad de datos.
+    
+    \item Diseñar un motor analítico que optimice la organización de la producción diaria y eleve la eficiencia operativa según los patrones de consumo.
+    
+    \item Desarrollar un back-office con visualización de KPIs (márgenes, costos de insumos, top productos, ventas por franja horaria, etc.) para la toma de decisiones informadas.
+    
+    \item Generar recomendaciones accionables automáticas (alertas de sobreproducción o faltantes, sugerencias de compra de insumos) basadas en los pronósticos y reglas de negocio.
+    
+    \item Crear un chatbot conversacional en lenguaje natural que actúe como interfaz principal y permita consultas sobre producción, ventas y métricas.
+    
+    \item Integrar fuentes de datos externas y exógenas (API meteorológica, calendario de eventos locales) para enriquecer los modelos de predicción y aumentar su precisión.
+    
+    \item Contribuir a la sostenibilidad alimentaria, alineando el proyecto con el ODS 12 (Producción y Consumo Responsables) mediante la reducción de mermas y el uso eficiente de recursos.
+\end{itemize}
 
-\section{Ejemplo de tabla}
+\section{Alcance}
 
-\input{tables/table_example.tex}
+El desarrollo de este producto de software será una aplicación web que incluirá las siguientes funcionalidades:
 
-\noindent \ldots como se ve en la Tabla~\ref{tab:example} \ldots
+\begin{itemize}
+    \item Se desarrollará un módulo de predicción de demanda diaria por producto, utilizando como variables de entrada el historial de ventas, día de la semana, clima y feriados, obteniendo como salida una predicción de producción del producto. 
+    \item Incluirá un dashboard que permita visualizar los KPIs más relevantes para la organización, tales como márgenes de ganancia, costos de insumos, productos más vendidos y visualización de ventas por franja horaria. 
+    \item Implementará un chatbot que funcionará como interfaz principal de interacción con el sistema en el cual el usuario podrá realizar consultas.
+    \item Implementará un sistema de carga de imágenes por parte del usuario, permitiendo subir registros de ventas directamente desde la interfaz web, extrayendo y almacenando automáticamente los datos desde las imágenes mediante LLMs.
+    \item Se implementará un conjunto de alertas básicas automatizadas, que advertirán al usuario en casos de potencial sobreproducción o faltantes de stock antelación, en base a la comparación entre los valores proyectados y los datos de producción ingresados. 
+    \item Se incorporará una herramienta de comparación de ventas semana a semana, que facilitará la identificación de patrones de comportamiento del consumo y permitirá evaluar la evolución del desempeño comercial en el tiempo.
+\end{itemize}
 
-\section{Ejemplo de figura}
+\section{Antecedentes}
 
-\input{figures/example.tex}
+La investigación sobre predicción de demanda para productos perecederos ha avanzado con rapidez en los últimos años gracias a la IA. Modelos basados en LSTM y otras redes recurrentes superan sistemáticamente a los enfoques estadísticos clásicos al reducir tanto el exceso como la falta de stock en el comercio minorista alimentario (Nassibi et al., 2023) y demuestran mejoras similares en plataformas de “fresh food e-commerce” cuando se incorporan variables meteorológicas y calendarios (Ni et al., 2022). Aun así, en Argentina se sigue desaprovechando el 12,5\% de la producción agroalimentaria, de las que solo el 1,2\% se pierden en la etapa comercial . El impacto se vuelve crítico en rubros como panaderías y pastelerías, donde en 2024 cerraron más de 400 locales y las ventas de pan cayeron un 53\%.
 
-\noindent \ldots como se ve en la Figura~\ref{fig:example} \ldots
+\newpage % <-- salto de página
+
+\section{Marco Teórico}
+
+En esta sección se presentan los conceptos fundamentales vinculados a la IA, el aprendizaje automático y su aplicación en la predicción de demanda. También se introducen nociones relacionadas con el procesamiento de datos, la visualización de indicadores clave y las interfaces conversacionales, que son relevantes para el desarrollo del sistema propuesto.
+
+\subsection{Inteligencia Artificial (IA)}
+
+La inteligencia artificial (en adelante IA) es un campo de estudio dentro de la informática que busca desarrollar sistemas capaces de realizar tareas que normalmente requieren inteligencia humana, tales como el razonamiento, la percepción, la toma de decisiones o el aprendizaje. El término fue acuñado formalmente en 1956 durante la conferencia de Dartmouth, considerada el punto de partida de la disciplina \parencite{mccarthy1955}.\\
+
+En términos generales, la IA puede dividirse en dos grandes enfoques:
+
+\begin{itemize}
+    \item \textbf{IA débil} (\textit{narrow AI}): especializada en tareas concretas como traducción automática, recomendación de productos o reconocimiento de imágenes.
+    
+    \item \textbf{IA fuerte} (\textit{general AI}): de carácter hipotético, orientada a replicar el razonamiento humano en su totalidad \parencite{russell2021}.
+\end{itemize}
+
+Gracias al aumento en la capacidad de cómputo y al acceso a grandes volúmenes de datos, el desarrollo reciente de IA basada en aprendizaje automático (\textit{machine learning}) ha permitido avances significativos en múltiples industrias, incluyendo salud, finanzas, logística y comercio minorista \parencite{jordan2015}.
+
+Estos avances han dado lugar al uso extendido de IA en tareas de predicción de demanda, optimización de recursos y automatización de procesos, tal como se propone en el presente proyecto.
+
+La IA también se ha convertido en una herramienta clave para abordar problemáticas socioambientales, como el desperdicio de alimentos, al permitir el análisis en tiempo real de patrones de consumo y la generación de alertas y recomendaciones \parencite{rolnick2019}.
+
+\subsection{Aprendizaje Automático}
+
+El aprendizaje automático (\textit{machine learning}, en adelante ML) es una subárea de la inteligencia artificial que se enfoca en desarrollar algoritmos capaces de aprender automáticamente a partir de datos, identificar patrones y realizar predicciones o tomar decisiones sin ser programados explícitamente para cada tarea específica \parencite{mitchell1997}.
+
+En contraste con la programación tradicional —donde se define explícitamente cada regla—, en ML los sistemas ajustan su comportamiento a partir de ejemplos y experiencia previa, lo que permite adaptarse a entornos dinámicos o impredecibles. Existen tres grandes categorías de aprendizaje automático:
+
+\begin{itemize}
+    \item \textbf{Supervisado}: el modelo se entrena con datos etiquetados (por ejemplo, ventas históricas con cantidades reales).
+    
+    \item \textbf{No supervisado}: busca patrones o agrupamientos en datos no etiquetados.
+    
+    \item \textbf{Por refuerzo}: el agente aprende mediante recompensas o penalizaciones por sus acciones \parencite{sutton2018}.
+\end{itemize}
+
+En el ámbito de la predicción de demanda y la gestión comercial, el ML ha demostrado ser altamente efectivo. Algoritmos como regresiones, árboles de decisión, \textit{random forest}, redes neuronales o XGBoost permiten prever comportamientos complejos en entornos de alta variabilidad, como el retail alimentario o los productos perecederos \parencite{carbonneau2008}.
+
+Gracias a su capacidad para adaptarse a datos históricos y variables externas —como el clima, promociones o eventos locales—, el ML se ha convertido en una herramienta estratégica para reducir mermas, optimizar la producción y tomar decisiones basadas en evidencia, alineándose con los objetivos del presente proyecto.
+
+\subsection{Series Temporales}
+
+Una serie temporal es una secuencia de observaciones recolectadas en intervalos regulares a lo largo del tiempo. Este tipo de datos permite analizar la evolución de un fenómeno y modelar su comportamiento futuro mediante técnicas estadísticas o de aprendizaje automático \parencite{chatfield2004}. En el caso del comercio minorista, las ventas históricas diarias o semanales de un producto conforman una serie temporal típica.\\
+
+Las series temporales suelen contener tres componentes principales:
+
+\begin{itemize}
+    \item \textbf{Tendencia (trend)}: dirección general del movimiento a largo plazo.
+    
+    \item \textbf{Estacionalidad (seasonality)}: patrones repetitivos dentro de un periodo (como días de la semana o estaciones).
+    
+    \item \textbf{Ruido (noise)}: variaciones aleatorias e impredecibles.
+\end{itemize}
+
+La predicción de series temporales es crucial para aplicaciones como la planificación de la producción, gestión de inventarios y optimización de recursos, ya que permite anticiparse a picos o caídas en la demanda \parencite{hyndman2018}.
+
+Tradicionalmente, se utilizaron modelos como ARIMA, Holt-Winters y modelos exponenciales suavizados, aunque en la actualidad han ganado terreno los modelos basados en aprendizaje automático y redes neuronales, especialmente cuando se incorporan variables exógenas como el clima o eventos especiales \parencite{bandara2020}.
+
+En el presente proyecto, las series temporales constituyen la estructura central sobre la cual se apoyará la generación de predicciones de demanda, mediante el uso de modelos ya existentes y herramientas que permiten adaptarse dinámicamente a los patrones observados en los datos históricos y en el contexto operativo del comercio.
+
+\subsection{Modelos de Predicción}
+
+Los modelos de predicción son herramientas matemáticas o computacionales que permiten estimar el valor futuro de una variable en función de sus observaciones pasadas y/o de otras variables relacionadas. En el contexto de series temporales, estos modelos se utilizan para anticipar comportamientos futuros de fenómenos que evolucionan en el tiempo, como la demanda de productos perecederos en comercios minoristas \parencite{hyndman2018}.
+
+Entre los enfoques tradicionales más utilizados se encuentran:
+
+\begin{itemize}
+    \item \textbf{Regresión lineal}: técnica estadística básica que modela la relación entre una variable dependiente y una o más variables independientes. Es útil en escenarios con relaciones simples y datos bien estructurados, aunque su capacidad para capturar patrones no lineales es limitada.
+    
+    \item \textbf{ARIMA (AutoRegressive Integrated Moving Average)}: combina componentes autorregresivos, de promediado móvil y diferenciación para tratar series no estacionarias \parencite{box2015}.
+    
+    \item \textbf{Holt-Winters}: extensión del suavizado exponencial que incorpora estacionalidad y tendencia, útil para pronósticos a corto plazo con ciclos estables.
+\end{itemize}
+
+Estos modelos son apreciados por su simplicidad y bajo costo computacional, aunque presentan limitaciones cuando hay muchas variables externas o relaciones no lineales.
+
+Con el auge del aprendizaje automático, se han incorporado técnicas más complejas que permiten capturar relaciones no lineales y variables exógenas:
+
+\begin{itemize}
+    \item \textbf{Prophet}: modelo desarrollado por Facebook que permite ajustar estacionalidades múltiples y eventos especiales de forma flexible \parencite{taylor2018}.
+    
+    \item \textbf{LSTM (Long Short-Term Memory)}: tipo de red neuronal recurrente capaz de aprender dependencias de largo plazo, muy utilizada en predicción de series temporales con datos ruidosos o variables múltiples \parencite{hewamalage2021}.
+\end{itemize}
+
+Como se observa en la Figura~\ref{fig:lstm}, esta arquitectura permite mantener y transmitir información a lo largo del tiempo, lo cual la hace especialmente útil para modelar secuencias con relaciones temporales complejas.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/lstm.png}
+    \caption{LSTM (Long Short-Term Memory) básico.}
+    \label{fig:lstm}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Transformers}: arquitectura inicialmente desarrollada para procesamiento de lenguaje natural, que ha comenzado a aplicarse con éxito en predicción multivariada de series temporales \parencite{li2019}.
+\end{itemize}
+
+La elección del modelo dependerá del tipo de datos disponibles, la granularidad deseada y los requisitos de interpretabilidad y precisión. En este proyecto, estos modelos permitirán estimar con mayor exactitud la demanda diaria de productos, reduciendo mermas y ajustando la producción a las condiciones reales del entorno.
+
+\subsection{Evaluación de Modelos Predictivos}
+
+La evaluación de modelos predictivos es un paso fundamental en el desarrollo de soluciones basadas en inteligencia artificial o series temporales, ya que permite medir cuán precisas y útiles son las predicciones generadas. Para problemas de regresión —como la predicción de demanda— se utilizan principalmente métricas de error que comparan los valores predichos con los observados.
+
+Entre las más utilizadas se encuentran:
+
+\begin{itemize}
+    \item \textbf{MAE (Mean Absolute Error)}: mide el promedio de los errores absolutos entre las predicciones $\hat{y}_t$ y los valores reales $y_t$ \parencite{willmott2005}.
+    
+    \[
+        \text{MAE} = \frac{1}{n} \sum_{t=1}^{n} \left| y_t - \hat{y}_t \right|
+    \]
+
+    \item \textbf{RMSE (Root Mean Squared Error)}: calcula la raíz cuadrada del promedio de los errores al cuadrado, penalizando más fuertemente los errores grandes \parencite{chai2014}.
+    
+    \[
+        \text{RMSE} = \sqrt{ \frac{1}{n} \sum_{t=1}^{n} \left( y_t - \hat{y}_t \right)^2 }
+    \]
+
+    \item \textbf{MAPE (Mean Absolute Percentage Error)}: expresa el error como un porcentaje del valor real. Es útil para comparar modelos en distintas escalas, aunque puede ser inestable cuando $y_t \approx 0$ \parencite{myttenaere2016}.
+    
+    \[
+        \text{MAPE} = \frac{100}{n} \sum_{t=1}^{n} \left| \frac{y_t - \hat{y}_t}{y_t} \right|
+    \]
+\end{itemize}
+
+La elección de la métrica depende del contexto. El MAE es más interpretable para usuarios no técnicos, mientras que el RMSE resulta más sensible a errores significativos. En el caso de predicción de demanda para comercios de productos perecederos, se recomienda utilizar al menos dos métricas para una evaluación equilibrada.
+
+Estas herramientas también permiten monitorear el desempeño del modelo en producción, facilitando el mantenimiento de su precisión a lo largo del tiempo.
+
+\subsection{Reconocimiento Óptico de Caracteres (OCR)}
+
+\indent El Reconocimiento Óptico de Caracteres (OCR) es una tecnología que permite convertir texto impreso o manuscrito en imágenes digitales en texto editable y procesable por máquinas. Es ampliamente utilizada en tareas como la digitalización de documentos, la lectura automatizada de facturas, tickets, formularios y libros (Smith, 2007).
+
+\indent Inicialmente, los sistemas OCR se basaban en técnicas de procesamiento de imágenes y plantillas estáticas, lo que limitaba su capacidad para adaptarse a diferentes formatos, caligrafías o niveles de ruido. Sin embargo, los avances en aprendizaje profundo han revolucionado esta tecnología: los modelos actuales, como CRNN (Convolutional Recurrent Neural Network) y los basados en transformers como TrOCR, ofrecen una mayor precisión y robustez en entornos no estructurados, como fotos tomadas con teléfonos móviles o documentos parcialmente dañados (Baek et al., 2019; Li et al., 2021).
+
+\indent El OCR es especialmente valioso en contextos donde los usuarios no pueden o no desean realizar carga manual de datos, como en pequeños comercios. Al automatizar la lectura de registros de venta o remitos mediante fotos, se reduce la carga operativa y se mejora la calidad del dato ingresado (Khandelwal et al., 2020).
+
+\indent En este proyecto, el OCR cumple un rol clave al permitir a los comerciantes digitalizar información histórica de ventas sin conocimientos técnicos, usando simplemente una fotografía desde la plataforma web, lo cual democratiza el acceso a herramientas de predicción.
+
+
+\subsection{Modelos de Lenguaje Extensos (LLM)}
+
+\indent Los Modelos de Lenguaje Extensos (Large Language Models, LLM) son un tipo avanzado de modelo de IA entrenado con enormes cantidades de texto para comprender, generar y manipular lenguaje natural de forma coherente y contextual. Se basan en arquitecturas como transformers, que han demostrado ser altamente eficaces para tareas complejas de procesamiento del lenguaje natural (Vaswani et al., 2017).
+
+\indent Los LLM aprenden a predecir la siguiente palabra en una secuencia, lo que les permite ejecutar tareas como generación de texto, traducción, resumen automático, respuestas a preguntas y análisis semántico. Modelos como GPT-3, PaLM, BERT o LLaMA han alcanzado niveles de rendimiento cercanos al humano en una variedad de benchmarks lingüísticos (Brown et al., 2020; OpenAI, 2023).
+
+\indent Una de las aplicaciones emergentes de los LLM es su integración con otros flujos de datos no estructurados, como imágenes o documentos escaneados, lo que los convierte en una herramienta poderosa para la automatización de tareas que antes requerían intervención humana. En combinación con OCR y pipelines de extracción, los LLM pueden interpretar textos ambiguos, corregir errores y convertir inputs visuales en información estructurada (Touvron et al., 2023).
+
+\indent En el contexto de este proyecto, los LLM permiten automatizar la carga de registros de ventas a partir de imágenes, interpretar consultas del usuario en lenguaje natural a través de un chatbot y ofrecer respuestas explicativas, todo sin requerir conocimientos técnicos del usuario final.
+
+\subsection{Chatbots Conversacionales}
+
+Los chatbots conversacionales son sistemas informáticos diseñados para interactuar con los usuarios mediante lenguaje natural, ya sea por texto o voz. Su objetivo principal es simular una conversación humana para asistir, informar, resolver consultas o ejecutar acciones específicas dentro de una plataforma digital \parencite{radziwill2017}.
+
+Originalmente basados en reglas fijas y árboles de decisión, los chatbots han evolucionado significativamente gracias a los avances en procesamiento de lenguaje natural (PLN), generación de lenguaje natural (GNL) y, más recientemente, en modelos de lenguaje extensos (LLM). Estas tecnologías les permiten comprender intenciones, responder con mayor coherencia y adaptarse al contexto de las interacciones \parencite{shum2018}.
+
+Existen distintos tipos de chatbots, entre ellos:
+
+\begin{itemize}
+    \item \textbf{Chatbots basados en reglas}: operan sobre flujos de conversación predefinidos.
+    
+    \item \textbf{Chatbots con IA}: utilizan algoritmos de aprendizaje automático, PLN y GNL para entender y generar respuestas dinámicas.
+    
+    \item \textbf{Chatbots híbridos}: combinan ambos enfoques, lo que los hace flexibles y eficientes.
+\end{itemize}
+
+En aplicaciones empresariales, los chatbots se utilizan cada vez más para consultas sobre datos, gestión de operaciones y soporte a decisiones, especialmente en entornos con usuarios no técnicos. Estudios recientes demuestran que la incorporación de asistentes conversacionales mejora la adopción de sistemas analíticos complejos, reduce barreras de entrada y mejora la experiencia del usuario \parencite{knote2021}.
+
+En este proyecto, el chatbot actuará como interfaz principal del sistema, permitiendo al comerciante consultar predicciones de demanda, indicadores clave (KPIs), alertas de sobreproducción y sugerencias de acción, sin necesidad de navegar por menús complejos ni interpretar gráficos técnicos.
+
+\subsection{Bases de Datos Relacionales y Vectoriales}
+
+Las bases de datos relacionales (RDB, por sus siglas en inglés) son estructuras de almacenamiento que organizan la información en tablas con filas y columnas, siguiendo un modelo basado en el álgebra relacional, propuesta por Edgar F. Codd en 1970. Este modelo formaliza las operaciones sobre conjuntos de datos utilizando el concepto de relación, y se convirtió en el estándar dominante para almacenar información estructurada en sistemas informáticos \parencite{codd1970}. 
+
+Las bases relacionales permiten realizar consultas complejas mediante lenguajes como SQL y son ampliamente utilizadas en aplicaciones empresariales debido a su robustez, integridad referencial y facilidad de acceso \parencite{coronel2020}.
+
+En contraposición, las bases de datos vectoriales son un tipo más reciente de almacenamiento orientado a datos no estructurados o semiestructurados representados como tensores. Su principal aplicación está en sistemas que utilizan inteligencia artificial, especialmente modelos de lenguaje, visión por computadora y recuperación semántica, donde se requiere comparar elementos no por igualdad exacta, sino por similitud de contexto o significado \parencite{johnson2019}.
+
+Estos vectores se obtienen comúnmente a través de \textit{embeddings} generados por modelos como Word2Vec, BERT o CLIP, y se almacenan en motores especializados como FAISS, Milvus o Pinecone, optimizados para búsquedas por proximidad (\textit{nearest neighbor search}).
+
+En el contexto de este proyecto, las bases relacionales serán utilizadas para almacenar información estructurada como productos, ventas, fechas y predicciones, mientras que las bases vectoriales podrían emplearse en versiones futuras para mejorar el rendimiento del chatbot, permitiéndole recuperar respuestas basadas en similitud semántica entre preguntas y registros históricos o documentación del sistema.
+
+\subsection{Desperdicio de Alimentos}
+
+El desperdicio de alimentos hace referencia a la pérdida de productos aptos para el consumo humano que son descartados, deteriorados o no utilizados en etapas finales de la cadena alimentaria, como la comercialización, el almacenamiento o el consumo doméstico. Se diferencia de la pérdida de alimentos, que ocurre en fases anteriores como la producción, poscosecha o procesamiento \parencite{fao2019}.
+
+A nivel mundial, se estima que alrededor del 17\% de los alimentos disponibles para los consumidores se desperdicia, lo que representa no solo un problema ético y de seguridad alimentaria, sino también una amenaza ambiental por el uso innecesario de recursos como agua, tierra y energía, y la generación de gases de efecto invernadero \parencite{unep2021}.
+
+En Argentina, se pierde o desperdicia el 12{,}5\% de la producción agroalimentaria, lo que equivale a aproximadamente 16 millones de toneladas por año, con consecuencias económicas directas para todos los actores de la cadena de valor \parencite{tiscornia2022}. Particularmente en supermercados, autoservicios y comercios de proximidad, estudios recientes estiman que las pérdidas en categorías frescas superan el 3\% de la facturación, debido a sobreproducción, quiebres de stock, manipulación inadecuada o falta de planificación \parencite{weteam2021}.
+
+Estas cifras revelan la importancia de implementar soluciones basadas en inteligencia artificial y analítica de datos para alinear la producción con la demanda real, evitar el sobrante no comercializable y aumentar la eficiencia operativa. Además, el combate al desperdicio de alimentos contribuye directamente al cumplimiento del Objetivo de Desarrollo Sostenible (ODS) 12: Producción y Consumo Responsables, propuesto por la ONU para 2030.
+
+\subsection{Impacto Económico del desperdicio de alimentos}
+
+El desperdicio de alimentos no solo representa una pérdida de recursos naturales y energéticos, sino también un impacto económico significativo para productores, distribuidores, comercios y consumidores. En cada etapa de la cadena alimentaria, los alimentos descartados implican costos hundidos en insumos, mano de obra, energía, logística y espacio, sin retorno económico alguno \parencite{gustavsson2011}.
+
+A nivel global, se estima que el valor económico del desperdicio asciende a 1 billón de dólares anuales, afectando tanto a países desarrollados como en desarrollo \parencite{fao2013}. En entornos urbanos y comerciales, las pérdidas se concentran especialmente en productos frescos y perecederos —como panificados, frutas, carnes y lácteos— debido a errores de planificación, sobreproducción, fluctuaciones de demanda o una gestión ineficiente de inventarios \parencite{fao2019}.
+
+En Argentina, estudios sectoriales revelan que las pérdidas en supermercados y autoservicios superan el 3\% de la facturación en categorías de frescos y almacén, representando un margen crítico para negocios con alta rotación y baja rentabilidad unitaria \parencite{weteam2021}. En comercios pequeños, como panaderías y pastelerías, esta ineficiencia se ve agravada por la falta de herramientas analíticas y predictivas que permitan anticipar la demanda real, provocando mermas frecuentes y subutilización de insumos.
+
+El impacto económico también afecta a escala sistémica: cada tonelada de alimento desperdiciado implica no solo una pérdida directa, sino también costos ocultos en la cadena logística, residuos, tratamiento y emisiones \parencite{refed2016}. Desde esta perspectiva, el desarrollo de soluciones tecnológicas que minimicen el desperdicio contribuye no solo a mejorar la rentabilidad del negocio, sino también a reducir costos operativos y ambientales a largo plazo.
+
+\subsection{Impacto Ambiental del Desperdicio de Alimentos}
+
+El desperdicio de alimentos tiene consecuencias ambientales severas, ya que cada unidad de alimento producida pero no consumida implica un uso innecesario de recursos naturales, como agua, suelo y energía, además de generar residuos y emisiones contaminantes. La huella ambiental del desperdicio incluye tres grandes dimensiones: la huella hídrica, la huella de carbono y el uso del suelo \parencite{fao2013}.
+
+A nivel mundial, se calcula que el desperdicio de alimentos genera entre el 8 y el 10\% de las emisiones globales de gases de efecto invernadero (GEI), lo que equivale a más de 3.300 millones de toneladas de CO\textsubscript{2} emitidas anualmente \parencite{unep2021}. Si el desperdicio de alimentos fuera un país, sería el tercer mayor emisor del mundo, detrás de China y Estados Unidos \parencite{fao2013}.
+
+En cuanto a recursos hídricos, se estima que alrededor de 250~km\textsuperscript{3} de agua se utilizan cada año para producir alimentos que nunca serán consumidos, lo que representa una presión significativa sobre acuíferos y sistemas hídricos vulnerables. Además, el uso ineficiente del suelo para cultivos que luego se pierden contribuye a la deforestación, pérdida de biodiversidad y degradación de ecosistemas \parencite{kummu2012}.
+
+En el caso de Argentina, donde se desperdician más de 16 millones de toneladas de alimentos por año \parencite{tiscornia2022}, el impacto ambiental se agrava por la dependencia del sector agroindustrial como motor económico, lo que exige soluciones que equilibren productividad y sostenibilidad. Reducir el desperdicio, por tanto, no solo mejora la eficiencia de los sistemas alimentarios, sino que también representa una estrategia concreta de mitigación del cambio climático \parencite{unep2021}.
+
+Desde esta perspectiva, el proyecto presentado cobra relevancia al buscar reducir la sobreproducción mediante herramientas de predicción basadas en inteligencia artificial, contribuyendo así a una gestión más sostenible de los recursos.
+
+\subsection{ODS 12 – Producción y Consumo Responsables}
+
+El Objetivo de Desarrollo Sostenible 12 (ODS 12), propuesto por las Naciones Unidas en la Agenda 2030, tiene como meta garantizar modalidades de consumo y producción sostenibles, promoviendo un uso eficiente de los recursos, la energía y los sistemas productivos, sin comprometer las necesidades de las generaciones futuras \parencite{onu2015}.
+
+Uno de los ejes centrales del ODS 12 es la reducción sustancial del desperdicio de alimentos, tanto en la etapa de producción como en los sectores minorista y de consumo. La meta 12.3, en particular, establece como compromiso internacional reducir a la mitad el desperdicio de alimentos per cápita mundial en el comercio minorista y el consumidor para el año 2030, y disminuir las pérdidas a lo largo de las cadenas de producción y suministro \parencite{unep2021}.
+
+Este objetivo reconoce que el desperdicio alimentario es un problema transversal: tiene impactos económicos, sociales (inseguridad alimentaria) y ambientales (emisiones de gases de efecto invernadero, uso de agua y suelo). Por eso, la tecnología juega un rol clave como habilitadora de soluciones innovadoras y escalables, particularmente en el sector privado.
+
+En este contexto, el presente proyecto de ingeniería se alinea directamente con el ODS 12, al proponer una plataforma que utiliza inteligencia artificial para predecir la demanda real en comercios de productos perecederos, evitando sobreproducción y mermas innecesarias. Así, no solo mejora la rentabilidad de los negocios, sino que contribuye a un modelo de producción más eficiente, consciente y responsable con el entorno.
+
+\subsection{Digitalización y brecha tecnológica en PYMEs}
+
+La digitalización implica la incorporación de tecnologías digitales en los procesos productivos, administrativos y comerciales de las organizaciones, con el objetivo de mejorar su eficiencia, competitividad y capacidad de adaptación. Sin embargo, las pequeñas y medianas empresas (PYMEs) enfrentan múltiples barreras estructurales que dificultan su transformación digital, generando una brecha tecnológica creciente respecto de grandes empresas o corporaciones \parencite{oecd2021}.
+
+Entre las principales limitaciones que afectan a las PYMEs se encuentran:
+
+\begin{itemize}
+    \item Falta de acceso a infraestructura tecnológica adecuada (hardware, software, conectividad).
+    \item Baja disponibilidad de talento digital o personal capacitado.
+    \item Costos percibidos como elevados, especialmente en soluciones basadas en IA o big data.
+    \item Desconocimiento de herramientas existentes y sus beneficios.
+    \item Miedo al cambio o resistencia organizacional \parencite{jordao2022}.
+\end{itemize}
+
+En América Latina y particularmente en Argentina, estas brechas son aún más pronunciadas. Estudios del BID señalan que solo 1 de cada 4 PYMEs en la región adopta tecnologías digitales avanzadas, y que más del 60~\% se encuentra en niveles básicos de digitalización \parencite{bid2020}. Complementariamente, un estudio reciente sobre digitalización contable en PYMEs de Ecuador identificó que los principales obstáculos son la falta de capacitación, los altos costos iniciales y la resistencia al cambio, y destacó que el acceso a tecnología, formación profesional y apoyo institucional son determinantes para una adopción exitosa \parencite{vasconez2025}.
+
+Entre sus hallazgos, se estima que la digitalización puede aumentar los ingresos en un 30~\% y reducir los costos operativos en un 20~\%, aunque aún persisten desafíos relacionados con la visión estratégica y el capital disponible.
+
+En el sector alimentario, la falta de herramientas tecnológicas específicas impide a muchos comercios ajustar su producción a la demanda real, generando ineficiencias como sobreproducción, desperdicio o rotura de stock. Por eso, el desarrollo de plataformas accesibles, intuitivas y enfocadas en resolver problemas concretos de gestión —como la que se propone en este proyecto— resulta clave para acortar la brecha digital, profesionalizar la toma de decisiones y mejorar la sostenibilidad operativa de los pequeños comercios.
+
+\chapter{Estado del Arte}\label{chapter03}
+
+La predicción de demanda en comercios que operan con productos perecederos representa un desafío significativo debido a la naturaleza volátil y sensible al tiempo de estos bienes. En las últimas décadas, el avance de las tecnologías de inteligencia artificial y aprendizaje automático ha permitido desarrollar soluciones cada vez más sofisticadas para anticipar patrones de consumo y optimizar la producción, con el objetivo de minimizar pérdidas y mejorar la eficiencia operativa.
+
+Este estado del arte presenta una revisión crítica de las soluciones tecnológicas existentes y los enfoques académicos más relevantes aplicados a la predicción de demanda en el sector alimentario, con especial énfasis en productos frescos y perecederos. Se analizan modelos, métricas y tecnologías empleadas, así como las limitaciones que enfrentan estas soluciones, especialmente en contextos de pequeñas y medianas empresas con restricciones operativas y tecnológicas.
+
+A partir de este análisis, se evidencian las oportunidades y necesidades no cubiertas que motivan el desarrollo de la propuesta de este proyecto, orientada a un contexto local con condiciones económicas y sociales específicas, buscando ofrecer una herramienta accesible, flexible y efectiva para comercios minoristas.
+
+\section{Soluciones Tecnológicas Existentes}
+
+En el mercado global existen diversas soluciones tecnológicas orientadas a la predicción de demanda, particularmente en \textit{retail} alimentario:
+
+\begin{itemize}
+    \item \textbf{SAP Forecasting and Replenishment (F\&R)}: solución empresarial para la planificación de inventarios y reposición automática, basada en modelos estadísticos y reglas de negocio. No utiliza inteligencia artificial. Para funcionalidades avanzadas con IA, SAP ofrece una solución distinta llamada \textit{SAP Predictive Replenishment} \parencite{sap2025}.
+    
+    \item \textbf{Oracle Retail Demand Forecasting}: incorpora algoritmos de aprendizaje automático para analizar variables como estacionalidad, promociones y eventos. Aunque potente, no está orientado a PYMEs y requiere una alta inversión en integración \parencite{oracle2021}.
+    
+    \item \textbf{BakePlan}: herramienta especializada para panaderías en Europa. Estima cantidades ideales de productos horneados por día usando datos de ventas y clima. Si bien demuestra mejoras en reducción de merma, no es adaptable fuera de entornos regulados y con datos estructurados \parencite{netherlands2019}.
+    
+    \item \textbf{Blue Yonder Luminate}: plataforma SaaS con capacidades de \textit{forecast} basadas en IA. Apta para grandes superficies, pero inadecuada para comercios sin personal técnico o sin sistemas previos de digitalización.
+\end{itemize}
+
+Estos estudios confirman que los modelos neuronales como LSTM y Bi-LSTM superan en precisión a los enfoques clásicos, especialmente en entornos con múltiples variables externas (como el clima), lo que refuerza su aplicabilidad en el presente proyecto.
+
+\section{Estudios y enfoques académicos}
+
+Investigaciones recientes han abordado la predicción de demanda para alimentos perecederos con distintos enfoques:
+
+\begin{itemize}
+    \item \textcite{nassibi2023} compararon modelos de \textit{machine learning} (Random Forest, SVM, LSTM) para predecir la demanda en la industria alimentaria. LSTM logró el menor error promedio (RMSE) al capturar patrones temporales no lineales.
+
+    \item \textcite{ni2022} utilizaron un modelo Bi-LSTM para predecir demanda logística en plataformas de \textit{e-commerce} de alimentos frescos. Al incluir variables climáticas y días festivos, lograron reducir el MAE en un 12{,}6\,\% respecto de modelos base.
+
+    \item \textcite{bandara2020} propusieron LSTM-MSNet para predecir múltiples series temporales con patrones estacionales. El modelo superó a Prophet y Holt-Winters al manejar datos ruidosos e incompletos.
+\end{itemize}
+
+Estos estudios confirman que los modelos neuronales como LSTM y Bi-LSTM superan en precisión a los enfoques clásicos, especialmente en entornos con múltiples variables externas (como el clima), lo que refuerza su aplicabilidad en el presente proyecto.
+
+
+
+\begin{table}[t]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Comparación de enfoques}
+    \label{tab:comparacion}
+    \begin{tabular}{|p{2.9cm}|p{2cm}|p{3cm}|p{5cm}|}
+        \hline
+        \textbf{Modelo / Solución} & \textbf{Tipo} & \textbf{Tecnologías principales} & \textbf{Limitaciones destacadas} \\
+        \hline
+        SAP F\&R & Comercial & ARIMA, reglas heurísticas & Costoso, complejo \\
+        \hline
+        Oracle RDF & Comercial & ML + estacionalidad & Requiere datos limpios (MAPE, RMSE) \\
+        \hline
+        BakePlan & Comercial (PYME) & Reglas, regresiones & No escalable (\% de merma) \\
+        \hline
+        Nassibi et al. (2023) & Académico & LSTM, Random Forest & No adaptado a Argentina (MAE, RMSE) \\
+        \hline
+        Ni et al. (2022) & Académico & Bi-LSTM & Datos estructurados (MAE, RMSE) \\
+        \hline
+        Propuesta actual (PFI) & Académico & LSTM, Prophet, LLMs & Datos limitados iniciales (MAE, RMSE, MAPE) \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+\section{Aporte diferencial del proyecto}
+
+El sistema propuesto en este proyecto se distingue de las soluciones analizadas por las siguientes características:
+
+\begin{itemize}
+    \item \textbf{Accesibilidad}: pensado específicamente para pequeños comercios argentinos sin sistemas previos de gestión ni personal técnico.
+
+    \item \textbf{Multimodalidad}: permite la carga de registros mediante imágenes, utilizando modelos OCR y LLMs, lo cual no está presente en las herramientas comerciales revisadas.
+
+    \item \textbf{Interfaz natural}: reemplaza los paneles tradicionales por un chatbot conversacional en lenguaje natural, facilitando el uso incluso por usuarios no técnicos.
+
+    \item \textbf{Costo operativo bajo}: arquitectura liviana, adaptable, y con un presupuesto estimado de solo USD~50 mensuales.
+
+    \item \textbf{Orientación local}: los modelos se entrenan considerando variables específicas como clima y feriados de Buenos Aires en el año 2025.
+\end{itemize}
+
+

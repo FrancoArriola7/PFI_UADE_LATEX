@@ -18,8 +18,8 @@
     ],
     "latex-workshop.latex.recipes": [
       {
-        "name": "pdflatex -> biber -> pdflatex x2",
-        "tools": ["pdflatex", "biber", "pdflatex", "pdflatex"]
+        "name": "pdflatex -> biber -> pdflatex",
+        "tools": ["pdflatex", "biber", "pdflatex"]
       }
     ],
     "latex-workshop.latex.autoBuild.run": "onSave",
