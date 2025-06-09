@@ -2,26 +2,21 @@
 
 \section{Objetivo General}
 
-Desarrollar una plataforma web de análisis y predicción basada en inteligencia artificial destinada a pequeños y medianos comercios que comercializan productos frescos y perecederos, con el propósito de optimizar la producción diaria mediante pronósticos de demanda, reducir el desperdicio de alimentos, ajustar la producción a la demanda real y maximizar los ingresos en el contexto de Buenos Aires 2025.\\
+Desarrollar una plataforma web de predicción con inteligencia artificial para optimizar la producción diaria y reducir el desperdicio en comercios de productos perecederos, ajustando la oferta a la demanda real con base en datos históricos en el contexto de Buenos Aires 2025.\\
 
 \noindent\textbf{Objetivos Específicos:}
 
 \begin{itemize}
-    \item Implementar un sistema de pronóstico diario por producto que combine modelos estadísticos clásicos y técnicas de IA, incorporando variables como historial de ventas, día de la semana, clima y feriados.
+    \item Desarrollar un sistema de predicción de demanda diaria por producto utilizando inteligencia artificial, considerando variables como historial de ventas, día de la semana, clima y feriados.
     
-    \item Automatizar la captura de registros de venta mediante carga de imágenes y procesamiento con modelos de visión o LLMs, eliminando la carga manual y mejorando la calidad de datos.
+    \item Implementar un módulo de carga y procesamiento automatizado de registros de venta, a partir de imágenes, mediante tecnologías de visión artificial y modelos de lenguaje.
     
-    \item Diseñar un motor analítico que optimice la organización de la producción diaria y eleve la eficiencia operativa según los patrones de consumo.
+    \item Diseñar una interfaz de backoffice con visualización de indicadores clave (KPIs), como márgenes, costos, productos más vendidos y ventas por franja horaria.
     
-    \item Desarrollar un back-office con visualización de KPIs (márgenes, costos de insumos, top productos, ventas por franja horaria, etc.) para la toma de decisiones informadas.
+    \item Incorporar un asistente conversacional basado en lenguaje natural, que facilite la interacción del usuario con el sistema, permitiendo consultas operativas y recomendaciones automatizadas.
     
-    \item Generar recomendaciones accionables automáticas (alertas de sobreproducción o faltantes, sugerencias de compra de insumos) basadas en los pronósticos y reglas de negocio.
+    \item Integrar un sistema de alertas y recomendaciones accionables, que anticipe sobreproducción o faltantes de stock y sugiera ajustes de planificación.
     
-    \item Crear un chatbot conversacional en lenguaje natural que actúe como interfaz principal y permita consultas sobre producción, ventas y métricas.
-    
-    \item Integrar fuentes de datos externas y exógenas (API meteorológica, calendario de eventos locales) para enriquecer los modelos de predicción y aumentar su precisión.
-    
-    \item Contribuir a la sostenibilidad alimentaria, alineando el proyecto con el ODS 12 (Producción y Consumo Responsables) mediante la reducción de mermas y el uso eficiente de recursos.
 \end{itemize}
 
 \section{Alcance}
@@ -45,7 +40,8 @@ La investigación sobre predicción de demanda para productos perecederos ha ava
 
 \section{Marco Teórico}
 
-En esta sección se presentan los conceptos fundamentales vinculados a la IA, el aprendizaje automático y su aplicación en la predicción de demanda. También se introducen nociones relacionadas con el procesamiento de datos, la visualización de indicadores clave y las interfaces conversacionales, que son relevantes para el desarrollo del sistema propuesto.
+En esta sección se describen los fundamentos conceptuales y técnicos necesarios para comprender el enfoque del sistema propuesto, incluyendo tecnologías de predicción, IA, aprendizaje automático y su aplicación en la predicción de demanda, y problemáticas sociales vinculadas al desperdicio de alimentos, que son relevantes para el sistema a desarrollar.
+
 
 \subsection{Inteligencia Artificial (IA)}
 
@@ -371,7 +367,7 @@ El sistema propuesto en este proyecto se distingue de las soluciones analizadas 
 
 \section{User Research}
 
-Para validar la propuesta y diseñar una herramienta que responda a problemáticas reales del entorno operativo, se llevó a cabo una instancia de investigación cualitativa centrada en usuarios representativos del mercado objetivo. La metodología consistió en entrevistas semi-estructuradas a actores clave del rubro de productos perecederos, con el objetivo de identificar necesidades, limitaciones tecnológicas actuales, y oportunidades de mejora en los procesos de planificación y producción diaria.
+Para validar la propuesta y diseñar una herramienta que responda a problemáticas reales del entorno operativo, se llevó a cabo una instancia de investigación cualitativa centrada en usuarios representativos del mercado objetivo. La metodología consistió en entrevistas semi-estructuradas a actores clave del rubro de productos perecederos, con el objetivo de identificar necesidades, limitaciones tecnológicas actuales, y oportunidades de mejora en los procesos de planificación y producción diaria. A continuación, se expone la información más significativa relevada durante las entrevistas.
 
 \subsection{Entrevista a Bruno, dueño de la Confitería ``Salvador''}
 
@@ -411,3 +407,13 @@ Con el objetivo de comprender mejor las dinámicas operativas y los desafíos es
 \indent Finalmente, al ser consultada sobre su interés en soluciones basadas en IA, María manifestó entusiasmo por contar con una herramienta que prediga la demanda usando datos históricos, condiciones climáticas y eventos externos. Según afirmó, esto le permitiría ajustar la producción a la demanda real, minimizar mermas, reducir costos operativos y mejorar la disponibilidad de productos en momentos clave.
 
 \indent En resumen, la entrevista a María refuerza la necesidad de soluciones tecnológicas accesibles y adaptables para la predicción de demanda en pequeños comercios, y valida el enfoque adoptado por este proyecto como una herramienta de mejora para la sostenibilidad y eficiencia operativa del sector.
+
+
+\subsection{Conclusión}
+
+\indent El relevamiento realizado a través de entrevistas a dueños de comercios que operan con productos perecederos permitió identificar con claridad necesidades concretas y limitaciones actuales en la gestión de la demanda, el inventario y la producción diaria. Si bien ambos entrevistados demostraron tener experiencia en la operación de sus negocios y, en algunos casos, el uso de herramientas básicas de gestión, se evidenció la ausencia de sistemas predictivos avanzados capaces de integrar variables externas (como clima, eventos o estacionalidad) en la planificación de la producción.
+
+\indent Asimismo, surgió un interés genuino en adoptar soluciones tecnológicas que permitan reducir el desperdicio, mejorar la eficiencia operativa y optimizar la toma de decisiones. Ambos entrevistados expresaron que una herramienta de predicción de demanda, basada en inteligencia artificial y alimentada por datos históricos y contextuales, sería útil y bienvenida en sus negocios, siempre que su adopción sea accesible y su impacto tangible.
+
+\indent Estos hallazgos validan el enfoque del presente proyecto, al confirmar que existe un problema real no resuelto y una oportunidad clara de mejora mediante la incorporación de tecnología. La información obtenida durante esta etapa de investigación será fundamental para ajustar el diseño funcional de la herramienta, asegurar su pertinencia en el entorno real y maximizar su potencial de adopción en el mercado objetivo.
+
