@@ -20,4 +20,5 @@
 *.upa
 *.upb
 *.synctex(busy)
+*.bcf-SAVE-ERROR
 build/*
