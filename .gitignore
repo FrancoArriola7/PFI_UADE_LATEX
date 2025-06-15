@@ -17,4 +17,7 @@
 *.synctex.gz
 *.synctex
 *.toc
+*.upa
+*.upb
+*.synctex(busy)
 build/*
