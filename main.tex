@@ -21,7 +21,8 @@
 
 % Para flotar figuras y tablas
 \usepackage{framed}
-
+\usepackage{tabularx}
+\usepackage{booktabs}
 % Para asegurar que las figuras y tablas queden en la secci\'on correspondiente
 \usepackage[section,above,below]{placeins}
 
@@ -162,6 +163,15 @@
 \input{config/symbols}
 
 \usepackage{pdfcomment}
+\usepackage{amssymb}
+% ya tenés amssymb, pero lo dejo por las dudas
+\usepackage{amssymb}
+
+% macros para usar en tablas de texto
+\newcommand{\cmark}{\ensuremath{\checkmark}} % sí
+\newcommand{\pmark}{\ensuremath{\sim}}        % parcial
+\newcommand{\xmark}{}                         % no (celda vacía)
+
 
 \begin{document}
 	\input{chapters/title}
@@ -175,6 +185,8 @@
 	\input{chapters/chapter01}
 	\input{chapters/chapter02}
 	\input{chapters/chapter03}
+	\input{chapters/chapter04}
+
 
 	\input{chapters/conclusion}
 
