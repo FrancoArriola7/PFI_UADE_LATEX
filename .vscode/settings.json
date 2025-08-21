@@ -23,5 +23,6 @@
       }
     ],
     "latex-workshop.latex.autoBuild.run": "onSave",
-    "latex-workshop.latex.recipe.default": "pdflatex -> biber -> pdflatex"
+    "latex-workshop.latex.recipe.default": "pdflatex -> biber -> pdflatex",
+    "editor.renderWhitespace": "all"
 }

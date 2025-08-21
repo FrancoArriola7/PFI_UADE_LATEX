@@ -1,203 +1,196 @@
-%onside para una impresi\'on simple.
-%titlepage define que vamos a tener una portada.
-%openany para que los cap\'{\i}tulos empiecen en cualquier p\'agina y no s\'olo las impares.
-%final es para compilar a modo normal. Cambiar a draft para que se compile en modo borrador. No se pone final dado que viene por defecto.
-\documentclass[a4paper, 12pt, oneside, titlepage, openany]{book}
+% oneside para una impresión simple.
+% titlepage define que vamos a tener una portada.
+% openany para que los capítulos empiecen en cualquier página.
+\documentclass[a4paper,12pt,oneside,titlepage,openany]{book}
 
-% Para el seccionado, debe colocarse al principio este package.
+% --- Seccionado temprano
 \usepackage{titlesec}
 
-% Encoding + cmap (para obtener un mapeo UTF8 adecuado)
+% --- Encoding / fuentes
 \usepackage{cmap}
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc} % Para poder copiar y pegar el texto desde un pdf
-\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx} % Times (como en el template nuevo)
 
-\usepackage[style=iso-authoryear]{biblatex}
-\bibliography{biblio}
+% --- Bibliografía (biber, estilo del profe)
+\usepackage[backend=biber,style=iso-authoryear,language=spanish]{biblatex}
+\DeclareUnicodeCharacter{202F}{~}
+\addbibresource{biblio.bib}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\DefineBibliographyStrings{spanish}{
+  online   = {En línea},
+  urlfrom  = {Disponible en:},
+  andothers = {\mkbibemph{et\addabbrvspace al\adddot}}
+}
+\DeclareFieldFormat{urldate}{\mkbibbrackets{consultado\space#1}}
 
-% Para colores
+% --- Colores / flotantes / microtipografía
 \usepackage[usenames]{color}
-
-% Para flotar figuras y tablas
 \usepackage{framed}
-\usepackage{tabularx}
-\usepackage{booktabs}
-% Para asegurar que las figuras y tablas queden en la secci\'on correspondiente
 \usepackage[section,above,below]{placeins}
-
-% Para microtipograf\'{\i}a
 \usepackage{microtype}
-
-% Permite tama\~no de fuentes arbitrarios
 \usepackage{anyfontsize}
 
-% Itemize
+% --- Listas y marcadores personalizados
 \usepackage{enumitem}
 \newlist{Properties}{enumerate}{2}
 \setlist[Properties]{label=Propiedad \arabic*.,itemindent=*}
 \renewcommand{\labelitemii}{\textasteriskcentered}
 \renewcommand{\labelitemiii}{-}
 
-\usepackage{lastpage} % Para poder contar las p\'aginas, habilita el \pageref command.
-\usepackage{titleps} % Para la tabla de contenidos
+% --- Encabezados/pies y portada PDF
+\usepackage{lastpage}
+\usepackage{titleps}
+\usepackage{textcase}
+\usepackage{pdfpages}
 
-% \parbox[b] es para poner texto sobre el bottom
+% Encabezado con tu logo/título/autores (de tu main.tex original)
 \newpagestyle{ruled}{
-	\sethead{\includegraphics[width=3.7cm]{./images/UADE_LARGE}}
-			{\parbox[b]{0.43\textwidth}{\centering AIVA Sistema de Predicción de Demanda con IA para productos perecederos}} 
-			{\shortstack{Arriola, Franco \\ Janse, Bautista}}\headrule{}
-	\setfoot[][][P\'agina \thepage\ de~\pageref*{LastPage}]{}{}{P\'agina \thepage\ de~\pageref*{LastPage}}\footrule{}
-	}
+  \sethead{\includegraphics[width=3.7cm]{./images/UADE_LARGE}}
+          {\parbox[b]{0.43\textwidth}{\centering AIVA Sistema de Predicción de Demanda con IA para productos perecederos}}
+          {\shortstack{Arriola, Franco \\ Janse, Bautista}}
+  \headrule{}
+  \setfoot[][][Página \thepage\ de~\pageref*{LastPage}]{}{}{Página \thepage\ de~\pageref*{LastPage}}
+  \footrule{}
+}
 \pagestyle{ruled}
-% Cambiar el color de la linea divisora:
-% \renewcommand\makeheadrule{\color{cyan}\rule[-.3\baselineskip]{\linewidth}{0.4pt}}
-% \renewcommand\makefootrule{\color{cyan}\rule[\baselineskip]{\linewidth}{0.4pt}}
 
-% M\'argenes
+% Para que la primera página de cada capítulo use el mismo estilo
+\makeatletter
+\let\ps@plain\ps@ruled
+\makeatother
+
+% --- Márgenes (como usaban)
 \usepackage{vmargin}
-%\setmarginsrb{leftmargin}{topmargin}{rightmargin}{bottommargin}%
-%         {headheight}{headsep}{footheight}{footskip}           %
-%Lo ideal ser\'{\i}a lo siguiente
-%\setmarginsrb{2.7cm}{4cm}{2.3cm}{2.5cm}{2cm}{0.5cm}{2cm}{0.5cm}
-%Pero estos valores se suman, por lo que en realidad ir\'{\i}a asi:
 \setmarginsrb{2.7cm}{2cm}{2.3cm}{1.5cm}{0cm}{2cm}{0cm}{1cm}
-% M\'argenes, pero otra opci\'on mas acotada
-% \usepackage[top=4cm,bottom=2.5cm,left=2.7cm,right=2.3cm]{geometry}
 
-% Seccionado. El par\'ametro left incrementa el margen, lo setteo en 0.
-%\titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
-\titlespacing{\section}{0pt}{12pt}{6pt}
-%\titlespacing{\subsection}{0pt}{*0}{*0}
-%\titlespacing{\subsubsection}{0pt}{*0}{*0}
-
-%Tama\~no de letra de cap\'{\i}tulo y secciones
-\newcommand{\chapfnt}{\fontsize{16}{19}}
-\newcommand{\secfnt}{\fontsize{14}{17}}
-%\newcommand{\ssecfnt}{\fontsize{12}{14}}
-\titleformat{\chapter}[display]
-{\normalfont\chapfnt\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\chapfnt}
-\titleformat{\section}
-{\normalfont\secfnt\bfseries}{\thesection}{1em}{}
-%\titleformat{\subsection}
-%{\normalfont\ssecfnt\bfseries}{\thesubsection}{1em}{}
-
-% Se pide numeraci\'on de tablas en n\'umeros romanos
+% --- Numeración de tablas
 \renewcommand{\thetable}{\thechapter.\Roman{table}}
 
-%Espaciado antes y despu\'es de una figura respecto del texto
+% --- Espaciado de flotantes
 \setlength{\textfloatsep}{5pt}
 
-% Para notas
+% --- Notas/tareas (tus macros)
 \usepackage{todonotes}
+\setlength{\marginparwidth}{2cm}
 \newcommand{\Nico}[1]{\todo[color=green!30,inline]{\textbf{Nico:} #1}}
 \newcommand{\Franco}[1]{\todo[color=yellow!30,inline]{\textbf{Franco:} #1}}
 \newcommand{\Bauti}[1]{\todo[color=blue!30,inline]{\textbf{Bauti:} #1}}
 
-% IMPORTANTE: En la entrega de UADE se pide en negro, pero visualmente es mejor trabajar con color
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=black,
-    citecolor=black
-}
-
-%Espaciado entre referencias en la bibliograf\'{\i}a
+% --- Bibliografía: espaciado en lista
 \usepackage{etoolbox}
-\patchcmd{\thebibliography}
-  {\settowidth}
-  {\setlength{\itemsep}{6pt}\settowidth}
-  {}{}
-\apptocmd{\thebibliography}
-  {\small}
-  {}{}
+\patchcmd{\thebibliography}{\settowidth}{\setlength{\itemsep}{6pt}\settowidth}{}{}
+\apptocmd{\thebibliography}{\small}{}{}
 
+% --- ToC/LoF/LoT (una sola vez)
 \usepackage{tocloft}
-\cftsetindents{table}{0em}{4em} % Ajusta 4em seg\'un sea necesario
+\cftsetindents{table}{0em}{4em}
+\renewcommand{\cfttoctitlefont}{\bfseries\fontsize{14pt}{16pt}\selectfont}
+\setlength{\cftbeforetoctitleskip}{12pt}
+\setlength{\cftaftertoctitleskip}{6pt}
+\renewcommand{\cftloftitlefont}{\bfseries\fontsize{14pt}{16pt}\selectfont}
+\renewcommand{\cftlottitlefont}{\bfseries\fontsize{14pt}{16pt}\selectfont}
+\setlength{\cftbeforeloftitleskip}{12pt}
+\setlength{\cftafterloftitleskip}{6pt}
+\setlength{\cftbeforelottitleskip}{12pt}
+\setlength{\cftafterlottitleskip}{6pt}
 
+% --- Idioma / captions
 \usepackage[spanish,es-nodecimaldot]{babel}
 \usepackage{csquotes}
 \addto\captionsspanish{
-	\renewcommand{\contentsname}{\'Indice}
-	\renewcommand{\listfigurename}{Lista de Figuras}
-	\renewcommand{\listtablename}{Lista de Tablas}
-	\renewcommand{\tablename}{TABLA}
+  \renewcommand{\contentsname}{Índice}
+  \renewcommand{\listfigurename}{Lista de Figuras}
+  \renewcommand{\listtablename}{Lista de Tablas}
+  \renewcommand{\tablename}{TABLA}
 }
 
-% Para que el primer parrafo de un cap\'{\i}tulo tenga identado.
+% --- Párrafo
 \usepackage{indentfirst}
-\setlength{\parindent}{36pt} %Tama\~no de la identaci\'on.
+\setlength{\parindent}{36pt}
 
-% Para tablas complejas
+% --- Tablas complejas (de tu proyecto)
+\usepackage{tabularx}
+\usepackage{booktabs}
 \usepackage{multicol,multirow}
 \usepackage{array,longtable}
 
+% --- Matemática
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
-
-\allowdisplaybreaks{} % Para que el align permita dividir entre p\'aginas si lo llega a necesitar.
-
+\allowdisplaybreaks{}
 \usepackage{cancel}
 
-\newenvironment{example}[1][Ejemplo]{\begin{trivlist}
-	\item[\hspace{\labelsep} {\itshape{} #1}]}{\end{trivlist}}
+% --- Entornos propios (sin espacios en el nombre)
+\newenvironment{EstadoDelArte}{\small\begin{center}\bfseries EstadoDelArte\end{center}}{}
+\newenvironment{EnfoqueMetodologico}{\small\begin{center}\bfseries Enfoque metodológico\end{center}}{}
+\newenvironment{Cronograma}{\small\begin{center}\bfseries Cronograma\end{center}}{}
 
-\newenvironment{examples}[1][Ejemplos]{\begin{trivlist}
-	\item[\hspace{\labelsep} {\itshape{} #1}]}{\end{trivlist}}
-
-\newenvironment{Abstract}
-    {\small\begin{center}
-    \bfseries{Abstract} \end{center}}
-
-\newenvironment{Resumen}
-    {\small\begin{center}
-    \bfseries{Resumen} \end{center}}
-
-\newenvironment{Agradecimientos}
-    {\small\begin{center}
-    \bfseries{Agradecimientos} \end{center}}
-
-\newenvironment{EstadoDelArte}
-    {\small\begin{center}
-    \bfseries{EstadoDelArte} \end{center}}
-
-
+% --- Símbolos de tu repo
 \input{config/symbols}
 
-\usepackage{pdfcomment}
-\usepackage{amssymb}
-% ya tenés amssymb, pero lo dejo por las dudas
-\usepackage{amssymb}
+% --- Subrayados / estilo
+\usepackage[normalem]{ulem}
 
-% macros para usar en tablas de texto
-\newcommand{\cmark}{\ensuremath{\checkmark}} % sí
-\newcommand{\pmark}{\ensuremath{\sim}}        % parcial
-\newcommand{\xmark}{}                         % no (celda vacía)
+% --- Interlineado 1.5 del template nuevo
+\usepackage{setspace}
+\onehalfspacing
 
+% --- Títulos (UADE: todo 14 pt)
+\titleformat{\chapter}{\bfseries\fontsize{14pt}{14pt}\selectfont}{\thechapter}{1em}{}
+\titlespacing*{\chapter}{0pt}{12pt}{6pt}
+\titleformat{\section}{\bfseries\fontsize{14pt}{14pt}\selectfont}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+\titleformat{\subsection}{\bfseries\fontsize{14pt}{14pt}\selectfont}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+\titleformat{\subsubsection}{\bfseries\fontsize{14pt}{14pt}\selectfont}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+
+% --- Bibliografía en el índice automáticamente
+\usepackage[nottoc]{tocbibind}
+
+% --- Hipervínculos: para entrega UADE sin color
+\usepackage[hidelinks]{hyperref}
 
 \begin{document}
-	\input{chapters/title}
-	\input{chapters/acknowledgments}
-	\newpage
-	\input{chapters/summary}
-	\newpage
-	\input{chapters/abstract}
-	\newpage
-	\tableofcontents
-	\input{chapters/chapter01}
-	\input{chapters/chapter02}
-	\input{chapters/chapter03}
-	\input{chapters/chapter04}
 
+% Portada en PDF del template nuevo (comenta si no aplica)
+\clearpage
+\thispagestyle{empty}
+\includepdf[
+  pages=1,
+  scale=1.01,
+  offset=25mm -25mm,
+  pagecommand={\thispagestyle{empty}},
+  noautoscale
+]{cover/6d6a18e7-ec20-45ae-99ea-084094abeebe.pdf}
+\clearpage
 
-	\input{chapters/conclusion}
+% --- Contenido (tu estructura original)
+\input{chapters/title}
+\input{chapters/acknowledgments}
+\newpage
+\input{chapters/summary}
+\newpage
+\input{chapters/abstract}
+\newpage
 
-	\addcontentsline{toc}{chapter}{Bibliograf\'{\i}a}
-	\printbibliography{}
+\tableofcontents
 
+\input{chapters/chapter01}
+\input{chapters/chapter02}
+\input{chapters/chapter03}
+\input{chapters/chapter04}
+\input{chapters/conclusion}
 
-	%\appendix
-	%\input{chapters/appendix/appendix}
-	\newpage
-	\listoffigures
-	\newpage
-	\listoftables
+\printbibliography
+
+\appendix
+\input{chapters/appendix/annex}
+
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
 \end{document}
