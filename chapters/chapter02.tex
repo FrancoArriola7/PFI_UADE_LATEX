@@ -340,6 +340,63 @@ El sistema propuesto en este proyecto se distingue de las soluciones analizadas 
 
 Para validar la propuesta y diseñar una herramienta que responda a problemáticas reales del entorno operativo, se llevó a cabo una instancia de investigación cualitativa centrada en usuarios representativos del mercado objetivo. La metodología consistió en entrevistas semi-estructuradas a actores clave del rubro de productos perecederos, con el objetivo de identificar necesidades, limitaciones tecnológicas actuales, y oportunidades de mejora en los procesos de planificación y producción diaria. A continuación, se expone la información más significativa relevada durante las entrevistas.
 
+\subsection{Encuesta}
+
+Con el objetivo de validar y parametrizar AIVA, realizamos una encuesta anónima a consumidores de panificados. La encuesta releva hábitos de compra y percepciones sobre disponibilidad de productos, así como la influencia del clima, los momentos y días de mayor compra y el tamaño típico de compra. Estos datos constituyen la base empírica para justificar y calibrar las funciones de pronóstico y alertas del sistema. Se obtuvieron 134 respuestas válidas mediante un cuestionario auto-administrado en línea, en el cual se observa una mayor participación de jóvenes (16–24) y de personas de 45–54 años.
+
+Del total de encuestados, alrededor del 69\% compra panificados más de una vez al mes y alrededor del 42\% compra al menos una vez por semana. Esto respalda la necesidad de pronósticos con horizonte semanal e intradía y de ajustes de lotes orientados a picos específicos, evitando sobreproducción y faltantes.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/FrecuenciaCompraPanificados.png}
+    \caption{Frecuencia de compra de panificados.}
+    \label{fig:frecuencia-compra-panificados}
+\end{figure}
+
+La distribución horaria muestra una fuerte concentración durante la tarde. El 53,6\% de las compras se realizan entre 15–18 h, muy por encima de los demás horarios. Este patrón confirma un pico intradiario pronunciado que justifica que AIVA trate la hora como variable de alto peso en el pronóstico e integre interacciones con día de semana y clima; operativamente, habilita recomendaciones de reposición con la suficiente antelación antes del pico, alertas de quiebre y sugerencias de sustitución cuando el stock proyectado sea insuficiente, acciones que atacan el momento de mayor riesgo de ventas perdidas.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/MomentoDeCompra.png}
+    \caption{Momento de compra de panificados.}
+    \label{fig:momento-compra}
+\end{figure}
+
+
+El 86,3\% de las personas declara comprar principalmente en panaderías/confiterías de barrio, lo que ubica al canal objetivo de AIVA exactamente donde se concentra la demanda. En ese mismo universo, al menos el 74,1\% experimentó algún faltante en el último mes. Esta combinación del canal dominante y alta incidencia de indisponibilidad, confirma la relevancia operativa del problema y respalda el diseño de AIVA: pronósticos por producto y franja horaria para panaderías de barrio, alertas tempranas de quiebre y sugerencias de sustitución para mitigar pérdidas justo donde más se compra.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/NoHubieraProducto.png}
+    \caption{Situación en la que faltó algún producto en la panadería.}
+    \label{fig:no-hubiera-producto}
+\end{figure}
+
+
+Ante la última situación de indisponibilidad, la mayoría reorientó la compra dentro del mismo local: 41,7\% eligió otra variedad/sabor y 28,1\% otro producto. En cambio, 25,9\% constituyó venta perdida. El 14,4\% se fue a otro local y 11,5\% no compró. Este patrón cuantifica tanto la oportunidad de retención como el costo del stockout. Para AIVA, estos datos respaldan un motor de sustituciones en tiempo real (sugerencias por afinidad y disponibilidad), alertas de quiebre y priorización de horneadas de los SKU críticos; además, permiten estimar pérdidas y monitorear la tasa de ventas perdidas como indicador operativo clave.
+
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/AccionPosterior.png}
+    \caption{Acción tomada por la persona al no conseguir el producto deseado.}
+    \label{fig:accion-posterior}
+\end{figure}
+
+
+El clima aparece como un factor determinante de la demanda: más de la mitad de las personas declara comprar más en días fríos (58\%) y lluviosos (55\%), mientras que en días calurosos predomina la disminución de compra (46\% “compro menos”). Este patrón confirma que las condiciones meteorológicas inciden de forma directa en el volumen a producir y cuándo hacerlo. En consecuencia, AIVA debe ponderar el clima como predictor de alto peso e integrar pronóstico de temperatura y precipitaciones para reforzar horneadas/reposiciones antes de los picos en frío/lluvia, y moderar lotes (con alertas y sustituciones) en calor, minimizando faltantes y sobreproducción.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/CompraSegunClima.png}
+    \caption{Frecuencia de compras según las condiciones climáticas.}
+    \label{fig:compras-segun-clima}
+\end{figure}
+
+
+La evidencia recolectada confirma que el problema de disponibilidad en panificados es real y frecuente. Tres de cada cuatro personas experimentaron algún faltante el último mes y, ante esa situación, alrededor de 1 de cada 4 casos termina en venta perdida. Estos resultados muestran que AIVA ataca un problema real, en el canal correcto y con funcionalidades que, según los datos, reducirán faltantes y mermas sin sobreproducir.
+
+
 \subsection{Entrevista a Bruno, dueño de la Confitería ``Salvador''}
 
 Con el objetivo de comprender de manera más profunda el contexto operativo de los pequeños comercios de productos perecederos, se entrevistó a Bruno, propietario de la confitería ``Salvador'', un negocio con más de 20 años de trayectoria en la ciudad. Esta entrevista buscó obtener información cualitativa para validar el desarrollo de una herramienta de predicción de demanda y conocer el grado de adopción tecnológica actual.

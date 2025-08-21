@@ -1,21 +1,19 @@
-\newenvironment{example}[1][Ejemplo]{\begin{trivlist}
-	\item[\hspace{\labelsep} {\itshape{} #1}]}{\end{trivlist}}
-
-\newenvironment{examples}[1][Ejemplos]{\begin{trivlist}
-	\item[\hspace{\labelsep} {\itshape{} #1}]}{\end{trivlist}}
-
+% === Entornos con título centrado (no capítulo) ===
 \newenvironment{Abstract}
-    {\small\begin{center}
-    \bfseries{Abstract} \end{center}}
+  {\small\begin{center}\bfseries Abstract\end{center}}
+  {}
 
+% --- Definición del entorno Resumen ---
 \newenvironment{Resumen}
-    {\small\begin{center}
-    \bfseries{Resumen} \end{center}}
+  {\chapter*{Resumen}%
+   \addcontentsline{toc}{chapter}{Resumen}%
+   \small}
+  {}
 
 \newenvironment{Agradecimientos}
-    {\small\begin{center}
-    \bfseries{Agradecimientos} \end{center}}
+  {\small\begin{center}\bfseries Agradecimientos\end{center}}
+  {}
 
 \newenvironment{EstadoDelArte}
-    {\small\begin{center}
-    \bfseries{EstadoDelArte} \end{center}}
+  {\small\begin{center}\bfseries Estado del Arte\end{center}}
+  {}
