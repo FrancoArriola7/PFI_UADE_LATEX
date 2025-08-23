@@ -6,9 +6,8 @@ El núcleo analítico del sistema combina el historial transaccional con variabl
 
 \vspace{1cm}
 
-\section{Solución}\label{sec:solucion}
 
-\subsection{Funcionalidades del sistema}
+\section{Funcionalidades del sistema}
 
 \begin{itemize}
     \item \textbf{Autenticación y perfiles de usuario}
@@ -107,10 +106,10 @@ El núcleo analítico del sistema combina el historial transaccional con variabl
 \end{itemize}
 
 \vspace{1cm}
-\subsection{Tecnologías utilizadas}\label{sec:tecnologias}
+\section{Tecnologías utilizadas}\label{sec:tecnologias}
 A continuación se detallan las tecnologías empleadas en AIVA, explicando su rol dentro de la solución, el modo de integración y los criterios que justifican su elección. La selección prioriza un balance entre rapidez de implementación, bajo costo operativo, mantenibilidad y adecuación a los requerimientos del sistema.
 
-\subsubsection{Next.js (React + TypeScript)}
+\subsection{Next.js (React + TypeScript)}
 Next.js es un \textit{framework} sobre React que incorpora enrutamiento, optimizaciones de rendimiento y opciones de renderizado (cliente/servidor). En AIVA se utiliza para:
 \begin{itemize}
     \item Implementar la interfaz web con componentes reutilizables y tipado estático (TypeScript), reduciendo defectos en tiempo de compilación.
@@ -119,7 +118,7 @@ Next.js es un \textit{framework} sobre React que incorpora enrutamiento, optimiz
 \end{itemize}
 \noindent\textbf{Motivación.} Ecosistema maduro y documentación extensa, compatible con librerías modernas de UI.
 
-\subsubsection{Tailwind CSS y \textit{shadcn/ui}}
+\subsection{Tailwind CSS y \textit{shadcn/ui}}
 Tailwind CSS provee utilidades de estilo de bajo nivel; \textit{shadcn/ui} aporta componentes accesibles basados en Tailwind.
 \begin{itemize}
     \item Permiten maquetar formularios, tablas, modales y gráficos con consistencia visual y tiempos de desarrollo acotados.
@@ -127,7 +126,7 @@ Tailwind CSS provee utilidades de estilo de bajo nivel; \textit{shadcn/ui} aport
 \end{itemize}
 \noindent\textbf{Motivación.} Coherencia visual y productividad. 
 
-\subsubsection{Recharts}
+\subsection{Recharts}
 Recharts es una biblioteca de gráficos para React.
 \begin{itemize}
     \item Se utiliza en el \textit{dashboard} y reportes para visualizar KPIs (ventas por período, productos destacados) y comparativas (predicción vs.\ observado).
@@ -135,7 +134,7 @@ Recharts es una biblioteca de gráficos para React.
 \end{itemize}
 \noindent\textbf{Motivación.} Integración directa con React y bajo costo de aprendizaje.
 
-\subsubsection{Supabase Auth}
+\subsection{Supabase Auth}
 Servicio gestionado para registro, inicio de sesión y manejo de sesiones (incluida verificación por correo).
 \begin{itemize}
     \item Centraliza la identidad del usuario y emite \textit{tokens} para acceder a recursos protegidos.
@@ -143,7 +142,7 @@ Servicio gestionado para registro, inicio de sesión y manejo de sesiones (inclu
 \end{itemize}
 \noindent\textbf{Motivación.} Reduce superficie de error y esfuerzo de mantenimiento respecto de una solución propia.
 
-\subsubsection{PostgreSQL (vía Supabase)}
+\subsection{PostgreSQL (vía Supabase)}
 Base de datos relacional donde reside el modelo de datos.
 \begin{itemize}
     \item Tablas operativas: \textit{products}, \textit{categories}, \textit{sales}/\textit{sale\_items}, \textit{stock\_movements}.
@@ -152,7 +151,7 @@ Base de datos relacional donde reside el modelo de datos.
 \end{itemize}
 \noindent\textbf{Motivación.} Robustez y expresividad SQL para analítica operativa.
 
-\subsubsection{PostgREST (Supabase)}
+\subsection{PostgREST (Supabase)}
 Capa que expone el esquema de PostgreSQL como API REST tipada.
 \begin{itemize}
     \item La capa de servicios del frontend consume esta API para operaciones CRUD y consultas filtradas.
@@ -160,7 +159,7 @@ Capa que expone el esquema de PostgreSQL como API REST tipada.
 \end{itemize}
 \noindent\textbf{Motivación.} Acelera la construcción de la capa de datos manteniendo convenciones REST.
 
-\subsubsection{OpenWeatherMap API}
+\subsection{OpenWeatherMap API}
 Fuente externa de variables meteorológicas usadas como factores exógenos.
 \begin{itemize}
     \item Proporciona temperatura, estado del tiempo y otros atributos que se asocian a ventas y se persisten para análisis.
@@ -168,7 +167,7 @@ Fuente externa de variables meteorológicas usadas como factores exógenos.
 \end{itemize}
 \noindent\textbf{Motivación.} Cobertura suficiente para el ámbito del proyecto.
 
-\subsubsection{Node.js y \texttt{npm}}
+\subsection{Node.js y \texttt{npm}}
 Entorno de ejecución y gestor de dependencias del proyecto.
 \begin{itemize}
     \item Se emplea para el servidor de desarrollo, construcción del frontend y automatización de tareas (scripts).
@@ -176,7 +175,7 @@ Entorno de ejecución y gestor de dependencias del proyecto.
 \end{itemize}
 \noindent\textbf{Motivación.} \textit{Tooling} ampliamente adoptado en el ecosistema web.
 
-\subsubsection{Utilitarios de CSV}
+\subsection{Utilitarios de CSV}
 Conjunto de utilidades para ingesta histórica.
 \begin{itemize}
     \item Validan formato, normalizan columnas y registran errores durante la carga de productos y ventas.
@@ -184,7 +183,7 @@ Conjunto de utilidades para ingesta histórica.
 \end{itemize}
 \noindent\textbf{Motivación.} Simplicidad y compatibilidad con exportaciones comunes.
 
-\subsubsection{Buenas prácticas de configuración y seguridad}
+\subsection{Buenas prácticas de configuración y seguridad}
 \begin{itemize}
     \item Gestión de credenciales mediante variables de entorno (\texttt{.env}), evitando su versionado.
     \item Separación de entornos (desarrollo/producción) y rotación periódica de claves.
@@ -194,33 +193,60 @@ Conjunto de utilidades para ingesta histórica.
 
 \vspace{1cm}
 
-\subsection{Diagrama de flujos}
+\section{Diagrama de flujos}
 
 Para describir el comportamiento dinámico del sistema incorporamos diagramas de flujo que muestran, paso a paso, cómo se procesan las operaciones clave. Estos esquemas complementan a los requerimientos y a la arquitectura estática, al hacer explícitas las secuencias, los puntos de decisión, los caminos alternativos y el manejo de errores, lo que facilita la validación funcional y el diseño de casos de prueba.
 \vspace{1cm}
-Diagramas a incluir:
 
-DF-A · Autenticación
 
-DF-B · Carga de venta
+\subsection{DF-A · Autenticación}
+El diagrama modela el control de acceso y el alta de usuarios. Se definió así para equilibrar seguridad (validaciones en el servicio de autenticación y verificación de correo), usabilidad (separación clara entre registro e inicio de sesión) y recuperabilidad (manejo de errores con retroalimentación inmediata). La convergencia final en el dashboard establece un único criterio de éxito y facilita la trazabilidad de estados; el objetivo es registrar las decisiones críticas del acceso sin describir pantallas intermedias.
 
-DF-C · Planes y suscripciones
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{images/FlujoAutenticacion.jpg}
+  \caption{DF-A · Autenticación -- Fuente: elaboración propia}
+  \label{fig:df-a-autenticacion}
+\end{figure}
+
+
+\subsection{DF-B · Carga de ventas}
+El diagrama describe el proceso de registro de ventas desde dos orígenes complementarios: ingreso manual tipo POS y carga automática (OCR/CSV). Se define así para cubrir los escenarios operativos más frecuentes con validaciones progresivas y una confirmación explícita antes del alta, incorporando puntos de corrección para minimizar errores y preservar trazabilidad. La bifurcación temprana optimiza tiempos según la fuente de datos y el cierre en confirmación establece una única condición de éxito.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{images/FlujoVentas.drawio.png}
+  \caption{DF-B · Carga de ventas -- Fuente: elaboración propia}
+  \label{fig:df-b-ventas}
+\end{figure}
+
+
+\subsection{DF-C · Planes y suscripciones}
+El diagrama describe la gestión de planes dentro de la aplicación. Al crear una cuenta, el usuario recibe automáticamente el plan gratuito; por este motivo, cualquier cambio de plan se realiza exclusivamente desde la app. El flujo contempla verificación de identidad y estado de suscripción, selección del nuevo plan y confirmación (incluida la validación de pago si corresponde). Ante éxito se actualiza la suscripción y se reflejan las capacidades en sesión; ante error se conserva el plan previo. El enfoque prioriza control de acceso, trazabilidad y una transición segura entre planes.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{images/FlujoPlanes.drawio.png}
+  \caption{DF-C · Planes y suscripciones -- Fuente: elaboración propia}
+  \label{fig:df-c-planes}
+\end{figure}
+
 
 \vspace{1cm}
-\subsection{Identidad de marca}\label{sec:brand}
+\section{Identidad de marca}\label{sec:brand}
 
 La identidad de marca de \textbf{AIVA} se diseñó para comunicar tecnología confiable, simplicidad operativa y foco en pequeños comercios. Esta sección documenta los elementos rectores de esa identidad y su relación con la experiencia de uso del sistema.
 
-\subsubsection{Naming}
+\subsection{Naming}
 \textbf{AIVA} es un acrónimo de \textit{Asistente Inteligente para Ventas y Análisis}. El nombre cumple tres criterios: (i) \textit{memorabilidad} y pronunciación sencilla en español e inglés, (ii) \textit{brevedad} apta para interfaces y piezas breves (íconos, botones, navegación), y (iii) \textit{connotación} directa con analítica y apoyo a la decisión. El nombre se usa en mayúsculas para reforzar la legibilidad y la consistencia visual en la interfaz.
 
-\subsubsection{Misión}
+\subsection{Misión}
 Poner la analítica predictiva al alcance de micro y pequeñas empresas de alimentos perecederos, reduciendo mermas y quiebres mediante planificación basada en datos. La misión orienta decisiones de producto hacia soluciones de bajo costo, fáciles de adoptar y con impacto operativo medible.
 
-\subsubsection{Visión}
+\subsection{Visión}
 Constituirse en la plataforma de referencia en América Latina para la gestión de demanda en comercios de proximidad, integrando múltiples fuentes de datos (histórico, clima, calendario) y promoviendo prácticas sustentables de producción y reposición.
 
-\subsubsection{Paleta de colores}\label{subsec:paleta}
+\subsection{Paleta de colores}\label{subsec:paleta}
 
 La paleta cromática de \textbf{AIVA} fue definida para comunicar confianza tecnológica, claridad y foco en la toma de decisiones. El eje visual está compuesto por un rango de azules–índigo que se aplica en fondos y navegación, desde un índigo profundo hasta un azul más luminoso (\#1E2A78–\#3F6BFF). Esta base fría evoca precisión y estabilidad, atributos propios de una plataforma analítica, y refuerza la percepción de fiabilidad por parte del usuario.
 
@@ -239,7 +265,7 @@ En conjunto, el gradiente principal de índigo a azul, el acento violeta y los s
   \label{fig:paleta-aiva}
 \end{figure}
 
-\subsubsection{Logo}
+\subsection{Logo}
 El signo marcario combina un \textbf{símbolo geométrico} (módulos rectangulares que sugieren el trazo de una “A” y la idea de bloques de datos) con el \textbf{logotipo} “AIVA” en tipografía \textit{sans serif} de alta legibilidad.
 
 \begin{itemize}
