@@ -6,7 +6,6 @@ El núcleo analítico del sistema combina el historial transaccional con variabl
 
 \vspace{1cm}
 
-
 \section{Funcionalidades del sistema}
 
 \begin{itemize}
@@ -106,6 +105,36 @@ El núcleo analítico del sistema combina el historial transaccional con variabl
 \end{itemize}
 
 \vspace{1cm}
+
+\section{Interfaz Gráfica}
+
+En esta sección se expone la interfaz gráfica desarrollada para la interacción cotidiana de los usuarios de AIVA en el entorno de comercio minorista de alimentos perecederos. La UI prioriza baja fricción operativa, consistencia visual y señales claras para la toma de decisiones, con patrones reutilizables que reducen la curva de aprendizaje. A continuación se describen las dos pantallas más relevantes por su impacto en el trabajo diario: el asistente conversacional (chatbot) y el módulo de predicción de demanda.
+
+\subsection{Asistente conversacional (chatbot)}
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{images/chatbotPage.png}
+  \caption{Asistente conversacional (chatbot) -- Fuente: elaboración propia}
+  \label{fig:ui-chatbot}
+\end{figure}
+La pantalla del asistente provee un canal de interacción en lenguaje natural para consultar métricas, navegar a vistas operativas y disparar acciones frecuentes sin abandonar el flujo de trabajo. El encabezado, con gradiente azul–violeta, muestra el estado del servicio mediante la insignia (“En línea”) y un selector de conversaciones que permite crear, cambiar y archivar hilos, favoreciendo la continuidad y la trazabilidad de consultas.
+
+El área central es un historial desplazable con burbujas alineadas según el rol: los mensajes del usuario se muestran a la derecha y las respuestas del asistente, a la izquierda. Cada mensaje incorpora marca de tiempo y, en el caso del asistente, una acción para copiar el contenido. Cuando no hay historial, se presenta un saludo dinámico según la hora y atajos de acción (“Ver predicciones de mañana”, “Analizar ventas de esta semana”) que precargan consultas típicas para reducir fricción.
+
+La barra inferior concentra la entrada de texto, con envío por Enter y salto de línea con Shift+Enter, y botones para enviar o limpiar la conversación. Durante el procesamiento se indica actividad y se habilita la interrupción segura de la respuesta. La comunicación con el backend se realiza autenticada (token de sesión de Supabase) contra el endpoint interno \texttt{/api/chat}; se contemplan estados de error categorizados (cuota, servicio, autenticación, cancelación y red) con retroalimentación visual y mensajes recuperables. En conjunto, el diseño prioriza velocidad de uso, consistencia con el resto de la interfaz y control explícito sobre el ciclo de la conversación.
+
+
+\subsection{Predicción de demanda}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{images/prediccionPage.png}
+\caption{Predicción de demanda -- Fuente: elaboración propia}
+\label{fig:ui-prediccion}
+\end{figure}
+La pantalla de predicción concentra el cálculo y la consulta de estimaciones por producto. El encabezado permite elegir el período de análisis (hoy, semana, mes) y recalcular bajo demanda; al mismo tiempo, resume el estado del proceso con indicadores clave (ventas predichas, confianza alta, tendencia positiva y volumen de datos históricos). La sección analítica combina un gráfico de ventas reales filtrable por producto con tres vistas complementarias: un resumen ejecutivo (top productos y riesgos), un detalle tabular con filtros por producto/categoría y umbral de confianza, y un historial de ventas con contexto (clima, fin de semana, feriados). Las predicciones se generan en tiempo real mediante el servicio de predicción y se persisten en la base (tabla \texttt{predictions}, por usuario y período), priorizando trazabilidad, consistencia visual con el dashboard y manejo explícito de errores/estados para decisiones operativas rápidas.
+
+\vspace{1cm}
+
 \section{Tecnologías utilizadas}\label{sec:tecnologias}
 A continuación se detallan las tecnologías empleadas en AIVA, explicando su rol dentro de la solución, el modo de integración y los criterios que justifican su elección. La selección prioriza un balance entre rapidez de implementación, bajo costo operativo, mantenibilidad y adecuación a los requerimientos del sistema.
 
@@ -193,6 +222,21 @@ Conjunto de utilidades para ingesta histórica.
 
 \vspace{1cm}
 
+\section{Arquitectura del sistema}
+
+La arquitectura adopta un enfoque liviano de tres capas con servicios gestionados. La interfaz de usuario se implementa en \textit{Next.js}, que además expone una API interna (rutas \texttt{/api}) para orquestar lógica de negocio: validación, enriquecimiento con clima y llamadas al asistente. Los datos persisten en \textit{Supabase} (PostgreSQL) con autenticación gestionada y políticas RLS por \texttt{user\_id}. Dos servicios externos completan el contexto: \textit{OpenWeather} para variables meteorológicas y \textit{OpenAI} para el asistente conversacional. 
+
+Las interacciones principales se agrupan en cuatro flujos: (i) autenticación y provisión de \textit{tokens} (JWT), (ii) operaciones CRUD de productos y ventas, (iii) generación y almacenamiento de predicciones (incluida trazabilidad de factores) y (iv) consultas conversacionales a través del endpoint \texttt{/api/chat}. Todas las comunicaciones se realizan sobre HTTPS y las lecturas/escrituras a base de datos respetan segmentación por usuario (RLS).
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{images/arquitecturaAIVA.png} % <-- reemplazar por tu archivo
+  \caption{Arquitectura del sistema -- Fuente: elaboración propia. 
+Los logotipos pertenecen a sus respectivas marcas.}
+  \label{fig:arquitectura-aiva}
+\end{figure}
+\vspace{1cm}
+
 \section{Diagrama de flujos}
 
 Para describir el comportamiento dinámico del sistema incorporamos diagramas de flujo que muestran, paso a paso, cómo se procesan las operaciones clave. Estos esquemas complementan a los requerimientos y a la arquitectura estática, al hacer explícitas las secuencias, los puntos de decisión, los caminos alternativos y el manejo de errores, lo que facilita la validación funcional y el diseño de casos de prueba.
@@ -269,7 +313,7 @@ En conjunto, el gradiente principal de índigo a azul, el acento violeta y los s
 El signo marcario combina un \textbf{símbolo geométrico} (módulos rectangulares que sugieren el trazo de una “A” y la idea de bloques de datos) con el \textbf{logotipo} “AIVA” en tipografía \textit{sans serif} de alta legibilidad.
 
 \begin{itemize}
-    \item \textbf{Configuración principal (lockup).} Símbolo a la izquierda y logotipo a la derecha, alineados sobre la línea base. El conjunto se utiliza en positivo (blanco) sobre fondos indigo/azules o en negativo (indigo/violeta) sobre fondos claros.
+    \item \textbf{Configuración principal (lockup).} Símbolo a la izquierda y logotipo a la derecha, alineados sobre la línea base. El conjunto se utiliza en positivo (blanco) sobre fondos índigo/azules o en negativo (índigo/violeta) sobre fondos claros.
     \item \textbf{Área de protección.} Mantener un margen libre alrededor del logo equivalente a la altura del símbolo para evitar interferencias con otros elementos.
     \item \textbf{Tamaños mínimos.} Asegurar que el ancho total no sea inferior a 24\,mm en impresos (o 160\,px en pantalla) para conservar la legibilidad de las formas internas.
     \item \textbf{Variantes.} 
