@@ -6,103 +6,48 @@ El núcleo analítico del sistema combina el historial transaccional con variabl
 
 \vspace{1cm}
 
-\section{Funcionalidades del sistema}
+\section{Requerimientos del sistema}
+Esta sección especifica las condiciones verificables que delimitan el alcance de AIVA. Se formulan en modo imperativo (“El sistema debe …”) para facilitar su prueba y aceptación. Se organizan en dos grupos: funcionales (capacidades observables) y no funcionales (calidades y restricciones transversales).
 
-\begin{itemize}
-    \item \textbf{Autenticación y perfiles de usuario}
-    \begin{itemize}
-        \item Registro e inicio de sesión mediante servicio gestionado (Supabase Auth).
-        \item Persistencia de sesión y provisión de identidad a la aplicación.
-        \item Gestión básica de perfil de usuario.
-    \end{itemize}
+\subsection{Requerimientos funcionales}
+Definen lo que el sistema hace de cara al usuario y a los procesos de negocio (captura de datos, análisis y presentación). Recogen sólo lo esencial para operar AIVA extremo a extremo, sin imponer detalles de implementación.
 
-    \item \textbf{Configuración y localización}
-    \begin{itemize}
-        \item Inicialización de la ubicación del usuario (por defecto, Ciudad Autónoma de Buenos Aires).
-        \item Persistencia de la ubicación para consumo por servicios externos (clima).
-    \end{itemize}
+\begin{enumerate}[label=RF-\arabic*., leftmargin=*, nosep]
+  \item El sistema debe permitir registro, verificación de correo e inicio/cierre de sesión.
+  \item El sistema debe asignar automáticamente un plan gratuito al alta y reflejarlo en la sesión.
+  \item El sistema debe mantener la sesión activa y renovar credenciales mientras sean válidas.
+  \item El sistema debe gestionar productos y categorías con operaciones CRUD.
+  \item El sistema debe permitir cargar productos y ventas históricas vía CSV con validación previa.
+  \item El sistema debe registrar ventas mediante un flujo POS con totales e ítems por producto.
+  \item El sistema debe enriquecer transacciones con contexto (fecha, día, clima, feriados/fin de semana).
+  \item El sistema debe generar predicciones de demanda por producto considerando tendencia, estacionalidad y clima.
+  \item El sistema debe asociar a cada predicción nivel de confianza, factores explicativos y recomendación de stock.
+  \item El sistema debe persistir predicciones por usuario y período y permitir su recalculo bajo demanda.
+  \item El sistema debe exponer un tablero con KPIs de ventas, clima y predicciones vigentes.
+  \item El sistema debe ofrecer un asistente conversacional para consultas y navegación guiada (\texttt{/api/chat}).
+  \item El sistema debe generar y listar alertas operativas (stock bajo, sobreproducción potencial, feriados).
+  \item El sistema debe filtrar todos los datos por el identificador del usuario autenticado.
+\end{enumerate}
 
-    \item \textbf{Gestión de productos y categorías}
-    \begin{itemize}
-        \item Crear, leer, actualizar y eliminar productos y categorías.
-        \item Carga masiva de productos vía CSV con previsualización y validación básica.
-        \item Ajustes manuales de stock y visualización de movimientos de stock.
-    \end{itemize}
+\subsection{Requerimientos no funcionales}
+Establecen cualidades globales del sistema (seguridad, desempeño, mantenibilidad, confiabilidad). Limitan cómo se implementan los servicios, sin modificar el comportamiento funcional.
 
-    \item \textbf{Registro y administración de ventas}
-    \begin{itemize}
-        \item Punto de Venta (POS): Flujo de carrito, totales y confirmación de venta. Alta de venta y detalle de ítems en base de datos. Enriquecimiento contextual de cada transacción para análisis de demanda.
-        \item Importación de ventas históricas (CSV): Carga de archivos CSV con validaciones y normalización.
-        \item Carga asistida por imágenes (OCR): Interfaz de carga y estados de procesamiento.
-    \end{itemize}
+\begin{enumerate}[label=RNF-\arabic*., leftmargin=*, nosep]
+  \item El sistema debe proteger recursos con autenticación/autorización y transmitir credenciales sólo por HTTPS.
+  \item El sistema debe aplicar segmentación de datos en base (RLS o equivalente) por \texttt{user\_id}.
+  \item El sistema debe ofrecer tiempos de respuesta percibidos menores a 2\,s en navegación del \textit{dashboard}.
+  \item El sistema debe calcular predicciones bajo demanda en tiempos compatibles con uso interactivo (orden de segundos).
+  \item El sistema debe manejar entradas inválidas y fallas externas con mensajes categorizados y recuperables.
+  \item El sistema debe registrar eventos relevantes (errores, importaciones, cálculos) para auditoría.
+  \item El sistema debe ser usable en navegadores modernos de escritorio y responder correctamente en distintos anchos.
+  \item El sistema debe cumplir pautas básicas de accesibilidad (contraste, etiquetas/ARIA en controles principales).
+  \item El sistema debe preservar integridad referencial y usar transacciones en altas de ventas.
+  \item El sistema debe favorecer mantenibilidad con módulos tipados y convenciones de estilo consistentes.
+  \item El sistema debe gestionar secretos vía variables de entorno y rotar credenciales periódicamente.
+  \item El sistema debe respetar privacidad aplicable, realizar backups de datos críticos y versionar migraciones.
+\end{enumerate}
 
-    \item \textbf{Datos contextuales de clima}
-    \begin{itemize}
-        \item Integración con API meteorológica.
-        \item Disponibilización de variables climáticas para análisis y predicción.
-    \end{itemize}
 
-    \item \textbf{Análisis de demanda}
-    \begin{itemize}
-        \item Consolidación de datos transaccionales enriquecidos.
-        \item Consultas y visualizaciones exploratorias (tendencias por producto/categoría, comparativas temporales).
-    \end{itemize}
-
-    \item \textbf{Predicción de demanda}
-    \begin{itemize}
-        \item Generación de predicciones: Estimación diaria por producto mediante enfoque heurístico (tendencia, estacionalidad, día de semana y clima). Indicadores asociados a cada predicción.
-        \item Persistencia y consulta de predicciones: Almacenamiento de predicciones para trazabilidad y auditoría. Gráficos comparativos entre predicción y ventas observadas.
-        \item Predicciones resumidas para tableros: Consolidación de resultados para consumo eficiente por el dashboard.
-    \end{itemize}
-
-    \item \textbf{Backoffice (dashboard)}
-    \begin{itemize}
-        \item Indicadores ejecutivos (ventas, productos destacados, clima, predicciones vigentes).
-        \item Visualizaciones de gráficos con filtros para seguimiento operativo.
-    \end{itemize}
-
-    \item \textbf{Reportes}
-    \begin{itemize}
-        \item Generación de reportes con agregados por período, producto y categoría.
-        \item Gráficos de evolución y comparativas semana a semana.
-    \end{itemize}
-
-    \item \textbf{Alertas operativas}
-    \begin{itemize}
-        \item Listado de alertas de referencia (p. ej., stock bajo, sobreproducción potencial, feriados).
-        \item Priorización de casos para acción correctiva.
-    \end{itemize}
-
-    \item \textbf{Asistente conversacional}
-    \begin{itemize}
-        \item Interfaz de chat para consultas frecuentes y navegación guiada.
-        \item Respuestas basadas en reglas; integración con modelos de lenguaje planificada.
-    \end{itemize}
-
-    \item \textbf{Gestión de planes y suscripciones}
-    \begin{itemize}
-        \item Plan gratuito por defecto y soporte para planes pagos.
-        \item Asociación de usuarios a planes y consulta del estado de suscripción.
-    \end{itemize}
-
-    \item \textbf{Perfil y preferencias}
-    \begin{itemize}
-        \item Edición de datos básicos de perfil.
-        \item Configuraciones generales del usuario.
-    \end{itemize}
-
-    \item \textbf{Validaciones y manejo de errores}
-    \begin{itemize}
-        \item Validación de formularios y archivos (CSV).
-        \item Mensajería de estados (carga, éxito, error) y prevención de acciones inválidas.
-    \end{itemize}
-
-    \item \textbf{Seguridad y segmentación de datos}
-    \begin{itemize}
-        \item Acceso autenticado a recursos y filtrado de datos por usuario.
-        \item Preparado para políticas de control a nivel base de datos (RLS) en despliegues gestionados.
-    \end{itemize}
-\end{itemize}
 
 \vspace{1cm}
 
@@ -117,11 +62,11 @@ En esta sección se expone la interfaz gráfica desarrollada para la interacció
   \caption{Asistente conversacional (chatbot) -- Fuente: elaboración propia}
   \label{fig:ui-chatbot}
 \end{figure}
-La pantalla del asistente provee un canal de interacción en lenguaje natural para consultar métricas, navegar a vistas operativas y disparar acciones frecuentes sin abandonar el flujo de trabajo. El encabezado, con gradiente azul–violeta, muestra el estado del servicio mediante la insignia (“En línea”) y un selector de conversaciones que permite crear, cambiar y archivar hilos, favoreciendo la continuidad y la trazabilidad de consultas.
+La pantalla del asistente provee un canal de interacción en lenguaje natural para consultar métricas, navegar a vistas operativas y disparar acciones frecuentes sin abandonar el flujo de trabajo. El encabezado, con gradiente azul–violeta, muestra el estado del servicio mediante la insignia («En línea») y un selector de conversaciones que permite crear, cambiar y archivar hilos, favoreciendo la continuidad y la trazabilidad de consultas.
 
 El área central es un historial desplazable con burbujas alineadas según el rol: los mensajes del usuario se muestran a la derecha y las respuestas del asistente, a la izquierda. Cada mensaje incorpora marca de tiempo y, en el caso del asistente, una acción para copiar el contenido. Cuando no hay historial, se presenta un saludo dinámico según la hora y atajos de acción (“Ver predicciones de mañana”, “Analizar ventas de esta semana”) que precargan consultas típicas para reducir fricción.
 
-La barra inferior concentra la entrada de texto, con envío por Enter y salto de línea con Shift+Enter, y botones para enviar o limpiar la conversación. Durante el procesamiento se indica actividad y se habilita la interrupción segura de la respuesta. La comunicación con el backend se realiza autenticada (token de sesión de Supabase) contra el endpoint interno \texttt{/api/chat}; se contemplan estados de error categorizados (cuota, servicio, autenticación, cancelación y red) con retroalimentación visual y mensajes recuperables. En conjunto, el diseño prioriza velocidad de uso, consistencia con el resto de la interfaz y control explícito sobre el ciclo de la conversación.
+La barra inferior concentra la entrada de texto, con envío por Enter y salto de línea con \textit{Shift+Enter}, y botones para enviar o limpiar la conversación. Durante el procesamiento se indica actividad y se habilita la interrupción segura de la respuesta. La comunicación con el backend se realiza autenticada (token de sesión de Supabase) contra el endpoint interno \texttt{/api/chat}; se contemplan estados de error categorizados (cuota, servicio, autenticación, cancelación y red) con retroalimentación visual y mensajes recuperables. En conjunto, el diseño prioriza velocidad de uso, consistencia con el resto de la interfaz y control explícito sobre el ciclo de la conversación.
 
 Cuando el usuario ingresa una consulta en el chat, el asistente procesa el mensaje y determina la intención de la pregunta a partir del lenguaje natural. En lugar de devolver una respuesta predefinida o aproximada, el agente genera de manera dinámica una consulta SQL parametrizada que traduce esa necesidad en una instrucción concreta sobre la base de datos. Esta consulta, siempre restringida a operaciones de solo lectura y filtrada por el identificador del usuario, se ejecuta en Supabase sobre el motor Postgres, garantizando seguridad y acceso únicamente a la información correspondiente. Una vez obtenidos los resultados, el asistente procesa los datos para calcular métricas, agrupar valores y elaborar indicadores relevantes, que luego son redactados en un formato comprensible y ejecutivo. De esta manera, el usuario recibe una respuesta clara y contextualizada, sustentada en datos reales y actualizados, sin exposición de detalles técnicos. El enfoque adoptado constituye el núcleo innovador de la solución: transformar de forma automática las consultas en lenguaje natural en consultas SQL seguras, ejecutarlas en tiempo real y presentar los resultados de manera amigable dentro del flujo conversacional.
 
@@ -134,8 +79,7 @@ Cuando el usuario ingresa una consulta en el chat, el asistente procesa el mensa
 \end{figure}
 La pantalla de predicción concentra el cálculo y la consulta de estimaciones por producto. El encabezado permite elegir el período de análisis (hoy, semana, mes) y recalcular bajo demanda; al mismo tiempo, resume el estado del proceso con indicadores clave (ventas predichas, confianza alta, tendencia positiva y volumen de datos históricos). La sección analítica combina un gráfico de ventas reales filtrable por producto con tres vistas complementarias: un resumen ejecutivo (top productos y riesgos), un detalle tabular con filtros por producto/categoría y umbral de confianza, y un historial de ventas con contexto (clima, fin de semana, feriados). Las predicciones se generan en tiempo real mediante el servicio de predicción y se persisten en la base (tabla \texttt{predictions}, por usuario y período), priorizando trazabilidad, consistencia visual con el dashboard y manejo explícito de errores/estados para decisiones operativas rápidas.
 
-Cuando se registra una venta en el sistema, además de almacenar la transacción, se capturan variables contextuales relevantes como fecha y hora, condiciones climáticas, feriados y características del producto (por ejemplo, si es perecedero). Estos datos se combinan con el historial reciente de ventas para estimar la demanda futura de cada producto, aplicando factores de tendencia, estacionalidad y contexto temporal. El resultado de este proceso es una predicción por período (hoy, semana o mes) que incluye métricas de cantidad esperada, nivel de confianza, tendencia y recomendaciones de stock. Las predicciones generadas se guardan automáticamente en la base de datos en la tabla predictions, asociadas al usuario y al período, lo que asegura que luego puedan ser consultadas en tiempo real desde la interfaz conversacional o visualizadas en la pantalla analítica. De este modo, cada nueva venta no solo actualiza el registro histórico, sino que alimenta y refina las estimaciones disponibles para la toma de decisiones.
-
+Cuando se registra una venta en el sistema, además de almacenar la transacción, se capturan variables contextuales relevantes como fecha y hora, condiciones climáticas, feriados y características del producto (por ejemplo, si es perecedero). Estos datos se combinan con el historial reciente de ventas para estimar la demanda futura de cada producto, aplicando factores de tendencia, estacionalidad y contexto temporal. El resultado de este proceso es una predicción por período (hoy, semana o mes) que incluye métricas de cantidad esperada, nivel de confianza, tendencia y recomendaciones de stock. Las predicciones generadas se guardan automáticamente en la base de datos en la tabla \texttt{predictions}, asociadas al usuario y al período, lo que asegura que luego puedan ser consultadas en tiempo real desde la interfaz conversacional o visualizadas en la pantalla analítica. De este modo, cada nueva venta no solo actualiza el registro histórico, sino que alimenta y refina las estimaciones disponibles para la toma de decisiones.
 \vspace{1cm}
 
 \section{Tecnologías utilizadas}\label{sec:tecnologias}
@@ -177,8 +121,8 @@ Servicio gestionado para registro, inicio de sesión y manejo de sesiones (inclu
 \subsection{PostgreSQL (vía Supabase)}
 Base de datos relacional donde reside el modelo de datos.
 \begin{itemize}
-    \item Tablas operativas: \textit{products}, \textit{categories}, \textit{sales}/\textit{sale\_items}, \textit{stock\_movements}.
-    \item Datos analíticos y de contexto: \textit{demand\_analysis\_data}, \textit{predictions}/\textit{stored\_predictions}, \textit{weather\_data}, \textit{plans}, \textit{user\_subscriptions}.
+    \item Tablas operativas: \texttt{products}, \texttt{categories}, \texttt{sales}/\texttt{sale\_items}, \texttt{stock\_movements}.
+    \item Datos analíticos y de contexto: \texttt{demand\_analysis\_data}, \texttt{predictions}/\texttt{stored\_predictions}, \texttt{weather\_data}, \texttt{plans}, \texttt{user\_subscriptions}.
     \item Soporte de integridad referencial, vistas e \textit{indexes} para consultas eficientes.
 \end{itemize}
 \noindent\textbf{Motivación.} Robustez y expresividad SQL para analítica operativa.
@@ -199,7 +143,7 @@ Fuente externa de variables meteorológicas usadas como factores exógenos.
 \end{itemize}
 \noindent\textbf{Motivación.} Cobertura suficiente para el ámbito del proyecto.
 
-\subsection{Node.js y \texttt{npm}}
+\subsection{Node.js y npm}
 Entorno de ejecución y gestor de dependencias del proyecto.
 \begin{itemize}
     \item Se emplea para el servidor de desarrollo, construcción del frontend y automatización de tareas (scripts).
@@ -227,9 +171,15 @@ Conjunto de utilidades para ingesta histórica.
 
 \section{Arquitectura del sistema}
 
-La arquitectura adopta un enfoque liviano de tres capas con servicios gestionados. La interfaz de usuario se implementa en \textit{Next.js}, que además expone una API interna (rutas \texttt{/api}) para orquestar lógica de negocio: validación, enriquecimiento con clima y llamadas al asistente. Los datos persisten en \textit{Supabase} (PostgreSQL) con autenticación gestionada y políticas RLS por \texttt{user\_id}. Dos servicios externos completan el contexto: \textit{OpenWeather} para variables meteorológicas y \textit{OpenAI} para el asistente conversacional. 
+La arquitectura adopta un enfoque liviano de tres capas con servicios gestionados. La interfaz de usuario se implementa en \textit{Next.js}, que además expone una API interna (rutas \texttt{/api}) para articular lógica de negocio: validación, enriquecimiento con clima y llamadas al asistente. Los datos persisten en \textit{Supabase} (PostgreSQL) con autenticación gestionada y políticas RLS por \texttt{user\_id}. Dos servicios externos completan el contexto: \textit{OpenWeather} para variables meteorológicas y \textit{OpenAI} para el asistente conversacional. 
 
-Las interacciones principales se agrupan en cuatro flujos: (i) autenticación y provisión de \textit{tokens} (JWT), (ii) operaciones CRUD de productos y ventas, (iii) generación y almacenamiento de predicciones (incluida trazabilidad de factores) y (iv) consultas conversacionales a través del endpoint \texttt{/api/chat}. Todas las comunicaciones se realizan sobre HTTPS y las lecturas/escrituras a base de datos respetan segmentación por usuario (RLS).
+Las interacciones principales se agrupan en cuatro flujos:
+\begin{enumerate}
+    \item Autenticación y provisión de \textit{tokens} (JWT).
+    \item Operaciones CRUD de productos y ventas.
+    \item Generación y almacenamiento de predicciones (incluida trazabilidad de factores).
+    \item Consultas conversacionales a través del endpoint \texttt{/api/chat}.
+\end{enumerate}
 
 \begin{figure}[!htbp]
   \centering
@@ -317,8 +267,8 @@ El signo marcario combina un \textbf{símbolo geométrico} (módulos rectangular
 
 \begin{itemize}
     \item \textbf{Configuración principal (lockup).} Símbolo a la izquierda y logotipo a la derecha, alineados sobre la línea base. El conjunto se utiliza en positivo (blanco) sobre fondos índigo/azules o en negativo (índigo/violeta) sobre fondos claros.
-    \item \textbf{Área de protección.} Mantener un margen libre alrededor del logo equivalente a la altura del símbolo para evitar interferencias con otros elementos.
-    \item \textbf{Tamaños mínimos.} Asegurar que el ancho total no sea inferior a 24\,mm en impresos (o 160\,px en pantalla) para conservar la legibilidad de las formas internas.
+    \item \textbf{Área de protección.} Se mantiene un margen libre alrededor del logo equivalente a la altura del símbolo para evitar interferencias con otros elementos.
+    \item \textbf{Tamaños mínimos.} Se asegura que el ancho total no sea inferior a 24\,mm en impresos (o 160\,px en pantalla) para conservar la legibilidad de las formas internas.
     \item \textbf{Variantes.} 
     \begin{itemize}
         \item \textit{Monocromo}: uso en una sola tinta (blanco o negro) cuando las restricciones de producción lo requieran.
