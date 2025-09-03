@@ -4,7 +4,7 @@ AIVA es un sistema web orientado a pequeñas y medianas empresas de alimentos pe
 
 El núcleo analítico del sistema combina el historial transaccional con variables exógenas para estimar la demanda esperada a corto plazo. Este módulo implementa un enfoque heurístico transparente centrado en tendencia, estacionalidad y condiciones meteorológicas, con un diseño abierto a la incorporación de modelos estadísticos y de aprendizaje automático más avanzados. La arquitectura prioriza componentes de bajo costo y rápida adopción, asegurando trazabilidad de datos, reproducibilidad de resultados y una experiencia de usuario alineada con los flujos cotidianos del negocio.
 
-\vspace{1cm}
+
 
 \section{Requerimientos del sistema}
 Esta sección especifica las condiciones verificables que delimitan el alcance de AIVA. Se formulan en modo imperativo (“El sistema debe …”) para facilitar su prueba y aceptación. Se organizan en dos grupos: funcionales (capacidades observables) y no funcionales (calidades y restricciones transversales).
@@ -49,8 +49,6 @@ Establecen cualidades globales del sistema (seguridad, desempeño, mantenibilida
 
 
 
-\vspace{1cm}
-
 \section{Interfaz Gráfica}
 
 En esta sección se expone la interfaz gráfica desarrollada para la interacción cotidiana de los usuarios de AIVA en el entorno de comercio minorista de alimentos perecederos. La UI prioriza baja fricción operativa, consistencia visual y señales claras para la toma de decisiones, con patrones reutilizables que reducen la curva de aprendizaje. A continuación se describen las dos pantallas más relevantes por su impacto en el trabajo diario: el asistente conversacional (chatbot) y el módulo de predicción de demanda.
@@ -68,6 +66,7 @@ El área central es un historial desplazable con burbujas alineadas según el ro
 
 La barra inferior concentra la entrada de texto, con envío por Enter y salto de línea con \textit{Shift+Enter}, y botones para enviar o limpiar la conversación. Durante el procesamiento se indica actividad y se habilita la interrupción segura de la respuesta. La comunicación con el backend se realiza autenticada (token de sesión de Supabase) contra el endpoint interno \texttt{/api/chat}; se contemplan estados de error categorizados (cuota, servicio, autenticación, cancelación y red) con retroalimentación visual y mensajes recuperables. En conjunto, el diseño prioriza velocidad de uso, consistencia con el resto de la interfaz y control explícito sobre el ciclo de la conversación.
 
+\subsection{Procesamiento de la consulta}
 Cuando el usuario ingresa una consulta en el chat, el asistente procesa el mensaje y determina la intención de la pregunta a partir del lenguaje natural. En lugar de devolver una respuesta predefinida o aproximada, el agente genera de manera dinámica una consulta SQL parametrizada que traduce esa necesidad en una instrucción concreta sobre la base de datos. Esta consulta, siempre restringida a operaciones de solo lectura y filtrada por el identificador del usuario, se ejecuta en Supabase sobre el motor Postgres, garantizando seguridad y acceso únicamente a la información correspondiente. Una vez obtenidos los resultados, el asistente procesa los datos para calcular métricas, agrupar valores y elaborar indicadores relevantes, que luego son redactados en un formato comprensible y ejecutivo. De esta manera, el usuario recibe una respuesta clara y contextualizada, sustentada en datos reales y actualizados, sin exposición de detalles técnicos. El enfoque adoptado constituye el núcleo innovador de la solución: transformar de forma automática las consultas en lenguaje natural en consultas SQL seguras, ejecutarlas en tiempo real y presentar los resultados de manera amigable dentro del flujo conversacional.
 
 \subsection{Predicción de demanda}
@@ -79,8 +78,9 @@ Cuando el usuario ingresa una consulta en el chat, el asistente procesa el mensa
 \end{figure}
 La pantalla de predicción concentra el cálculo y la consulta de estimaciones por producto. El encabezado permite elegir el período de análisis (hoy, semana, mes) y recalcular bajo demanda; al mismo tiempo, resume el estado del proceso con indicadores clave (ventas predichas, confianza alta, tendencia positiva y volumen de datos históricos). La sección analítica combina un gráfico de ventas reales filtrable por producto con tres vistas complementarias: un resumen ejecutivo (top productos y riesgos), un detalle tabular con filtros por producto/categoría y umbral de confianza, y un historial de ventas con contexto (clima, fin de semana, feriados). Las predicciones se generan en tiempo real mediante el servicio de predicción y se persisten en la base (tabla \texttt{predictions}, por usuario y período), priorizando trazabilidad, consistencia visual con el dashboard y manejo explícito de errores/estados para decisiones operativas rápidas.
 
+\subsection{Procesamiento de prediccón}
 Cuando se registra una venta en el sistema, además de almacenar la transacción, se capturan variables contextuales relevantes como fecha y hora, condiciones climáticas, feriados y características del producto (por ejemplo, si es perecedero). Estos datos se combinan con el historial reciente de ventas para estimar la demanda futura de cada producto, aplicando factores de tendencia, estacionalidad y contexto temporal. El resultado de este proceso es una predicción por período (hoy, semana o mes) que incluye métricas de cantidad esperada, nivel de confianza, tendencia y recomendaciones de stock. Las predicciones generadas se guardan automáticamente en la base de datos en la tabla \texttt{predictions}, asociadas al usuario y al período, lo que asegura que luego puedan ser consultadas en tiempo real desde la interfaz conversacional o visualizadas en la pantalla analítica. De este modo, cada nueva venta no solo actualiza el registro histórico, sino que alimenta y refina las estimaciones disponibles para la toma de decisiones.
-\vspace{1cm}
+
 
 \section{Tecnologías utilizadas}\label{sec:tecnologias}
 A continuación se detallan las tecnologías empleadas en AIVA, explicando su rol dentro de la solución, el modo de integración y los criterios que justifican su elección. La selección prioriza un balance entre rapidez de implementación, bajo costo operativo, mantenibilidad y adecuación a los requerimientos del sistema.
@@ -167,7 +167,7 @@ Conjunto de utilidades para ingesta histórica.
 \end{itemize}
 
 
-\vspace{1cm}
+
 
 \section{Arquitectura del sistema}
 
@@ -190,10 +190,44 @@ Los logotipos pertenecen a sus respectivas marcas.}
 \end{figure}
 \vspace{1cm}
 
+\section{Modelo de datos}
+
+El diseño de la base de datos de AIVA se implementó sobre \textit{PostgreSQL} en \textit{Supabase}, priorizando la normalización, la trazabilidad y la segmentación de datos por \texttt{user\_id} para garantizar seguridad y consistencia.
+
+El esquema integra distintas entidades relacionadas con el ciclo de ventas y predicción:
+
+\begin{itemize}
+    \item \textbf{Usuarios y perfiles}: gestionados por el módulo de autenticación de \textit{Supabase} (\texttt{auth.users}), con tabla complementaria \texttt{profiles} que almacena información adicional de cada comerciante.
+    \item \textbf{Productos y categorías}: las tablas \texttt{products} y \texttt{categories} permiten organizar el catálogo con atributos como precio de costo, precio de venta, stock mínimo/máximo, vida útil y clasificación perecedera.
+    \item \textbf{Ventas y detalle de ítems}: la tabla \texttt{sales} centraliza las transacciones y se relaciona con \texttt{sale\_items}, donde se registran los productos vendidos, cantidades, importes y descuentos aplicados.
+    \item \textbf{Movimientos de stock}: la tabla \texttt{stock\_movements} conserva un historial de entradas y salidas, asegurando trazabilidad de inventario.
+    \item \textbf{Suscripciones y planes}: las tablas \texttt{plans} y \texttt{user\_subscriptions} definen la modalidad de uso (plan gratuito o pago), el período de facturación y los límites asociados a cada cuenta.
+    \item \textbf{Eventos y contexto}: la tabla \texttt{holidays\_events} registra feriados y factores de impacto; \texttt{weather\_data} almacena condiciones meteorológicas (temperatura, humedad, precipitación, viento). Estos datos enriquecen el análisis predictivo.
+    \item \textbf{Análisis de demanda}: la tabla \texttt{demand\_analysis\_data} integra variables transaccionales y contextuales (día, clima, feriados, estacionalidad) para generar indicadores de tendencia, nivel de confianza y recomendaciones de stock.
+\end{itemize}
+
+En conjunto, este modelo de datos respalda la lógica analítica de AIVA, permitiendo registrar operaciones diarias, incorporar factores externos y producir predicciones personalizadas. Su organización modular facilita la escalabilidad y asegura que cada nueva transacción refuerce la capacidad predictiva del sistema.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{images/ArquitecturaDB1.png} % <-- reemplazar por tu archivo
+  \caption{Modelo de datos de AIVA -- Fuente: elaboración propia.}
+  \label{fig:arquitectura-db}
+\end{figure}
+\vspace{1cm}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{images/ArquitecturaDB2.png} % <-- reemplazar por tu archivo
+    \caption{Modelo de datos de AIVA -- Fuente: elaboración propia.}
+    \label{fig:arquitectura-db2}
+  \end{figure}
+  \vspace{2cm}
+
+
 \section{Diagrama de flujos}
 
 Para describir el comportamiento dinámico del sistema incorporamos diagramas de flujo que muestran, paso a paso, cómo se procesan las operaciones clave. Estos esquemas complementan a los requerimientos y a la arquitectura estática, al hacer explícitas las secuencias, los puntos de decisión, los caminos alternativos y el manejo de errores, lo que facilita la validación funcional y el diseño de casos de prueba.
-\vspace{1cm}
 
 
 \subsection{DF-A · Autenticación}
@@ -201,7 +235,7 @@ El diagrama modela el control de acceso y el alta de usuarios. Se definió así 
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.92\textwidth]{images/FlujoAutenticacion.jpg}
+  \includegraphics[width=0.92\textwidth]{images/FlujoAutenticación.png}
   \caption{DF-A · Autenticación -- Fuente: elaboración propia}
   \label{fig:df-a-autenticacion}
 \end{figure}
