@@ -250,15 +250,54 @@ Conjunto de utilidades para ingesta histórica.
 
 \section{Arquitectura del sistema}
 
-La arquitectura adopta un enfoque liviano de tres capas con servicios gestionados. La interfaz de usuario se implementa en \textit{Next.js}, que además expone una API interna (rutas \texttt{/api}) para articular lógica de negocio: validación, enriquecimiento con clima y llamadas al asistente. Los datos persisten en \textit{Supabase} (PostgreSQL) con autenticación gestionada y políticas RLS por \texttt{user\_id}. Dos servicios externos completan el contexto: \textit{OpenWeather} para variables meteorológicas y \textit{OpenAI} para el asistente conversacional. 
+La arquitectura adoptada se basa en un modelo de tres capas 
+(presentación, lógica de negocio y persistencia), apoyada en 
+servicios gestionados para simplificar la operación y garantizar 
+escalabilidad. El diseño busca un equilibrio entre simplicidad 
+en el desarrollo y robustez en la operación, integrando 
+componentes internos con servicios externos especializados.
 
-Las interacciones principales se agrupan en cuatro flujos:
-\begin{enumerate}
-    \item Autenticación y provisión de \textit{tokens} (JWT).
-    \item Operaciones CRUD de productos y ventas.
-    \item Generación y almacenamiento de predicciones (incluida trazabilidad de factores).
-    \item Consultas conversacionales a través del endpoint \texttt{/api/chat}.
-\end{enumerate}
+\subsection{Capa de presentación (Front-end)}
+
+La interfaz de usuario está implementada en \textbf{Next.js}, que cumple un doble rol:
+\begin{itemize}
+    \item Renderizado del front-end (formularios, dashboards, carga de datos).
+    \item Exposición de endpoints internos (/api) que conectan directamente con los servicios del backend.
+\end{itemize}
+
+Los usuarios interactúan con el sistema a través de esta capa 
+para gestionar productos, registrar ventas, consultar predicciones 
+y atender alertas. Todas las solicitudes son enviadas al backend 
+con los \textit{tokens JWT} emitidos por el servicio de autenticación.
+
+\subsection{Capa de lógica de negocio (Backend + API Services)}
+
+El backend, desarrollado en \textbf{Node.js}, centraliza la lógica de negocio. 
+Está organizado en servicios que exponen distintos endpoints específicos.
+
+El backend también se encarga de la validación de datos, el control 
+de acceso mediante los JWT emitidos por Supabase Auth, y la interacción 
+con la base de datos.
+
+\subsection{Capa de datos (Supabase)}
+
+La persistencia está gestionada por \textbf{Supabase}, que provee:
+\begin{itemize}
+    \item Base de datos PostgreSQL para almacenar usuarios, productos, ventas, predicciones y alertas.
+    \item Módulo de autenticación (\textit{Supabase Auth}), encargado de la provisión y validación de tokens JWT, con \textit{Row Level Security (RLS)} configurado para restringir el acceso por \texttt{user\_id}.
+\end{itemize}
+
+La comunicación entre backend y Supabase se realiza a través de 
+consultas SQL, garantizando consistencia y trazabilidad de los datos.
+
+\subsection{Integraciones externas}
+
+El sistema se enriquece con dos servicios externos:
+\begin{itemize}
+    \item \textbf{OpenWeather}: fuente de datos meteorológicos (temperatura, precipitaciones, condiciones climáticas) que son integrados al proceso de predicción de la demanda.
+    \item \textbf{OpenAI}: utilizado tanto para el asistente conversacional como para procesos de OCR avanzado, ampliando la capacidad de interacción y automatización del sistema.
+\end{itemize}
+
 
 \begin{figure}[!htbp]
   \centering
