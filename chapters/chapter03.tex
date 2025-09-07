@@ -5,7 +5,7 @@ AIVA es un sistema web orientado a pequeñas y medianas empresas de alimentos pe
 El núcleo analítico del sistema combina el historial transaccional con variables exógenas para estimar la demanda esperada a corto plazo. Este módulo implementa un enfoque heurístico transparente centrado en tendencia, estacionalidad y condiciones meteorológicas, con un diseño abierto a la incorporación de modelos estadísticos y de aprendizaje automático más avanzados. La arquitectura prioriza componentes de bajo costo y rápida adopción, asegurando trazabilidad de datos, reproducibilidad de resultados y una experiencia de usuario alineada con los flujos cotidianos del negocio.
 
 
-
+\vspace{1cm}
 \section{Requerimientos del sistema}
 Esta sección especifica las condiciones verificables que delimitan el alcance de AIVA. Se formulan en modo imperativo (“El sistema debe …”) para facilitar su prueba y aceptación. Se organizan en dos grupos: funcionales (capacidades observables) y no funcionales (calidades y restricciones transversales).
 
@@ -35,7 +35,7 @@ Establecen cualidades globales del sistema (seguridad, desempeño, mantenibilida
 \begin{enumerate}[label=RNF-\arabic*., leftmargin=*, nosep]
   \item El sistema debe proteger recursos con autenticación/autorización y transmitir credenciales sólo por HTTPS.
   \item El sistema debe aplicar segmentación de datos en base (RLS o equivalente) por \texttt{user\_id}.
-  \item El sistema debe ofrecer tiempos de respuesta percibidos menores a 2\,s en navegación del \textit{dashboard}.
+  \item El sistema debe ofrecer tiempos de respuesta percibidos menores a 2\,segundos en navegación del \textit{dashboard}.
   \item El sistema debe calcular predicciones bajo demanda en tiempos compatibles con uso interactivo (orden de segundos).
   \item El sistema debe manejar entradas inválidas y fallas externas con mensajes categorizados y recuperables.
   \item El sistema debe registrar eventos relevantes (errores, importaciones, cálculos) para auditoría.
@@ -44,13 +44,92 @@ Establecen cualidades globales del sistema (seguridad, desempeño, mantenibilida
   \item El sistema debe preservar integridad referencial y usar transacciones en altas de ventas.
   \item El sistema debe favorecer mantenibilidad con módulos tipados y convenciones de estilo consistentes.
   \item El sistema debe gestionar secretos vía variables de entorno y rotar credenciales periódicamente.
-  \item El sistema debe respetar privacidad aplicable, realizar backups de datos críticos y versionar migraciones.
+  \item El sistema debe respetar privacidad aplicable, realizar respaldos de datos críticos y versionar migraciones.
+\end{enumerate}
+
+\vspace{1cm}
+\section{Historias de usuario}
+Esta sección captura, en lenguaje natural, necesidades y objetivos de los actores del sistema. Cada historia sigue el formato \emph{«Como [rol], quiero [objetivo] para [beneficio]»} e incluye criterios de aceptación sintéticos.
+
+\begin{enumerate}[label=HU-\arabic*., leftmargin=*, nosep]
+
+\item Como \textbf{Comerciante nuevo}, quiero registrarme e iniciar sesión con verificación de correo para comenzar a usar AIVA de forma segura.
+\begin{itemize}[nosep]
+\item No se permite acceso hasta confirmar el correo; al confirmar, queda sesión activa.
+\item Tras el alta, se asigna automáticamente el plan gratuito y se refleja en la sesión.
+\end{itemize}
+
+\item Como \textbf{Comerciante}, quiero fijar mi ubicación por defecto para que el sistema incorpore clima local en análisis y predicciones.
+\begin{itemize}[nosep]
+\item La ubicación se persiste y es editable por el usuario.
+\item Las consultas al servicio de clima usan la ubicación guardada.
+\end{itemize}
+
+\item Como \textbf{Administrador de catálogo}, quiero gestionar productos y categorías (crear/editar/eliminar) para mantener actualizado el inventario.
+\begin{itemize}[nosep]
+\item Validación de campos obligatorios y unicidad por usuario.
+\item Historial de movimientos de stock visible por producto.
+\end{itemize}
+
+\item Como \textbf{Administrador de catálogo}, quiero cargar productos por CSV con vista previa para acelerar altas masivas sin errores.
+\begin{itemize}[nosep]
+\item Se validan columnas mínimas; se muestra resumen de aceptadas/rechazadas.
+\item La importación es idempotente y permite revertir en caso de error.
+\end{itemize}
+
+\item Como \textbf{Cajero/a}, quiero registrar una venta tipo POS con carrito y totales para asentar transacciones rápidamente.
+\begin{itemize}[nosep]
+\item La confirmación crea venta e ítems de forma atómica y actualiza stock.
+\item La transacción queda enriquecida con fecha/día y banderas de contexto.
+\end{itemize}
+
+\item Como \textbf{Analista}, quiero importar ventas históricas (CSV) para consolidar el histórico que alimenta reportes y predicciones.
+\begin{itemize}[nosep]
+\item Normalización de fechas/productos y registro descargable de errores.
+\item Detección de duplicados para evitar dobles cargas (idempotencia).
+\end{itemize}
+
+\item Como \textbf{Operador}, quiero registrar ventas asistidas por imágenes (OCR) para acelerar la carga desde comprobantes.
+\begin{itemize}[nosep]
+\item Estados visibles: en cola, procesando, listo; notificación al completar.
+\item Edición/corrección antes de confirmar el alta definitiva.
+\end{itemize}
+
+\item Como \textbf{Responsable de producción}, quiero ver y recalcular predicciones (hoy/semana/mes) para planificar elaboración y reposición.
+\begin{itemize}[nosep]
+\item Cada predicción incluye confianza, factores y recomendación de stock.
+\item Se persisten por fecha/usuario y se marcan como vigentes.
+\end{itemize}
+
+\item Como \textbf{Encargado}, quiero recibir alertas de quiebre/sobreproducción y feriados para actuar preventivamente.
+\begin{itemize}[nosep]
+\item Listado priorizado por criticidad con fecha y producto.
+\item Enlaces a la acción sugerida (ajuste de producción/stock).
+\end{itemize}
+
+\item Como \textbf{Gerente}, quiero un \textit{dashboard} y reportes por período, producto y categoría para monitorear desempeño y tendencias.
+\begin{itemize}[nosep]
+\item Gráficos comparan observado vs.\ predicho con filtros persistentes.
+\item Exportes básicos (tabla/gráfico) para análisis externo.
+\end{itemize}
+
+\item Como \textbf{Usuario}, quiero consultar al asistente conversacional para obtener métricas y ejecutar tareas frecuentes sin salir del flujo.
+\begin{itemize}[nosep]
+\item Gestión de conversaciones (crear/cambiar/archivar) y copia de respuestas.
+\item Manejo de errores categorizado y posibilidad de cancelar la respuesta.
+\end{itemize}
+
+\item Como \textbf{Usuario de plan gratuito}, quiero poder adquirir una suscripción desde la app para habilitar capacidades avanzadas.
+\begin{itemize}[nosep]
+\item Verificación de identidad y confirmación de pago cuando corresponda.
+\item La nueva capacidad se refleja de inmediato en la sesión.
+\end{itemize}
+
 \end{enumerate}
 
 
-
+\vspace{1cm}
 \section{Interfaz Gráfica}
-
 En esta sección se expone la interfaz gráfica desarrollada para la interacción cotidiana de los usuarios de AIVA en el entorno de comercio minorista de alimentos perecederos. La UI prioriza baja fricción operativa, consistencia visual y señales claras para la toma de decisiones, con patrones reutilizables que reducen la curva de aprendizaje. A continuación se describen las dos pantallas más relevantes por su impacto en el trabajo diario: el asistente conversacional (chatbot) y el módulo de predicción de demanda.
 
 \subsection{Asistente conversacional (chatbot)}
@@ -225,6 +304,7 @@ En conjunto, este modelo de datos respalda la lógica analítica de AIVA, permit
   \vspace{2cm}
 
 
+\vspace{1cm}
 \section{Diagrama de flujos}
 
 Para describir el comportamiento dinámico del sistema incorporamos diagramas de flujo que muestran, paso a paso, cómo se procesan las operaciones clave. Estos esquemas complementan a los requerimientos y a la arquitectura estática, al hacer explícitas las secuencias, los puntos de decisión, los caminos alternativos y el manejo de errores, lo que facilita la validación funcional y el diseño de casos de prueba.
