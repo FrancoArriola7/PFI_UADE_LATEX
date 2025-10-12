@@ -4,23 +4,29 @@
 
 El modelo de negocio de AIVA se orienta a ofrecer a comercios de alimentos perecederos una plataforma web que pronostica la demanda diaria por producto y habilita decisiones operativas basadas en datos. La propuesta enfatiza un costo total de propiedad acotado, tiempos de respuesta breves y explicabilidad de los resultados, de modo que cada recomendación pueda ser auditada y comprendida por el equipo del local. El enfoque prioriza el impacto económico directo mediante la reducción de mermas y quiebres de stock, la mejora de la rotación y un ahorro de tiempo en tareas de carga y análisis.
 
-Con el objetivo de representar de manera estructurada la lógica de creación, entrega y captura de valor de la solución, se adopta como marco el \textit{Business Model Canvas} (BMC). Esta herramienta permite describir y analizar de forma sistemática los distintos componentes del modelo de negocio —propuesta de valor, clientes, canales, recursos, actividades, socios, estructura de costos e ingresos— y constituye la base conceptual que habilita posteriormente el desarrollo del análisis financiero. De este modo, el BMC actúa como puente entre la definición estratégica del proyecto y la evaluación cuantitativa de su viabilidad económica.
+Con el objetivo de representar de manera estructurada la lógica de creación, entrega y captura de valor de la solución, se adopta como marco el \textit{Business Model Canvas} (BMC). Esta herramienta permite describir y analizar de forma sistemática los distintos componentes del modelo de negocio, entre ellos la propuesta de valor, clientes, canales, recursos, actividades, socios, estructura de costos e ingresos, y constituye la base conceptual que habilita posteriormente el desarrollo del análisis financiero. De este modo, el BMC actúa como puente entre la definición estratégica del proyecto y la evaluación cuantitativa de su viabilidad económica.
 
 \subsection{Propuesta de Valor}
 AIVA propone una plataforma web de fácil adopción para comercios que operan con productos perecederos (panaderías, confiterías y tiendas naturales), orientada a reducir mermas y faltantes mediante planificación basada en datos. La solución integra modelos de predicción de demanda con series temporales y variables exógenas (clima y feriados), un asistente conversacional para consultas operativas y un flujo de carga asistida por imágenes (OCR) que minimiza la fricción de ingreso de datos. El valor se manifiesta en una mejora de la disponibilidad de productos, una disminución del desperdicio y una optimización de los recursos de producción, traduciéndose en mayor eficiencia operativa y márgenes más saludables para el comerciante.
 
 \subsection{Segmentos de Clientes}
-El segmento objetivo está conformado por pequeñas y medianas empresas del sector de alimentos perecederos, con foco en panaderías y confiterías de barrio. Se trata de negocios con recursos limitados para soluciones corporativas complejas, pero con necesidad crítica de herramientas predictivas que acompañen decisiones diarias de producción y reposición.
-En esta primera etapa de desarrollo, el proyecto se plantea como meta alcanzar un parque de mil usuarios activos, conformado por comercios de pequeña y mediana escala dentro del sector de alimentos perecederos. Esta cifra funciona como horizonte de referencia tanto para dimensionar la infraestructura tecnológica como para proyectar el análisis financiero del modelo de negocio.
+El segmento objetivo está conformado por pequeñas y medianas empresas del sector de alimentos perecederos, con foco en panaderías, confiterías, y emprendimientos dedicados a la elaboración de productos frescos o de corta vida útil, incluyendo productores artesanales, pastelerías, fábricas de tortas y comercios gastronómicos afines.
+Se trata de negocios que, si bien operan con estructuras reducidas y recursos acotados en comparación con grandes cadenas, requieren herramientas tecnológicas accesibles que les permitan optimizar la planificación de su producción y reposición diaria.
+En esta primera etapa, el proyecto se propone alcanzar un parque de 300 usuarios activos, conformado por comercios y emprendimientos de pequeña y mediana escala dentro del sector de alimentos perecederos. Esta meta sirve como referencia tanto para dimensionar la infraestructura tecnológica como para proyectar el análisis financiero del modelo de negocio.
 
 \subsection{Canales}
-La captación se apoya primordialmente en publicidad digital, para la cual se asigna el 50\% del valor de la suscripción (USD~15 por usuario activo). Este canal permite adquisición directa, medible y escalable. La estrategia se complementa con difusión orgánica (boca a boca) y presencia sectorial, a efectos de reforzar la marca en el ámbito de referencia del cliente objetivo.
+La captación se apoya primordialmente en publicidad digital, para la cual se asigna el 50\% del valor de la suscripción (USD~15 por usuario). Este canal permite adquisición directa, medible y escalable. La estrategia se complementa con difusión orgánica (boca a boca) y presencia sectorial, a efectos de reforzar la marca en el ámbito de referencia del cliente objetivo.
 
 \subsection{Relación con los Clientes}
 El modelo de relación combina autoservicio digital para el registro y uso inicial con soporte técnico y funcional por correo electrónico. Este esquema preserva la escalabilidad sin desatender la asistencia necesaria durante la adopción y operación, especialmente en etapas de onboarding y calibración del modelo predictivo.
 
 \subsection{Recursos Clave}
-Los recursos críticos son la infraestructura y las capacidades analíticas. En backend, \emph{Supabase Pro} ofrece hasta 100{,}000 usuarios activos mensuales incluidos, 250~GB/mes de egress (con amplio margen frente al patrón de uso de 1{,}000 usuarios) y 8~GB de base de datos (con ampliación bajo demanda), además de 100~GB de almacenamiento. En frontend, \emph{Vercel Pro} proporciona despliegue continuo, edge network, caché y observabilidad, suficientes para garantizar disponibilidad y rendimiento frente a la meta de 1{,}000 usuarios. A ello se suman APIs de terceros: datos meteorológicos (OpenWeather), capacidades de reconocimiento óptico de caracteres (OCR) y modelos de lenguaje de gran escala provistos por OpenAI, que sustentan tanto el asistente conversacional como los procesos de interpretación de datos visuales. Estos recursos tecnológicos fortalecen la diferenciación funcional de AIVA y garantizan una experiencia de usuario fluida, explicable y de alto valor agregado.
+
+Los recursos críticos del proyecto se centran en la infraestructura tecnológica y las capacidades analíticas que permiten ofrecer una experiencia confiable, predictiva y escalable.
+En el backend, la plataforma \emph{Supabase Pro} constituye la base del sistema, brindando autenticación segura, base de datos relacional, almacenamiento y APIs en tiempo real. Su capacidad, que admite hasta 100{,}000 usuarios activos mensuales y 250 GB/mes de egress, ofrece un amplio margen frente a la meta inicial de 300 usuarios, garantizando rendimiento y estabilidad, con la posibilidad de ampliar recursos conforme crezca la adopción.
+En el frontend, \emph{Vercel Pro} permite despliegue continuo, red de distribución global (edge network), caché y monitoreo de rendimiento, asegurando tiempos de respuesta óptimos y una experiencia de usuario fluida.
+A ello se suman integraciones con APIs de terceros: datos meteorológicos (\emph{OpenWeather}), reconocimiento óptico de caracteres (OCR) y modelos de lenguaje de gran escala (\emph{OpenAI}), que sustentan el asistente conversacional y los procesos de interpretación automática de información.
+En conjunto, estos recursos no solo cubren de forma eficiente las necesidades actuales del proyecto, sino que también sientan las bases para una expansión sin fricciones hacia una mayor escala de usuarios y funcionalidades.
 
 \subsection{Actividades Clave}
 Las actividades esenciales incluyen el desarrollo y mantenimiento de la plataforma, la mejora continua de los modelos de predicción (monitoreo de error y recalibración), la operación y observabilidad del servicio en producción, la ejecución de campañas de adquisición digital y la provisión de soporte al usuario final. La consistencia entre predicción y operación diaria del comercio es un objetivo permanente.
@@ -32,7 +38,7 @@ Si bien la adquisición es directa, se consideran aliados sectoriales (cámaras 
 La estructura combina costos fijos y variables. Entre los fijos se contemplan las suscripciones de infraestructura (Supabase Pro y Vercel Pro) y las herramientas de operación. Entre los variables se incluyen publicidad digital (USD~15 por usuario activo al mes asignados a adquisición), uso incremental de APIs (LLM, OCR, clima), almacenamiento y egress por encima de los tramos incluidos, y el soporte operativo. Adicionalmente, cada alta entra en un período de prueba de un mes, durante el cual los costos recaen sobre AIVA sin ingresos asociados, por lo que representa un costo directo de adquisición. La inversión inicial (CapEx) en desarrollo e ingeniería se registra previo al lanzamiento del servicio.
 
 \subsection{Fuentes de Ingresos}
-El ingreso proviene de una suscripción mensual de USD~30 por usuario. Este flujo recurrente se modela con una tasa de cancelación (churn) mensual del 5\%, incorporando además la conversión del período de prueba (trial) al plan pago. La combinación de suscripción, retención y adquisición digital permite proyectar escalabilidad de ingresos acorde con el crecimiento del parque de clientes.
+El ingreso proviene de una suscripción mensual de USD~30 por usuario. Este flujo recurrente se modela con una tasa de cancelación (churn) mensual del 5\%, incorporando además la conversión del período de prueba (trial) al plan pago de un 42\%. La combinación de suscripción, retención y adquisición digital permite proyectar escalabilidad de ingresos acorde con el crecimiento del parque de clientes.
 
 \subsection{Indicadores Financieros Clave}
 Para evaluar la sostenibilidad económica del modelo se incorporan métricas estándar de negocios por suscripción.
@@ -72,7 +78,7 @@ En términos de buenas prácticas SaaS, valores superiores a 3 son deseables; el
 
 El modelo financiero se estructura sobre un servicio por suscripción mensual de USD~30 con un mes de prueba inicial sin cargo. La inclusión de un período de prueba se fundamenta en evidencia empírica que demuestra cómo el diseño de los \textit{trials} puede incidir en la adopción y la conversión: estudios experimentales en plataformas SaaS confirman que extender o personalizar la duración de la prueba incrementa tanto su utilización como la probabilidad de que los usuarios se conviertan en clientes pagos (Zhang, 2025). En este marco, se adopta una tasa de conversión post‐trial del 42\% como supuesto de referencia, entendida como una hipótesis informada por la literatura, que posteriormente deberá ser contrastada con datos reales de operación.
 
-En cuanto a la tasa de cancelación (\textit{churn}), los benchmarks de referencia para SaaS B2B muestran que, en servicios con un precio mensual entre USD~25 y USD~50, el churn promedio es de 7,3\% (Vitally, 2025). En este análisis se adopta un 6\% como supuesto operativo, lo que representa una postura conservadora que evita sobredimensionar la retención de usuarios.
+En cuanto al churn, los benchmarks de referencia para SaaS B2B muestran que, en servicios con un precio mensual entre USD~25 y USD~50, el churn promedio es de 7,3\% (Vitally, 2025). En este análisis se adopta un 6\% como supuesto operativo, lo que representa una postura conservadora que evita sobredimensionar la retención de usuarios.
 
 
 
@@ -81,24 +87,75 @@ La sostenibilidad del modelo se evalúa mediante métricas propias de negocios p
 
 
 \subsection{Estructura de costos: CapEx}
-La inversión inicial (\emph{CapEx}) corresponde principalmente a recursos humanos para el desarrollo del MVP y el despliegue productivo. Se contemplan seis roles, con tarifas medias y dedicación acumulada de seis meses (o equivalentes). El detalle se presenta en la Figura~\ref{fig:capex}.
+La estructura de costos de capital (CAPEX) refleja la inversión necesaria para el desarrollo inicial de la plataforma, abarcando tanto el diseño funcional como la implementación tecnológica y las actividades de lanzamiento. El proyecto demanda un total estimado de 600 horas de trabajo, distribuidas en un período aproximado de dos meses de desarrollo con un equipo interdisciplinario que cubre las áreas clave del producto.
 
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=0.85\textwidth]{images/Capex.PNG}
-  \caption{Detalle de CapEx por rol -- Fuente: elaboración propia}
-  \label{fig:capex}
-\end{figure}
+El esfuerzo principal se concentra en los roles técnicos: desarrollo backend y frontend, responsables de la arquitectura, la base de datos y la interfaz de usuario. A ello se suma la participación de un ingeniero en machine learning, encargado del diseño e integración del modelo predictivo, un QA tester para la validación funcional y control de calidad, y un marketing manager dedicado al posicionamiento y las acciones de comunicación del producto. La coordinación general está a cargo del project manager, quien supervisa la planificación, cumplimiento de plazos y alineación del desarrollo con los objetivos de negocio.
+
+El costo total estimado para esta etapa asciende a USD 15 600, monto que cubre la totalidad del desarrollo del prototipo funcional y su despliegue inicial, estableciendo las bases tecnológicas y operativas para la posterior etapa de validación y escalamiento comercial. El detalle se presenta en la tabla 4.I.
+
+\begin{table}[t]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Estructura de costos de desarrollo (CAPEX)}
+    \label{tab:capex}
+    \begin{tabular}{|p{4.5cm}|p{2.2cm}|p{2.5cm}|p{2.5cm}|}
+        \hline
+        \textbf{Rol / Recurso} & \textbf{Horas} & \textbf{Tarifa (USD/h)} & \textbf{Costo total (USD)} \\
+        \hline
+        Desarrollador Backend & 160 & 30 & 4,800 \\
+        \hline
+        Desarrollador Frontend & 160 & 25 & 4,000 \\
+        \hline
+        Ingeniero en Machine Learning & 100 & 30 & 3,000 \\
+        \hline
+        Project Manager & 40 & 25 & 1,000 \\
+        \hline
+        Marketing Manager & 100 & 20 & 2,000 \\
+        \hline
+        QA Tester & 40 & 20 & 800 \\
+        \hline
+        \textbf{Total CAPEX} & \textbf{600} & -- & \textbf{15,600} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
 
 \subsection{Estructura de costos: OpEx}
-El \emph{OpEx} mensual combina componentes fijos y variables. Entre los fijos se incluyen hosting del frontend y base de datos/backend; entre los variables: publicidad proporcional a las altas, impuestos locales sobre ingresos brutos, comisiones de facturación/cobranza, uso de tokens de OpenAI y servicios de clima. La Figura~\ref{fig:costos-variables-fijas} resume los parámetros fijos empleados en el modelo.
+El \emph{OpEx} mensual combina componentes fijos y variables. Entre los fijos se incluyen hosting del frontend y base de datos/backend; entre los variables: publicidad proporcional a las altas, impuestos locales sobre ingresos brutos, comisiones de facturación/cobranza, uso de tokens de OpenAI y servicios de clima. La tabla 4.II resume los parámetros fijos empleados en el modelo.
 
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=0.6\textwidth]{images/CostosVariablesFijas.PNG}
-  \caption{Variables fijas para costos -- Fuente: elaboración propia}
-  \label{fig:costos-variables-fijas}
-\end{figure}
+\begin{table}[t]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Variables fijas y parámetros operativos del modelo}
+    \label{tab:variables_fijas}
+    \begin{tabular}{|p{6cm}|p{3cm}|}
+        \hline
+        \textbf{Variable} & \textbf{Valor} \\
+        \hline
+        Tasa de Crecimiento Mensual & 9\% \\
+        \hline
+        Tasa de Conversión & 42\% \\
+        \hline
+        Churn (cancelación mensual) & 6\% \\
+        \hline
+        Precio del Plan Unitario & \$30,00 \\
+        \hline
+        Publicidad – Costo por Alta & \$15,00 \\
+        \hline
+        Hosting / Front End & \$20,00 \\
+        \hline
+        Base de Datos / Back End & \$25,00 \\
+        \hline
+        API de Clima (hasta 1000 usuarios) & \$0,00 \\
+        \hline
+        API de Clima (por usuario adicional) & \$0,00015 \\
+        \hline
+        Uso de OpenAI (por consulta promedio) & \$0,35 \\
+        \hline
+    \end{tabular}
+\end{table}
+
 
 El detalle mensual del OpEx se presenta en las Figuras~\ref{fig:opex-anio1}, \ref{fig:opex-anio2} y \ref{fig:opex-anio3}, correspondientes a los tres primeros años de operación.
 
@@ -130,7 +187,9 @@ En el escenario base del modelo financiero se adopta una tasa de crecimiento men
 
 En cuanto a los costos variables asociados al uso de inteligencia artificial, el análisis estima un cargo aproximado de USD~0,35 por usuario activo mensual correspondiente a consultas a modelos de OpenAI (tanto para el asistente conversacional como para funciones de OCR). Este valor surge de proyectar el patrón de uso definido en el caso base (alrededor de 30 consultas diarias por usuario, con una media de tokens por interacción y las tarifas vigentes de la API), lo que permite dimensionar de manera realista el impacto unitario de la infraestructura cognitiva sobre el costo operativo.
 
-Finalmente, los resultados consolidados permiten sintetizar los principales indicadores financieros del escenario base. En el horizonte de tres años, los ingresos acumulados alcanzan aproximadamente USD~929.270, mientras que los costos operativos totales (OPEX) ascienden a USD~313.841. La inversión inicial (CapEx), correspondiente al desarrollo de la plataforma y adquisición de equipamiento, se sitúa en USD~196.000 adicionales. Este resumen evidencia que, bajo los supuestos planteados, el modelo proyecta una senda de crecimiento sostenible en la que los ingresos superan ampliamente los costos, validando la viabilidad económica de la propuesta.
+Bajo estas condiciones, la proyección del modelo alcanza 310 usuarios activos al cierre del tercer año, cumpliendo y ligeramente superando la meta inicial de 300 usuarios planteada en la etapa de planificación. Este nivel de adopción representa una base sólida de clientes recurrentes que garantiza la estabilidad de los ingresos y valida la propuesta de valor del sistema en su nicho objetivo.
+
+Finalmente, los resultados consolidados permiten sintetizar los principales indicadores financieros del escenario base. En el horizonte de tres años, los ingresos acumulados alcanzan aproximadamente USD~92.927, mientras que los costos operativos totales (OPEX) ascienden a USD~32.842. La inversión inicial (CapEx), correspondiente al desarrollo de la plataforma y adquisición de equipamiento, se sitúa en USD~15.600 adicionales. Este resumen evidencia que, bajo los supuestos planteados, el modelo proyecta una senda de crecimiento sostenible en la que los ingresos superan ampliamente los costos, validando la viabilidad económica de la propuesta.
 
 
 \begin{figure}[!htbp]
@@ -159,11 +218,11 @@ Finalmente, los resultados consolidados permiten sintetizar los principales indi
 
 El flujo de fondos proyectado para el caso base integra los ingresos por suscripciones, los costos operativos (OPEX) y la inversión inicial en desarrollo y equipamiento (CapEx). La dinámica se construye sobre el supuesto de crecimiento mensual del 9\% en altas de usuarios, con una conversión del 42\% post--trial, una tasa de cancelación mensual del 6\% y una tasa anual del 20\% que se utiliza en los 3 escenarios propuestos. 
 
-En el \textbf{Año 1}, los ingresos generados resultan todavía insuficientes para cubrir la inversión inicial y los costos operativos, lo que mantiene el flujo acumulado en valores negativos a lo largo de los primeros meses. A medida que avanza el año, la curva de ingresos se acelera y reduce progresivamente el déficit acumulado, pasando de --USD~196.000 en el inicio a --USD~170.845 al cierre del mes 12.  
+En el \textbf{Año 1}, los ingresos generados resultan todavía insuficientes para cubrir la inversión inicial y los costos operativos, lo que mantiene el flujo acumulado en valores negativos a lo largo de los primeros meses. A medida que avanza el año, la curva de ingresos se acelera y reduce progresivamente el déficit acumulado, pasando de --USD~15.600 en el inicio a --USD~13.570 al cierre del mes 12.  
 
-Durante el \textbf{Año 2}, la progresión de clientes pagos permite un crecimiento sostenido en los ingresos. Este efecto acelera la reducción del déficit acumulado, que desciende desde --USD~164.618 en el mes 13 hasta --USD~25.475 al finalizar el mes 24. El negocio se aproxima al punto de equilibrio financiero (\textit{break-even}), el cual se alcanza en el transcurso del tercer año.  
+Durante el \textbf{Año 2}, la progresión de clientes pagos permite un crecimiento sostenido en los ingresos. Este efecto acelera la reducción del déficit acumulado, que desciende desde --USD~12.988 en el mes 13 hasta --USD~1.449 al finalizar el mes 24. El negocio se aproxima al punto de equilibrio financiero (\textit{break-even}), el cual se alcanza en el transcurso del tercer año.  
 
-Finalmente, en el \textbf{Año 3}, el flujo acumulado se torna positivo y refleja un proceso de recuperación de la inversión inicial. A partir del mes 27 se alcanza el \textit{break-even} (USD~45.744 acumulados), y desde allí los excedentes se amplían con rapidez hasta llegar a un saldo positivo de USD~419.427 al cierre del mes 36. Este comportamiento confirma la viabilidad económica del modelo bajo los parámetros establecidos en el escenario base.  
+Finalmente, en el \textbf{Año 3}, el flujo acumulado se torna positivo y refleja un proceso de recuperación de la inversión inicial. A partir del mes 24 se alcanza el \textit{break-even}, y desde allí los excedentes se amplían con rapidez hasta llegar a un saldo positivo de USD~44.484 al cierre del mes 36. Este comportamiento confirma la viabilidad económica del modelo bajo los parámetros establecidos en el escenario base.  
 
 Las Figuras~\ref{fig:flujo-anio1}, \ref{fig:flujo-anio2} y \ref{fig:flujo-anio3} muestran en detalle la evolución mensual del flujo de fondos para cada uno de los tres años analizados.
 
@@ -200,22 +259,44 @@ Con el objetivo de evaluar la robustez del modelo financiero se plantearon tres 
   \item \textbf{Payback}: señala el tiempo requerido para recuperar la inversión inicial a través de los flujos netos de caja. A menor período de recuperación, menor es el riesgo financiero.
 \end{itemize}
 
-\paragraph{Escenario pesimista (5\% de crecimiento mensual).}  
-En esta proyección el modelo alcanza ingresos acumulados por USD~463.716 al cabo de tres años, con un OPEX total de USD~140.543. El VAN resulta positivo, aunque reducido (USD~15.531), mientras que la TIR se ubica en 24\%. El período de repago de la inversión inicial se extiende a 2 años y 6 meses. Este escenario refleja que, aun con un ritmo bajo de crecimiento, la propuesta mantiene viabilidad económica, pero con márgenes ajustados y retornos moderados.
 
 \paragraph{Escenario base (9\% de crecimiento mensual).}  
-Se trata del caso central de análisis. Bajo estos parámetros los ingresos totales ascienden a USD~929.270 en tres años, con un OPEX acumulado de USD~313.842. El VAN se eleva a USD~191.940 y la TIR alcanza un 53\%. El payback se logra en 2 años y 2 meses. Este escenario confirma que, con una dinámica de crecimiento acorde a benchmarks de SaaS en etapas iniciales, el modelo no solo cubre con holgura la inversión inicial de USD~196.000, sino que además genera una rentabilidad significativa.
+Se trata del caso central de análisis. Bajo estos parámetros los ingresos totales ascienden a USD~92.927 en tres años, con un OPEX acumulado de USD~32.842. El VAN se eleva a USD~22.056 y la TIR alcanza un 62\%. El payback se logra en 2 años. En este escenario, la proyección de crecimiento permite alcanzar 310 usuarios activos al cierre del tercer año, cumpliendo la meta operativa planteada para la fase de validación comercial. Este resultado confirma que, con una dinámica de expansión acorde a los benchmarks de startups SaaS en etapas iniciales, el modelo no solo cubre con holgura la inversión inicial de USD~15.600, sino que además genera una rentabilidad significativa.
+
+\paragraph{Escenario pesimista (5\% de crecimiento mensual).}  
+En esta proyección el modelo alcanza ingresos acumulados por USD~46.372 al cabo de tres años, con un OPEX total de USD~15.512. El VAN resulta positivo, aunque reducido (USD~4.415), mientras que la TIR se ubica en 32\%. El período de repago de la inversión inicial se extiende a 2 años y 4 meses. Con este ritmo de expansión más moderado, la plataforma llega a 109 usuarios activos al final del horizonte de análisis, lo que refleja un crecimiento más lento pero sostenido. Aun bajo este contexto conservador, la propuesta mantiene viabilidad económica, aunque con márgenes ajustados y retornos más acotados.
+
+
 
 \paragraph{Escenario optimista (12\% de crecimiento mensual).}  
-Bajo un desempeño más acelerado, los ingresos totales alcanzan USD~1.643.576 en el período analizado, con un OPEX proporcionalmente mayor (USD~605.135). El VAN asciende a USD~443.576 y la TIR alcanza el 75\%. El payback se produce en apenas 2 años. Este resultado muestra el potencial de escalabilidad del modelo: una mayor tracción comercial acelera la recuperación de la inversión y multiplica el valor económico generado.
+Bajo un desempeño más acelerado, los ingresos totales alcanzan USD~164.358 en el período analizado, con un OPEX proporcionalmente mayor (USD~61.971). El VAN asciende a USD~47.220 y la TIR alcanza el 85\%. El payback se produce en apenas 1 año y 10 meses. En este contexto favorable, el modelo proyecta llegar a 689 usuarios activos al término del tercer año, duplicando la meta base y demostrando un alto potencial de escalabilidad. Este resultado evidencia cómo una mayor tracción comercial acelera la recuperación de la inversión y multiplica el valor económico generado.
 
 \paragraph{Comparación y conclusiones.}  
 El contraste entre los tres escenarios permite observar la sensibilidad del modelo a la tasa de crecimiento mensual de usuarios. Mientras que con un 5\% el proyecto mantiene apenas la viabilidad financiera, a partir del 9\% se consolida como rentable y sostenible, y con un 12\% despliega un perfil altamente atractivo para inversionistas. Esto confirma que la variable crítica del modelo no reside únicamente en los costos fijos o variables, sino en la capacidad de sostener un ritmo de crecimiento en la base de clientes que garantice retornos adecuados sobre la inversión.
 
 
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=0.9\textwidth]{images/AnalisisFinal.PNG}
-  \caption{Comparación de escenarios: pesimista, base y optimista. Fuente: elaboración propia}
-  \label{fig:analisis-final}
-\end{figure}
+\begin{table}[t]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Resumen comparativo de escenarios financieros}
+    \label{tab:escenarios_financieros}
+    \begin{tabular}{|p{4cm}|p{2.5cm}|p{2.5cm}|p{3cm}|}
+        \hline
+        \textbf{Variable} & \textbf{Caso Pesimista} & \textbf{Caso Base} & \textbf{Caso Optimista} \\
+        \hline
+        Tasa de Crecimiento Mensual & 5\% & 9\% & 12\% \\
+        \hline
+        Ingresos Totales (USD) & 46,372 & 92,927 & 164,358 \\
+        \hline
+        OPEX (USD) & 15,512 & 32,842 & 61,971 \\
+        \hline
+        CAPEX (USD) & 15,600 & 15,600 & 15,600 \\
+        \hline
+        VAN (USD) & 4,415 & 22,056 & 47,220 \\
+        \hline
+        TIR Anual & 32\% & 62\% & 85\% \\
+        \hline
+        Payback & 2 años y 4 meses & 2 años & 1 año y 10 meses \\
+        \hline
+    \end{tabular}
+\end{table}
