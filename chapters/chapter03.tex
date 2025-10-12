@@ -33,19 +33,53 @@ Definen lo que el sistema hace de cara al usuario y a los procesos de negocio (c
 Establecen cualidades globales del sistema (seguridad, desempeño, mantenibilidad, confiabilidad). Limitan cómo se implementan los servicios, sin modificar el comportamiento funcional.
 
 \begin{enumerate}[label=RNF-\arabic*., leftmargin=*, nosep]
-  \item El sistema debe proteger recursos con autenticación/autorización y transmitir credenciales sólo por HTTPS.
-  \item El sistema debe aplicar segmentación de datos en base (RLS o equivalente) por \texttt{user\_id}.
-  \item El sistema debe ofrecer tiempos de respuesta percibidos menores a 2\,segundos en navegación del \textit{dashboard}.
-  \item El sistema debe calcular predicciones bajo demanda en tiempos compatibles con uso interactivo (orden de segundos).
-  \item El sistema debe manejar entradas inválidas y fallas externas con mensajes categorizados y recuperables.
-  \item El sistema debe registrar eventos relevantes (errores, importaciones, cálculos) para auditoría.
-  \item El sistema debe ser usable en navegadores modernos de escritorio y responder correctamente en distintos anchos.
-  \item El sistema debe cumplir pautas básicas de accesibilidad (contraste, etiquetas/ARIA en controles principales).
-  \item El sistema debe preservar integridad referencial y usar transacciones en altas de ventas.
-  \item El sistema debe favorecer mantenibilidad con módulos tipados y convenciones de estilo consistentes.
-  \item El sistema debe gestionar secretos vía variables de entorno y rotar credenciales periódicamente.
-  \item El sistema debe respetar privacidad aplicable, realizar respaldos de datos críticos y versionar migraciones.
+
+  \item El sistema debe garantizar la seguridad y privacidad de la información, protegiendo todos los recursos mediante mecanismos de autenticación y autorización basados en estándares actuales. Las credenciales deberán transmitirse exclusivamente por conexiones seguras (HTTPS) y almacenarse de forma cifrada. Asimismo, se debe aplicar segmentación de datos por \texttt{user\_id} (RLS o equivalente) para asegurar que cada usuario acceda únicamente a sus propios registros.
+
+  \item El sistema debe ofrecer un desempeño adecuado a su uso interactivo, proporcionando tiempos de respuesta inferiores a 2\,segundos durante la navegación del \textit{dashboard}, y ejecutando los procesos de predicción bajo demanda en tiempos compatibles con el uso continuo (orden de segundos). Los servicios deberán mantener una disponibilidad no inferior al 99\,\% mensual, asegurando estabilidad operativa y experiencia fluida.
+
+  \item El sistema debe manejar errores, fallas externas y entradas inválidas de forma controlada, mostrando mensajes claros, categorizados y recuperables que permitan al usuario continuar la operación o corregir el ingreso. Además, deberá registrar todos los eventos relevantes, como errores, importaciones y cálculos, en un sistema de auditoría que permita trazabilidad y diagnóstico posterior.
+
+  \item El sistema debe garantizar la integridad y consistencia de la base de datos, aplicando restricciones de integridad referencial y ejecutando todas las operaciones críticas de escritura mediante transacciones atómicas. En particular, las altas de ventas deberán registrarse de manera completa y coherente, evitando duplicados, pérdidas de datos o inconsistencias lógicas.
+
+  \item El sistema debe asegurar la usabilidad y accesibilidad de la interfaz, siendo compatible con los principales navegadores modernos de escritorio y adaptándose correctamente a distintos tamaños de pantalla. Deberá cumplir las pautas básicas de accesibilidad web, incluyendo contraste de color adecuado y navegación por teclado en los controles principales, priorizando la claridad visual y la facilidad de uso para cualquier usuario.
+
+  \item El sistema debe mantener altos estándares de mantenibilidad y calidad del código, organizando su arquitectura en módulos tipados y reutilizables, con convenciones de estilo consistentes y documentación técnica actualizada. Los secretos y claves de acceso deberán gestionarse mediante variables de entorno, con rotación periódica de credenciales. Además, se deben realizar respaldos automáticos de los datos críticos y versionar todas las migraciones de base de datos y despliegues, garantizando trazabilidad y control de versiones en todo el ciclo de vida del sistema.
+
 \end{enumerate}
+
+\section{Análisis FODA}\label{sec:foda}
+
+El análisis FODA (acrónimo de Fortalezas, Oportunidades, Debilidades y Amenazas) constituye una herramienta metodológica ampliamente utilizada en la gestión estratégica de proyectos y organizaciones. Su finalidad es evaluar de manera integral los factores internos y externos que inciden en el desempeño de un sistema, identificando los aspectos positivos y negativos que pueden influir en su desarrollo. A partir de esta evaluación, es posible definir estrategias orientadas a potenciar las fortalezas, aprovechar las oportunidades, minimizar las debilidades y anticipar las amenazas, contribuyendo así a la toma de decisiones fundamentadas y sostenibles.
+
+El objetivo del presente análisis es examinar la posición estratégica del sistema AIVA dentro del entorno tecnológico, económico y social en el que se inserta. AIVA es una plataforma de inteligencia artificial aplicada a la predicción de demanda en comercios de productos perecederos. En este contexto, el análisis FODA permite determinar las ventajas competitivas del proyecto, las limitaciones que podrían afectar su implementación, las oportunidades de crecimiento que ofrece el mercado y los riesgos asociados al entorno externo, con el propósito de establecer una visión clara y sustentada sobre su viabilidad y potencial de escalabilidad.
+
+\subsection{Análisis interno}
+
+En el análisis interno se identifican las principales fortalezas y debilidades del proyecto. 
+
+Entre las fortalezas más relevantes, se destaca la propuesta tecnológica integral de AIVA, que combina predicción de demanda mediante algoritmos de inteligencia artificial, un asistente conversacional basado en lenguaje natural y carga automatizada de registros mediante tecnologías OCR y modelos de lenguaje extensos (LLMs). Esta integración de herramientas convierte al sistema en una solución innovadora y de alto valor agregado para pequeños comercios. Asimismo, su diseño centrado en la usabilidad y accesibilidad favorece la adopción por parte de usuarios sin conocimientos técnicos, a diferencia de las soluciones corporativas que demandan infraestructura avanzada. 
+
+Otro aspecto sobresaliente es la adaptación del modelo al contexto local, incorporando variables como condiciones climáticas, feriados y patrones de consumo característicos del Área Metropolitana de Buenos Aires, lo que incrementa la precisión de las predicciones. Desde el punto de vista estratégico, AIVA contribuye al \textit{Objetivo de Desarrollo Sostenible N.º 12 (Producción y Consumo Responsables)} al promover la reducción del desperdicio alimentario y el uso eficiente de recursos. Además, su modelo de negocio, basado en un esquema de suscripción mensual con período de prueba gratuito (free trial), presenta indicadores financieros favorables, con un valor actual neto positivo, una tasa interna de retorno superior al 50\,\% y un período de recupero estimado en aproximadamente dos años. Finalmente, la arquitectura moderna y modular del sistema, basada en tecnologías como Next.js, Supabase y OpenWeather API, asegura un funcionamiento eficiente, escalable y de mantenimiento simple.
+
+Entre las debilidades, se identifica la dependencia de la calidad y cantidad de los datos iniciales que los usuarios carguen en el sistema, dado que la precisión de los modelos predictivos se encuentra directamente relacionada con la disponibilidad y consistencia de dichos registros. Asimismo, la continuidad del proyecto requiere inversión constante y recursos técnicos especializados para el mantenimiento y actualización de los modelos de inteligencia artificial, lo cual puede representar una limitación en etapas tempranas de expansión. Otro desafío relevante es la curva de adopción tecnológica: algunos usuarios, especialmente en comercios tradicionales, pueden mostrar resistencia o dificultades al incorporar nuevas herramientas digitales, lo que exige estrategias de acompañamiento y capacitación. Finalmente, la dependencia de proveedores externos como OpenAI o Supabase introduce vulnerabilidades ante posibles variaciones en costos, políticas de uso o disponibilidad de servicios.
+
+\subsection{Análisis externo}
+
+El análisis externo considera los factores del entorno que pueden influir en el desempeño del proyecto, tanto de manera positiva como negativa. 
+
+En cuanto a las oportunidades, se observa un contexto favorable caracterizado por una creciente demanda de digitalización en pequeñas y medianas empresas, muchas de las cuales carecen de herramientas de análisis avanzadas. Este panorama abre un amplio espacio de inserción para soluciones accesibles como AIVA, que facilitan la transición hacia la gestión inteligente de datos. Además, la expansión global del mercado de inteligencia artificial aplicada al sector minorista y alimentario impulsa la adopción de tecnologías predictivas orientadas a la optimización de la producción y la reducción de mermas. 
+
+Las entrevistas y encuestas realizadas a comerciantes confirman una necesidad real y validada de herramientas que mejoren la planificación operativa, lo que respalda la pertinencia del sistema. También se identifican oportunidades de crecimiento mediante alianzas estratégicas con cámaras empresariales, asociaciones gastronómicas o programas de innovación tecnológica, que podrían acelerar la adopción y fortalecer el posicionamiento de la plataforma. Finalmente, la naturaleza SaaS (Software as a Service) y la arquitectura modular de AIVA permiten su adaptación a otros mercados de América Latina con ajustes mínimos, potenciando su escalabilidad regional.
+
+Entre las amenazas más relevantes, se encuentra la competencia de soluciones internacionales consolidadas, como las ofrecidas por SAP, Oracle o Blue Yonder, que cuentan con una mayor trayectoria y recursos, aunque orientadas a grandes corporaciones y con costos elevados. No obstante, su presencia podría limitar la participación de nuevos actores en determinados segmentos del mercado. La inestabilidad macroeconómica argentina representa otro factor de riesgo, ya que la inflación, las variaciones del tipo de cambio y las restricciones financieras pueden afectar la rentabilidad y el acceso a recursos tecnológicos. 
+
+Asimismo, la baja digitalización estructural de muchos comercios minoristas constituye una barrera para la adopción inicial del sistema, especialmente en regiones con infraestructura tecnológica limitada. El rápido ritmo de evolución en los modelos de inteligencia artificial exige actualizaciones constantes para mantener la competitividad y vigencia del producto. Finalmente, los riesgos asociados a la ciberseguridad y la protección de datos requieren políticas estrictas de confidencialidad y cumplimiento normativo, dada la sensibilidad de la información comercial que el sistema maneja.
+
+\subsection{Síntesis del análisis}
+
+En síntesis, el análisis FODA evidencia que AIVA presenta una posición estratégica favorable dentro del contexto local, sustentada en su carácter innovador, su enfoque sostenible y su adaptabilidad a las necesidades de las PYMEs argentinas. Las fortalezas y oportunidades identificadas superan ampliamente las debilidades y amenazas, consolidando al proyecto como una solución viable, escalable y con impacto positivo tanto económico como ambiental. Este diagnóstico permite concluir que AIVA posee una base sólida para su implementación, expansión y sostenimiento en el tiempo, contribuyendo al desarrollo tecnológico y a la eficiencia operativa del sector de productos perecederos.
+
 
 \vspace{1cm}
 \section{Historias de usuario}
@@ -415,18 +449,23 @@ En conjunto, el gradiente principal de índigo a azul, el acento violeta y los s
 \end{figure}
 
 \subsection{Logo}
-El signo marcario combina un \textbf{símbolo geométrico} (módulos rectangulares que sugieren el trazo de una “A” y la idea de bloques de datos) con el \textbf{logotipo} “AIVA” en tipografía \textit{sans serif} de alta legibilidad.
+El logotipo de AIVA representa la identidad visual del sistema y sintetiza su esencia conceptual y tecnológica. El nombre surge de la combinación de dos siglas: “AI”, correspondiente a Artificial Intelligence (Inteligencia Artificial), y “VA”, abreviatura de Valor Agregado. Esta fusión refleja la misión del proyecto de integrar inteligencia artificial aplicada a la predicción de demanda con un enfoque orientado a generar valor operativo, económico y ambiental para los pequeños comercios.
 
-\begin{itemize}
-    \item \textbf{Configuración principal (lockup).} Símbolo a la izquierda y logotipo a la derecha, alineados sobre la línea base. El conjunto se utiliza en positivo (blanco) sobre fondos índigo/azules o en negativo (índigo/violeta) sobre fondos claros.
-    \item \textbf{Área de protección.} Se mantiene un margen libre alrededor del logo equivalente a la altura del símbolo para evitar interferencias con otros elementos.
-    \item \textbf{Tamaños mínimos.} Se asegura que el ancho total no sea inferior a 24\,mm en impresos (o 160\,px en pantalla) para conservar la legibilidad de las formas internas.
-    \item \textbf{Variantes.} 
-    \begin{itemize}
-        \item \textit{Monocromo}: uso en una sola tinta (blanco o negro) cuando las restricciones de producción lo requieran.
-        \item \textit{Isotipo}: sólo el símbolo para favicons, íconos de app o espacios reducidos.
-    \end{itemize}
-    \item \textbf{Usos incorrectos.} No distorsionar, rotar ni aplicar efectos de sombra; no alterar la paleta definida; no combinar el logo con fondos de bajo contraste que comprometan la lectura.
-\end{itemize}
+Desde el punto de vista visual, el logotipo está compuesto por un símbolo geométrico formado por cuatro módulos de distinta proporción que se agrupan en forma ascendente, evocando la idea de crecimiento, análisis y optimización de procesos. Este isotipo acompaña a la tipografía principal, moderna y de líneas rectas, que transmite precisión, confianza y solidez tecnológica.
+
+La paleta cromática, en gradientes de azul, refuerza la noción de innovación y tecnología, mientras que el contraste con el texto blanco aporta claridad, legibilidad y profesionalismo. En conjunto, el diseño comunica los valores centrales de la marca: innovación, simplicidad y mejora continua mediante el uso de la inteligencia artificial.
+
+
+\section{Metodología de desarrollo}\label{sec:metodologia}
+
+El desarrollo del sistema se realizó siguiendo la metodología en cascada como modelo principal de ciclo de vida. Este enfoque, de naturaleza secuencial y estructurada, organiza el proceso de desarrollo en etapas claramente definidas: análisis, diseño, implementación, pruebas, despliegue y mantenimiento. La elección de esta metodología se basó en la necesidad de contar con una planificación detallada, documentación completa y un control riguroso del avance, condiciones adecuadas para proyectos con requerimientos bien delimitados y objetivos técnicos precisos.
+
+En la fase de análisis, se relevaron los requerimientos funcionales y no funcionales del sistema, considerando tanto las necesidades de los usuarios finales como las restricciones técnicas. Posteriormente, durante el diseño, se elaboraron los diagramas de casos de uso, el modelo de datos y la arquitectura general de la aplicación, junto con las interfaces de usuario principales. En la etapa de implementación, se desarrollaron los módulos planificados conforme a las especificaciones definidas y siguiendo convenciones de codificación y documentación consistentes. Finalmente, las fases de pruebas y validación se centraron en verificar la correcta integración de los componentes, el desempeño general y la precisión de las predicciones generadas por el sistema.
+
+Si bien la metodología en cascada fue la base del proceso, se introdujeron adaptaciones puntuales que permitieron incorporar instancias de retroalimentación sin alterar la estructura secuencial general. A lo largo del desarrollo se realizaron presentaciones intermedias del prototipo ante los tutores y revisores, con el propósito de obtener observaciones sobre la interfaz, la experiencia de uso y los resultados de predicción. Dichas revisiones posibilitaron efectuar ajustes menores en requerimientos y diseño, integrando comentarios relevantes sin modificar el orden de las fases principales. 
+
+Esta adaptación otorgó flexibilidad al proceso, permitiendo mejorar la calidad del producto final y garantizar que las funcionalidades implementadas respondieran efectivamente a las necesidades validadas durante el seguimiento. En síntesis, el proyecto combinó la rigurosidad y trazabilidad del modelo en cascada con instancias controladas de retroalimentación iterativa, logrando un equilibrio entre planificación estructurada y capacidad de ajuste, adecuado para el desarrollo del sistema AIVA.
+
 
 \vspace{1cm}
+
