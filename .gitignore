@@ -10,7 +10,7 @@
 *.lot
 *.nav
 *.out
-*.pdf
+main.pdf
 *.run.xml
 *.snm
 *.spl
