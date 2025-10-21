@@ -55,9 +55,9 @@ CAC \;=\; \frac{15}{0{,}42} \approx \text{USD }35{,}7.
 
 \paragraph{Valor de Vida del Cliente (LTV).}
 Con un ingreso medio por usuario (ARPU) igual al precio mensual del plan y $c$ como churn mensual, el LTV se aproxima como
-\[
+\begin{align}
 LTV \;=\; \frac{ARPU}{c}.
-\]
+\end{align}
 Bajo $ARPU = \text{USD }30$ y $c = 0{,}05$, resulta
 \[
 LTV \;=\; \frac{30}{0{,}05} \;=\; \text{USD }600.
@@ -76,9 +76,9 @@ En términos de buenas prácticas SaaS, valores superiores a 3 son deseables; el
 
 \subsection{Metodología}
 
-El modelo financiero se estructura sobre un servicio por suscripción mensual de USD~30 con un mes de prueba inicial sin cargo. La inclusión de un período de prueba se fundamenta en evidencia empírica que demuestra cómo el diseño de los \textit{trials} puede incidir en la adopción y la conversión: estudios experimentales en plataformas SaaS confirman que extender o personalizar la duración de la prueba incrementa tanto su utilización como la probabilidad de que los usuarios se conviertan en clientes pagos (Zhang, 2025). En este marco, se adopta una tasa de conversión post‐trial del 42\% como supuesto de referencia, entendida como una hipótesis informada por la literatura, que posteriormente deberá ser contrastada con datos reales de operación.
+El modelo financiero se estructura sobre un servicio por suscripción mensual de USD 30 con un mes de prueba inicial sin cargo. La inclusión de un período de prueba se fundamenta en evidencia empírica que demuestra cómo el diseño de los \emph{trials} puede incidir en la adopción y la conversión: estudios experimentales en plataformas SaaS confirman que extender o personalizar la duración de la prueba incrementa tanto su utilización como la probabilidad de que los usuarios se conviertan en clientes pagos \parencite{zhang2025}. En este marco, se adopta una tasa de conversión post-trial del 42\% como supuesto de referencia, entendida como una hipótesis informada por la literatura, que posteriormente deberá ser contrastada con datos reales de operación.
 
-En cuanto al churn, los benchmarks de referencia para SaaS B2B muestran que, en servicios con un precio mensual entre USD~25 y USD~50, el churn promedio es de 7,3\% (Vitally, 2025). En este análisis se adopta un 6\% como supuesto operativo, lo que representa una postura conservadora que evita sobredimensionar la retención de usuarios.
+En cuanto al churn, los benchmarks de referencia para SaaS B2B muestran que, en servicios con un precio mensual entre USD~25 y USD 50, el churn promedio es de 7,3\% (Vitally, 2025). En este análisis se adopta un 6\% como supuesto operativo, lo que representa una postura conservadora que evita sobredimensionar la retención de usuarios.
 
 
 
@@ -183,7 +183,7 @@ El detalle mensual del OpEx se presenta en las Figuras~\ref{fig:opex-anio1}, \re
 
 \subsection{Ingresos y dinámica de conversión}
 
-En el escenario base del modelo financiero se adopta una tasa de crecimiento mensual de altas del 9\%. Este parámetro se encuentra alineado con los rangos reportados para startups de software como servicio (SaaS) en fases iniciales, donde la literatura especializada identifica tasas de expansión mensual de entre 5\% y 10\% como habituales en etapas de tracción temprana (Burkland Finance, 2024). Bajo este supuesto, los ingresos se reconocen exclusivamente por clientes pagos, es decir, aquellos que han atravesado el período de prueba y se han convertido efectivamente en suscriptores.
+En el escenario base del modelo financiero se adopta una tasa de crecimiento mensual de altas del 9\%. Este parámetro se encuentra alineado con los rangos reportados para startups de software como servicio (SaaS) en fases iniciales, donde la literatura especializada identifica tasas de expansión mensual de entre 5\% y 10\% como habituales en etapas de tracción temprana~\parencite{burkland2024ltvcac}. Bajo este supuesto, los ingresos se reconocen exclusivamente por clientes pagos, es decir, aquellos que han atravesado el período de prueba y se han convertido efectivamente en suscriptores.
 
 En cuanto a los costos variables asociados al uso de inteligencia artificial, el análisis estima un cargo aproximado de USD~0,35 por usuario activo mensual correspondiente a consultas a modelos de OpenAI (tanto para el asistente conversacional como para funciones de OCR). Este valor surge de proyectar el patrón de uso definido en el caso base (alrededor de 30 consultas diarias por usuario, con una media de tokens por interacción y las tarifas vigentes de la API), lo que permite dimensionar de manera realista el impacto unitario de la infraestructura cognitiva sobre el costo operativo.
 
