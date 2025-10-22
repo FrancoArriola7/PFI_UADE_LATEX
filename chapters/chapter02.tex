@@ -115,21 +115,21 @@ Entre las más utilizadas se encuentran:
 \begin{itemize}
     \item \textbf{MAE (Mean Absolute Error)}: mide el promedio de los errores absolutos entre las predicciones $\hat{y}_t$ y los valores reales $y_t$ \parencite{willmott2005}.
     
-    \[
+    \begin{align}
         \text{MAE} = \frac{1}{n} \sum_{t=1}^{n} \left| y_t - \hat{y}_t \right|
-    \]
+    \end{align}
 
     \item \textbf{RMSE (Root Mean Squared Error)}: calcula la raíz cuadrada del promedio de los errores al cuadrado, penalizando más fuertemente los errores grandes \parencite{chai2014}.
     
-    \[
+    \begin{align}
         \text{RMSE} = \sqrt{ \frac{1}{n} \sum_{t=1}^{n} \left( y_t - \hat{y}_t \right)^2 }
-    \]
+    \end{align}
 
     \item \textbf{MAPE (Mean Absolute Percentage Error)}: expresa el error como un porcentaje del valor real. Es útil para comparar modelos en distintas escalas, aunque puede ser inestable cuando $y_t \approx 0$ \parencite{myttenaere2016}.
     
-    \[
+    \begin{align}
         \text{MAPE} = \frac{100}{n} \sum_{t=1}^{n} \left| \frac{y_t - \hat{y}_t}{y_t} \right|
-    \]
+    \end{align}
 \end{itemize}
 
 La elección de la métrica depende del contexto. El MAE es más interpretable para usuarios no técnicos, mientras que el RMSE resulta más sensible a errores significativos. 
