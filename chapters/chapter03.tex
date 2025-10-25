@@ -180,7 +180,41 @@ El área central es un historial desplazable con burbujas alineadas según el ro
 La barra inferior concentra la entrada de texto, con envío por Enter y salto de línea con \textit{Shift+Enter}, y botones para enviar o limpiar la conversación. Durante el procesamiento se indica actividad y se habilita la interrupción segura de la respuesta. La comunicación con el backend se realiza autenticada (token de sesión de Supabase) contra el endpoint interno \texttt{/api/chat}; se contemplan estados de error categorizados (cuota, servicio, autenticación, cancelación y red) con retroalimentación visual y mensajes recuperables. En conjunto, el diseño prioriza velocidad de uso, consistencia con el resto de la interfaz y control explícito sobre el ciclo de la conversación.
 
 \subsection{Procesamiento de la consulta}
+
 Cuando el usuario ingresa una consulta en el chat, el asistente procesa el mensaje y determina la intención de la pregunta a partir del lenguaje natural. En lugar de devolver una respuesta predefinida o aproximada, el agente genera de manera dinámica una consulta SQL parametrizada que traduce esa necesidad en una instrucción concreta sobre la base de datos. Esta consulta, siempre restringida a operaciones de solo lectura y filtrada por el identificador del usuario, se ejecuta en Supabase sobre el motor Postgres, garantizando seguridad y acceso únicamente a la información correspondiente. Una vez obtenidos los resultados, el asistente procesa los datos para calcular métricas, agrupar valores y elaborar indicadores relevantes, que luego son redactados en un formato comprensible y ejecutivo. De esta manera, el usuario recibe una respuesta clara y contextualizada, sustentada en datos reales y actualizados, sin exposición de detalles técnicos. El enfoque adoptado constituye el núcleo innovador de la solución: transformar de forma automática las consultas en lenguaje natural en consultas SQL seguras, ejecutarlas en tiempo real y presentar los resultados de manera amigable dentro del flujo conversacional.
+
+
+
+\begin{figure}[!htbp]
+ \centering
+
+ \includegraphics[width=0.9\textwidth]{images/ConsultaSQL.png}
+
+ \caption{Flujo de procesamiento de consulta en AIVA -- Fuente: elaboración propia}
+
+ \label{fig:flujo-consulta}
+
+\end{figure}
+
+
+
+El diagrama ilustra la interacción coordinada entre los componentes del sistema durante el procesamiento de una consulta en AIVA. El proceso puede desglosarse en las siguientes etapas:
+
+
+
+\begin{enumerate}[label=\arabic*., leftmargin=*, nosep]
+
+ \item \textbf{Interpretación del lenguaje natural.} El asistente analiza el mensaje ingresado por el usuario aplicando técnicas de \textit{Natural Language Processing} (NLP), con el fin de identificar la intención de la consulta y extraer los parámetros relevantes (fechas, productos, métricas, etc.).
+
+\item \textbf{Traducción a consulta estructurada.} A partir de la interpretación semántica, el sistema genera dinámicamente una instrucción SQL parametrizada, limitada a operaciones de lectura y filtrada por el identificador del usuario autenticado, garantizando privacidad y control de acceso.
+
+\item \textbf{Ejecución segura y procesamiento analítico.} La consulta se ejecuta sobre la base de datos alojada en Supabase (PostgreSQL), y los resultados obtenidos son procesados para calcular métricas, agrupar valores y derivar indicadores relevantes.
+
+\item \textbf{Comunicación de resultados.} Finalmente, el asistente sintetiza los hallazgos en un lenguaje claro y ejecutivo, presentándolos dentro del flujo conversacional, lo que permite al usuario acceder a información analítica sin requerir conocimientos técnicos de bases de datos.
+
+\end{enumerate}
+
+Este proceso refleja la integración entre comprensión lingüística, generación dinámica de consultas y comunicación orientada al usuario, consolidando uno de los ejes innovadores del sistema AIVA.
 
 \subsection{Predicción de demanda}
 \begin{figure}[!htbp]
