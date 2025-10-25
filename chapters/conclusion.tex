@@ -14,29 +14,42 @@ El sistema también aporta en el plano humano. Su diseño simple, con una interf
 En síntesis, AIVA constituye una innovación con propósito: mejora la rentabilidad del comerciante, reduce el desperdicio de alimentos, promueve prácticas sostenibles y acerca la inteligencia artificial a quienes más pueden beneficiarse de ella.  
 El proyecto deja en evidencia que la tecnología, cuando se diseña con empatía y orientación al valor, puede ser una aliada poderosa para construir negocios más inteligentes, eficientes y humanos.
 
-\subsection*{5.1 Resumen de aportes}
+\section*{5.1 Resumen de aportes}
 
-El desarrollo de AIVA constituye un aporte significativo tanto desde el punto de vista tecnológico como desde su impacto práctico en la gestión de comercios de productos perecederos.  
-A lo largo del proyecto, se lograron avances concretos en tres dimensiones principales: la optimización operativa, la accesibilidad tecnológica y la sostenibilidad económica y ambiental.
+El desarrollo de \textbf{AIVA} constituye un aporte significativo tanto desde el punto de vista tecnológico como desde su impacto práctico en la gestión de comercios de productos perecederos. 
+A lo largo del proyecto, se lograron avances concretos en cuatro dimensiones principales: optimización operativa, interacción inteligente mediante lenguaje natural, accesibilidad tecnológica y sostenibilidad económica y ambiental.
 
-En primer lugar, AIVA demostró que es posible implementar un sistema de predicción de demanda preciso y accesible, basado en inteligencia artificial y datos históricos, que permite a los comerciantes reducir pérdidas y planificar su producción con mayor eficiencia.  
-El modelo integra variables internas (ventas, stock, precios) y externas (clima, estacionalidad), generando pronósticos confiables que se traducen en decisiones más racionales y objetivas. Este enfoque representa una mejora sustancial frente a los métodos tradicionales de estimación basados únicamente en la experiencia o la intuición.
+En primer lugar, AIVA demostró que es posible implementar un sistema de predicción de demanda preciso y accesible, basado en modelos de series temporales y variables exógenas. 
+El sistema integra información histórica (ventas, precios, stock) con factores externos como clima, estacionalidad y feriados, generando pronósticos confiables que permiten planificar la producción diaria con mayor eficiencia. 
+Este enfoque combina técnicas estadísticas (Holt-Winters, regresión lineal) y algoritmos de aprendizaje automático, incorporando métricas de evaluación (MAE, RMSE, MAPE) para garantizar la validez de los resultados. 
+El resultado es una herramienta capaz de reemplazar métodos empíricos o basados únicamente en la intuición, por decisiones objetivas respaldadas por datos.
 
-En segundo lugar, el proyecto aportó una arquitectura moderna, modular y segura, construida sobre tecnologías abiertas y escalables (\textit{Next.js}, \textit{Supabase}, \textit{OpenWeatherMap} y \textit{OpenAI}).  
-Esta combinación permitió desarrollar una solución robusta y adaptable, capaz de integrarse con otros sistemas y evolucionar con el tiempo, sin depender de infraestructura costosa ni de conocimientos técnicos avanzados.  
-El uso de reglas de seguridad a nivel de fila (RLS) y la gestión centralizada de datos garantizan la privacidad y la integridad de la información de cada usuario.
+En segundo lugar, el proyecto introdujo un componente de interacción natural mediante un asistente conversacional potenciado por modelos de lenguaje extensos (LLM), lo que representa un avance notable en el campo de la analítica predictiva aplicada. 
+El LLM actúa como un intermediario entre el usuario y la base de datos, capaz de interpretar preguntas formuladas en lenguaje natural (por ejemplo: ``¿cuántas ventas hubo esta semana?'' o ``¿qué producto tuvo mayor demanda en los días fríos?'') y traducirlas dinámicamente en consultas SQL parametrizadas, seguras y auditables. 
 
-Asimismo, AIVA incorporó una capa de interacción natural mediante un asistente conversacional, lo que representa un aporte innovador al enfoque de la analítica predictiva.  
-Este componente humaniza la tecnología y facilita la adopción de la herramienta por parte de usuarios no especializados, democratizando el acceso a la inteligencia artificial en contextos comerciales de pequeña escala.
+Este proceso se implementó a través de un motor \textbf{Text-to-SQL} desarrollado en el backend, que sigue un flujo estructurado:
 
-Otro aporte clave radica en la orientación hacia la sostenibilidad.  
-Al reducir el desperdicio de alimentos, optimizar los niveles de stock y evitar sobreproducción, AIVA contribuye directamente a mejorar la rentabilidad del negocio y a disminuir el impacto ambiental asociado a la gestión ineficiente de inventarios.  
-De este modo, el sistema integra los principios de la economía circular en la práctica cotidiana del comercio.
+\begin{itemize}
+    \item \textbf{Clasificación de intención:} el modelo identifica qué tipo de información busca el usuario (ventas, predicciones, comparaciones, clima, etc.).
+    \item \textbf{Generación de consulta SQL parametrizada:} el LLM produce una instrucción \texttt{SELECT} compatible con PostgreSQL, respetando una lista segura de tablas y columnas (\textit{allowlist}) y filtrando automáticamente por \texttt{user\_id}.
+    \item \textbf{Ejecución controlada y recuperación de datos:} la aplicación ejecuta la consulta dentro de un entorno supervisado (Supabase) mediante herramientas internas que impiden operaciones no permitidas.
+    \item \textbf{Síntesis y redacción del resultado:} el LLM interpreta los datos obtenidos y genera una respuesta narrativa en lenguaje natural, con formato legible, métricas clave y recomendaciones accionables.
+\end{itemize}
 
-Finalmente, desde el punto de vista académico y profesional, el desarrollo de AIVA aportó una experiencia integral que combina la aplicación de conocimientos de ingeniería de software, bases de datos, aprendizaje automático y diseño centrado en el usuario.  
-El proyecto demuestra cómo la unión entre rigor técnico y empatía por el usuario puede dar lugar a soluciones con impacto real en la sociedad.
+El resultado es un asistente que combina análisis de datos, razonamiento contextual y comunicación natural, eliminando la necesidad de conocimientos técnicos y democratizando el acceso a la inteligencia artificial para pequeños comerciantes.
 
-En síntesis, los aportes de AIVA pueden resumirse en una frase: convertir datos en decisiones, decisiones en ahorro, y ahorro en sostenibilidad.
+En tercer lugar, AIVA incorporó una arquitectura moderna, modular y segura, construida sobre tecnologías abiertas y escalables (Next.js, Supabase, OpenWeatherMap y OpenAI). 
+El uso de reglas de seguridad a nivel de fila (\textit{Row-Level Security, RLS}) y la gestión centralizada de datos garantizan la privacidad y la integridad de la información de cada usuario, mientras que la modularidad del backend facilita la incorporación de nuevos modelos predictivos o fuentes de datos sin alterar la estructura general del sistema.
+
+Por último, el proyecto se orienta hacia la sostenibilidad económica y ambiental. 
+Al reducir el desperdicio de alimentos, optimizar niveles de stock y prevenir la sobreproducción, AIVA contribuye a mejorar la rentabilidad del negocio y a disminuir el impacto ambiental asociado a la gestión ineficiente de inventarios. 
+De este modo, el sistema integra principios de economía circular y consumo responsable, alineándose con los Objetivos de Desarrollo Sostenible (ODS 12) de la ONU.
+
+Desde el punto de vista académico y profesional, AIVA constituye una experiencia integral que combina ingeniería de software, bases de datos, aprendizaje automático, seguridad, diseño de interacción y responsabilidad social. 
+El proyecto demuestra cómo la integración entre LLMs, analítica predictiva y usabilidad centrada en el usuario puede generar soluciones con impacto real, capaces de transformar la toma de decisiones en entornos comerciales cotidianos.
+
+En síntesis, los aportes de AIVA pueden resumirse en una frase: 
+convertir lenguaje en datos, datos en decisiones, decisiones en ahorro, y ahorro en sostenibilidad. 
 Esa es la verdadera contribución de este trabajo al cruce entre la tecnología, la gestión y la innovación responsable.
 
 
