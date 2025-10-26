@@ -5,7 +5,7 @@ La investigación sobre predicción de demanda para productos perecederos ha ava
 
 \section{Marco teórico}
 
-En esta sección se describen los fundamentos conceptuales y técnicos necesarios para comprender el enfoque del sistema propuesto, incluyendo tecnologías de predicción, Inteligencia artificial, aprendizaje automático y su aplicación en la predicción de demanda, y problemáticas sociales vinculadas al desperdicio de alimentos, que son relevantes para el sistema a desarrollar.
+En esta sección se describen los fundamentos conceptuales y técnicos necesarios para comprender el enfoque del sistema propuesto, incluyendo tecnologías de predicción, inteligencia artificial, aprendizaje automático y su aplicación en la predicción de demanda, y problemáticas sociales vinculadas al desperdicio de alimentos, que son relevantes para el sistema a desarrollar.
 
 
 \subsection{Inteligencia artificial}
@@ -83,26 +83,23 @@ Entre los enfoques tradicionales más utilizados se encuentran:
 
 Estos modelos son apreciados por su simplicidad y bajo costo computacional, aunque presentan limitaciones cuando hay muchas variables externas o relaciones no lineales.
 
-Con el auge del aprendizaje automático, se han incorporado técnicas más complejas que permiten capturar relaciones no lineales y variables exógenas:
 
-\begin{itemize}
-    \item \textbf{Prophet}: modelo desarrollado por Facebook que permite ajustar estacionalidades múltiples y eventos especiales de forma flexible \parencite{taylor2018}.
-    
-    \item \textbf{LSTM (Long Short-Term Memory)}: tipo de red neuronal recurrente capaz de aprender dependencias de largo plazo, muy utilizada en predicción de series temporales con datos ruidosos o variables múltiples (Hewamalage, 2021).
-\end{itemize}
+Como se observa en la Figura~\ref{fig:ols}, la regresión lineal busca ajustar una línea de mejor ajuste que minimice la distancia entre los valores observados y los valores predichos. 
+Cada punto representa una observación del conjunto de datos (por ejemplo, las ventas diarias de un producto), mientras que la pendiente (\(\beta\)) indica la dirección y magnitud de la relación entre las variables. 
+Las diferencias verticales entre los puntos y la línea representan los \textit{errores} o \textit{residuos}, es decir, la parte de la variabilidad que el modelo no logra explicar. 
+Este enfoque resulta útil para comprender tendencias generales y estimar relaciones simples entre variables, aunque puede no capturar dinámicas temporales o no lineales más complejas.
 
-Como se observa en la Figura~\ref{fig:lstm}, esta arquitectura permite mantener y transmitir información a lo largo del tiempo, lo cual la hace especialmente útil para modelar secuencias con relaciones temporales complejas.
+
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/lstm.png}
-    \caption{LSTM (Long Short-Term Memory) básico.}
-    \label{fig:lstm}
+    \includegraphics[width=0.55\textwidth]{images/RegresionOLS.png}
+    \caption{Representación esquemática de una regresión lineal (OLS)}
+    \label{fig:ols}
+    \vspace{2mm}
+    \small Fuente: adaptado de \parencite{vitalflux2022ols}.
 \end{figure}
 
-\begin{itemize}
-    \item \textbf{Transformers}: arquitectura inicialmente desarrollada para procesamiento de lenguaje natural, que ha comenzado a aplicarse con éxito en predicción multivariada de series temporales \parencite{li2019}.
-\end{itemize}
 
 La elección del modelo dependerá del tipo de datos disponibles, la granularidad deseada y los requisitos de interpretabilidad y precisión. En este proyecto, estos modelos permitirán estimar con mayor exactitud la demanda diaria de productos, reduciendo mermas y ajustando la producción a las condiciones reales del entorno.
 
@@ -245,7 +242,7 @@ Entre las principales limitaciones que afectan a las PYMEs se encuentran:
     \item Miedo al cambio o resistencia organizacional \parencite{jordao2022}.
 \end{itemize}
 
-En América Latina y particularmente en Argentina, estas brechas son aún más pronunciadas. Estudios del BID señalan que solo 1 de cada 4 PYMEs en la región adopta tecnologías digitales avanzadas, y que más del 60~\% se encuentra en niveles básicos de digitalización \parencite{bid2020}. Complementariamente, un estudio reciente sobre digitalización contable en PYMEs de Ecuador identificó que los principales obstáculos son la falta de capacitación, los altos costos iniciales y la resistencia al cambio, y destacó que el acceso a tecnología, formación profesional y apoyo institucional son determinantes para una adopción exitosa \parencite{vasconez2025}.
+En América Latina y particularmente en Argentina, estas brechas son aún más pronunciadas. Estudios del BID señalan que solo 1 de cada 4 PYMEs en la región adopta tecnologías digitales avanzadas, y que más del 60~\% se encuentra en niveles básicos de digitalización \parencite{bid2020}.
 
 Entre sus hallazgos, se estima que la digitalización puede aumentar los ingresos en un 30~\% y reducir los costos operativos en un 20~\%, aunque aún persisten desafíos relacionados con la visión estratégica y el capital disponible.
 
@@ -322,17 +319,22 @@ Estos estudios confirman que los modelos neuronales como LSTM y Bi-LSTM superan 
 
 \subsection{Aporte diferencial del proyecto}
 
-El sistema propuesto en este proyecto se distingue de las soluciones analizadas por las siguientes características:
+El sistema propuesto en este proyecto se distingue de las soluciones analizadas por integrar de forma coherente técnicas de predicción de demanda, inteligencia artificial aplicada al lenguaje natural y una arquitectura abierta orientada a la sostenibilidad. Sus principales aportes diferenciales son los siguientes:
 
 \begin{itemize}
-    \item \textbf{Accesibilidad}: pensado específicamente para pequeños comercios argentinos sin sistemas previos de gestión ni personal técnico.
+    \item \textbf{Accesibilidad y enfoque local}: diseñado específicamente para pequeños comercios argentinos que carecen de sistemas de gestión avanzados o personal técnico especializado. Los modelos se calibran con variables contextuales locales, como el clima y los feriados de Buenos Aires, lo que mejora la precisión y relevancia práctica de las predicciones.
 
-    \item \textbf{Multimodalidad}: permite la carga de registros mediante imágenes, utilizando modelos OCR y LLMs, lo cual no está presente en las herramientas comerciales revisadas.
+    \item \textbf{Interacción natural con el usuario}: el sistema reemplaza paneles analíticos complejos por un asistente conversacional basado en modelos de lenguaje extensos (LLM), capaz de interpretar preguntas en lenguaje natural y traducirlas automáticamente en consultas SQL seguras y auditables. Esto democratiza el acceso a la analítica avanzada sin requerir conocimientos técnicos.
 
-    \item \textbf{Interfaz natural}: reemplaza los paneles tradicionales por un chatbot conversacional en lenguaje natural, facilitando el uso incluso por usuarios no técnicos.
+    \item \textbf{Motor \textit{Text-to-SQL} seguro}: AIVA implementa un flujo de inferencia estructurado que permite al LLM generar consultas parametrizadas (solo lectura) sobre una lista controlada de tablas, filtradas por usuario y validadas antes de su ejecución en la base de datos (Supabase + PostgreSQL).
 
-    \item \textbf{Orientación local}: los modelos se entrenan considerando variables específicas como clima y feriados de Buenos Aires en el año 2025.
+    \item \textbf{Predicción adaptativa y evaluación continua}: el sistema selecciona dinámicamente el mejor modelo de predicción (Holt-Winters o regresión OLS) según métricas de error (MAE, RMSE, MAPE), lo que permite mantener la precisión sin intervención manual y adaptarse a los cambios en el comportamiento de la demanda.
+
+    \item \textbf{Multimodalidad en la captura de datos}: además de la carga manual, AIVA permite registrar información mediante imágenes de tickets o planillas utilizando OCR combinado con LLMs, ampliando la capacidad de digitalización y reduciendo la fricción de adopción en contextos de baja formalización.
+
+    \item \textbf{Sostenibilidad y eficiencia operativa}: al optimizar la producción y reducir el desperdicio de alimentos, el sistema contribuye a la economía circular y a los Objetivos de Desarrollo Sostenible (ODS 12), integrando tecnología e impacto social en un mismo marco operativo.
 \end{itemize}
+
 
 
 \subsection{Conclusión del estado del arte}
