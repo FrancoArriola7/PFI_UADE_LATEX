@@ -93,11 +93,10 @@ Este enfoque resulta útil para comprender tendencias generales y estimar relaci
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.55\textwidth]{images/RegresionOLS.png}
-    \caption{Representación esquemática de una regresión lineal (OLS)}
+    \includegraphics[width=0.55\textwidth]{images/GraficoRegresionOLS.PNG}
+    \caption{Representación esquemática de una regresión lineal (OLS) -- Fuente: elaboración propia}
     \label{fig:ols}
     \vspace{2mm}
-    \small Fuente: adaptado de \parencite{vitalflux2022ols}.
 \end{figure}
 
 
@@ -248,7 +247,7 @@ Entre sus hallazgos, se estima que la digitalización puede aumentar los ingreso
 
 En el sector alimentario, la falta de herramientas tecnológicas específicas impide a muchos comercios ajustar su producción a la demanda real, generando ineficiencias como sobreproducción, desperdicio o rotura de stock. Por eso, el desarrollo de plataformas accesibles, intuitivas y enfocadas en resolver problemas concretos de gestión —como la que se propone en este proyecto— resulta clave para acortar la brecha digital, profesionalizar la toma de decisiones y mejorar la sostenibilidad operativa de los pequeños comercios.
 
-\newpage % <-- salto de página
+\newpage 
 
 \section{Estado del arte}
 
@@ -294,26 +293,31 @@ Estos estudios confirman que los modelos neuronales como LSTM y Bi-LSTM superan 
 \begin{table}[t]
     \centering
     \renewcommand{\arraystretch}{1.3}
-    \caption{Comparación de enfoques}
+    \caption{Comparación de enfoques y diferenciales de AIVA}
     \label{tab:comparacion}
-    \begin{tabular}{|p{2.9cm}|p{2cm}|p{3cm}|p{5cm}|}
+    \begin{tabular}{|p{3cm}|p{4.2cm}|p{6.3cm}|}
         \hline
-        \textbf{Solución} & \textbf{Tipo} & \textbf{Tecnologías principales} & \textbf{Limitaciones destacadas} \\
+        \textbf{Solución} & \textbf{Tecnologías principales} & \textbf{Diferencial de AIVA frente a la solución} \\
         \hline
-        SAP F\&R & Comercial & Suite de reposición SAP; forecasting integrado; integración ERP & Alto costo de licencias y consultoría; requiere datos históricos limpios y equipo IT; tiempos de implantación largos \\
+        SAP F\&R & Suite de reposición SAP integrada a ERP corporativo; requiere licencias y consultoría especializada &
+        AIVA elimina la dependencia de infraestructura ERP y licencias costosas, ofreciendo predicción automática y analítica contextual en una plataforma ligera y accesible para PYMEs. \\
         \hline
-        Oracle RDF & Comercial  & Oracle Retail; forecast multinivel; planogramas & Complejidad técnica; vendor lock-in; demanda gobierno de datos sólido; implantación 4–9 meses \\
+        Oracle RDF & Plataforma Oracle Retail con forecast multinivel y planogramas; requiere implementación compleja y soporte técnico especializado &
+        AIVA evita los altos costos y tiempos de despliegue, integrando predicción, visualización e interacción en un entorno unificado que no demanda personal técnico ni procesos de implantación extensos. \\
         \hline
-        BakePlan & Comercial  & Planificación de producción/pedidos; reglas predefinidas & Personalización limitada; sin señales externas (clima/eventos); escalabilidad acotada \\
+        BakePlan & Sistema de planificación de producción basado en reglas predefinidas; sin integración de variables externas &
+        AIVA reemplaza las reglas estáticas por modelos predictivos adaptativos que incorporan clima, feriados y patrones de consumo, generando recomendaciones dinámicas y alertas automatizadas. \\
         \hline
-        POS + add-ons (locales) & Comercial  & Reportes de ventas/stock; integraciones básicas & Sin predicción; sin recomendaciones operativas; no considera clima/eventos; foco administrativo \\
+        POS + add-ons (locales) & Módulos adicionales de puntos de venta centrados en reportes administrativos e inventarios básicos &
+        AIVA amplía el alcance operativo al transformar reportes descriptivos en análisis predictivos y recomendaciones accionables mediante inteligencia artificial y procesamiento de lenguaje natural. \\
         \hline
-        Excel / BI genérico & Herramienta & Dashboards y/o manuales & Dependencia de trabajo manual; errores humanos; sin modelos predictivos ni automatización operativa \\
-        \hline
-        \textbf{AIVA (PFI)} & \textbf{Comercial} & \textbf{Predicción con clima y eventos; sugerencias de producción; carga asistida OCR/LLM} & Requiere calibración inicial y adopción; datos iniciales ruidosos \\
+        Excel / BI genérico & Herramientas manuales de análisis y visualización sin automatización ni conexión con datos en tiempo real &
+        AIVA automatiza la analítica, elimina la dependencia del trabajo manual y permite la consulta directa mediante un asistente conversacional, reduciendo errores y mejorando la toma de decisiones. \\
         \hline
     \end{tabular}
 \end{table}
+
+
 
 
 
@@ -340,7 +344,7 @@ El sistema propuesto en este proyecto se distingue de las soluciones analizadas 
 \subsection{Conclusión del estado del arte}
 El análisis realizado permite constatar que, si bien existen múltiples soluciones comerciales y académicas orientadas a la predicción de demanda en el sector alimentario, la mayoría presenta limitaciones significativas para su adopción en pequeños comercios. Las herramientas comerciales suelen implicar altos costos, requerimientos técnicos avanzados o infraestructuras previas de gestión, lo que las hace poco viables en entornos de baja digitalización. Por otro lado, los enfoques académicos demuestran un alto potencial predictivo, en particular mediante modelos neuronales como LSTM y Bi-LSTM, pero carecen de implementaciones accesibles y adaptadas al mercado local. En este contexto, AIVA se posiciona como una propuesta diferencial al integrar accesibilidad, multimodalidad y orientación a la realidad de las PYMEs argentinas, aportando una solución práctica y escalable que combina avances tecnológicos recientes con un enfoque inclusivo y sostenible.
 
-\newpage % <-- salto de página
+\newpage
 
 \section{User research}
 
