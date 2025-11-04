@@ -1,0 +1,33 @@
+\chapter{Pruebas y Validación del Sistema}\label{chapter05}
+
+En el desarrollo de AIVA se llevaron a cabo pruebas orientadas a garantizar la funcionalidad, usabilidad y confiabilidad del sistema antes de su entrega final. Estas pruebas tuvieron como principales objetivos verificar el correcto funcionamiento de los módulos implementados, asegurar una experiencia de usuario intuitiva y validar que las predicciones y visualizaciones se ajusten a las expectativas de los usuarios finales.
+
+\section{Pruebas de usabilidad}
+
+Las pruebas de usabilidad se realizaron con Milena González, encargada de la confitería \textit{La Catalana}, quien también participó en la etapa de user research.  
+El objetivo fue evaluar la facilidad de uso del sistema, la claridad visual de la interfaz y la utilidad de las funcionalidades implementadas.
+
+Durante la sesión de prueba, Milena exploró los principales módulos de AIVA: el tablero de indicadores (dashboard), el asistente conversacional y la sección de carga de ventas.  
+En general, manifestó una impresión positiva sobre la aplicación, destacando su diseño simple, la coherencia entre las distintas secciones y la facilidad con la que se pueden consultar métricas o generar reportes sin necesidad de conocimientos técnicos avanzados.  
+También resaltó la utilidad del asistente conversacional como medio rápido para obtener información sobre las ventas o productos, considerando que “ahorra tiempo en tareas cotidianas” y “presenta los resultados de forma clara y comprensible”.
+
+Sin embargo, su participación permitió además identificar oportunidades de mejora. Entre los puntos más relevantes, sugirió incorporar la funcionalidad de permitir la carga de archivos o imágenes directamente desde el chat del asistente, de modo que el sistema pueda interpretarlos automáticamente y generar respuestas o registros asociados.  
+Esta última propuesta fue incorporada al \textit{roadmap} de futuras versiones, ya que se alinea con el objetivo de AIVA de simplificar la gestión de datos mediante tecnologías de visión artificial y modelos de lenguaje.
+
+Las observaciones recogidas fueron de gran valor para ajustar la interfaz y mejorar la experiencia de usuario, contribuyendo a que AIVA sea una herramienta accesible, intuitiva y adaptable a las necesidades reales de pequeños comercios.
+
+\section{Pruebas unitarias e integración}
+
+De manera paralela, se llevaron a cabo pruebas unitarias e integrales a lo largo del desarrollo, siguiendo un enfoque iterativo.  
+Las pruebas unitarias se enfocaron en la validación de funciones críticas como la generación de predicciones, el procesamiento de datos históricos y la creación de alertas automáticas.
+Por su parte, las pruebas de integración verificaron la correcta comunicación entre el frontend desarrollado en Next.js y el backend gestionado mediante Supabase y APIs REST, asegurando la coherencia en el intercambio de datos y la persistencia de la información.
+
+Asimismo, se evaluó el correcto funcionamiento de la interacción con servicios externos —como OpenWeather para el registro de variables climáticas y OpenAI para el asistente conversacional— garantizando una respuesta estable incluso ante errores de conexión o variaciones en los endpoints.
+
+\section{Conclusión de pruebas}
+
+Las pruebas implementadas permitieron comprobar que AIVA posee un funcionamiento estable, preciso y coherente con los objetivos definidos en la etapa de diseño.  
+El sistema demostró una adecuada capacidad de respuesta, integrando correctamente sus distintos módulos y ofreciendo una experiencia de uso fluida para el usuario final.  
+Asimismo, las validaciones realizadas evidenciaron que las funcionalidades principales —como la generación de predicciones, el asistente conversacional y la carga de datos— operan de manera confiable y con un nivel de exactitud acorde a las expectativas planteadas.  
+En conjunto, los resultados obtenidos reflejan que AIVA constituye una herramienta sólida y eficiente, capaz de asistir al usuario en la gestión y análisis de su negocio mediante un entorno intuitivo y accesible.
+
