@@ -1,6 +1,6 @@
 \chapter{Antecedentes}\label{chapter02}
 
-La investigación sobre predicción de demanda para productos perecederos ha avanzado con rapidez en los últimos años gracias a la IA. En el ámbito del comercio de alimentos frescos en línea, se ha demostrado que la incorporación de variables como el clima y el calendario mejora significativamente la precisión de los modelos predictivos (Ni et al., 2022). Posteriormente, investigaciones más recientes en el sector minorista alimentario evidencian que modelos basados en redes neuronales recurrentes, como LSTM, superan sistemáticamente a los enfoques estadísticos tradicionales al minimizar tanto los faltantes como los excesos de inventario (Nassibi et al., 2023). Estos avances reflejan el papel creciente de la inteligencia artificial en la optimización de la gestión de productos perecederos. Aun así, en Argentina se sigue desaprovechando el 12,5\% de la producción agroalimentaria, de las que solo el 1,2\% se pierden en la etapa comercial. El impacto se vuelve crítico en rubros como panaderías y pastelerías, donde en 2024 cerraron más de 400 locales y las ventas de pan cayeron un 53\%.
+La investigación sobre predicción de demanda para productos perecederos ha avanzado con rapidez en los últimos años gracias a la inteligencia artificial. En el ámbito del comercio de alimentos frescos en línea, se ha demostrado que la incorporación de variables como el clima y el calendario mejora significativamente la precisión de los modelos predictivos (Ni et al., 2022). Posteriormente, investigaciones más recientes en el sector minorista alimentario evidencian que modelos basados en redes neuronales recurrentes, como LSTM, superan sistemáticamente a los enfoques estadísticos tradicionales al minimizar tanto los faltantes como los excesos de inventario (Nassibi et al., 2023). Estos avances reflejan el papel creciente de la inteligencia artificial en la optimización de la gestión de productos perecederos.
 
 
 \section{Marco teórico}
@@ -10,9 +10,9 @@ En esta sección se describen los fundamentos conceptuales y técnicos necesario
 
 \subsection{Inteligencia artificial}
 
-La inteligencia artificial (en adelante IA) es un campo de estudio dentro de la informática que busca desarrollar sistemas capaces de realizar tareas que normalmente requieren inteligencia humana, tales como el razonamiento, la percepción, la toma de decisiones o el aprendizaje. El término fue acuñado formalmente en 1956 durante la conferencia de Dartmouth, considerada el punto de partida de la disciplina \parencite{mccarthy1955}.\\
+La inteligencia artificial es un campo de estudio dentro de la informática que busca desarrollar sistemas capaces de realizar tareas que normalmente requieren inteligencia humana, tales como el razonamiento, la percepción, la toma de decisiones o el aprendizaje. El término fue acuñado formalmente en 1956 durante la conferencia de Dartmouth, considerada el punto de partida de la disciplina \parencite{mccarthy1955}.
 
-En términos generales, la IA puede dividirse en dos grandes enfoques:
+En términos generales, la inteligencia artificial puede dividirse en dos grandes enfoques:
 
 \begin{itemize}
     \item \textbf{IA débil} (\textit{narrow AI}): especializada en tareas concretas como traducción automática, recomendación de productos o reconocimiento de imágenes \parencite{russell2021}.
@@ -20,17 +20,17 @@ En términos generales, la IA puede dividirse en dos grandes enfoques:
     \item \textbf{IA fuerte} (\textit{general AI}): de carácter hipotético, orientada a replicar el razonamiento humano en su totalidad \parencite{russell2021}.
 \end{itemize}
 
-Gracias al aumento en la capacidad de cómputo y al acceso a grandes volúmenes de datos, el desarrollo reciente de IA basada en aprendizaje automático (\textit{machine learning}) ha permitido avances significativos en múltiples industrias, incluyendo salud, finanzas, logística y comercio minorista \parencite{jordan2015}.
+Gracias al aumento en la capacidad de cómputo y al acceso a grandes volúmenes de datos, el desarrollo reciente de inteligencia artificial basada en aprendizaje automático (\textit{machine learning}) ha permitido avances significativos en múltiples industrias, incluyendo salud, finanzas, logística y comercio minorista \parencite{jordan2015}.
 
-Estos avances han dado lugar al uso extendido de IA en tareas de predicción de demanda, optimización de recursos y automatización de procesos, tal como se propone en el presente proyecto.
+Estos avances han dado lugar al uso extendido de inteligencia artificial en tareas de predicción de demanda, optimización de recursos y automatización de procesos, tal como se propone en el presente proyecto.
 
-La IA también se ha convertido en una herramienta clave para abordar problemáticas socioambientales, como el desperdicio de alimentos, al permitir el análisis en tiempo real de patrones de consumo y la generación de alertas y recomendaciones \parencite{rolnick2019}.
+La inteligencia artificial también se ha convertido en una herramienta clave para abordar problemáticas socioambientales, como el desperdicio de alimentos, al permitir el análisis en tiempo real de patrones de consumo y la generación de alertas y recomendaciones \parencite{rolnick2019}.
 
 \subsection{Aprendizaje automático}
 
 El aprendizaje automático (\textit{machine learning}, en adelante ML) es una subárea de la inteligencia artificial que se enfoca en desarrollar algoritmos capaces de aprender automáticamente a partir de datos, identificar patrones y realizar predicciones o tomar decisiones sin ser programados explícitamente para cada tarea específica \parencite{mitchell1997}.
 
-En contraste con la programación tradicional —donde se define explícitamente cada regla—, en ML los sistemas ajustan su comportamiento a partir de ejemplos y experiencia previa, lo que permite adaptarse a entornos dinámicos o impredecibles. Existen tres grandes categorías de aprendizaje automático:
+En contraste con la programación tradicional (donde se define explícitamente cada regla), en ML los sistemas ajustan su comportamiento a partir de ejemplos y experiencia previa, lo que permite adaptarse a entornos dinámicos o impredecibles. Existen tres grandes categorías de aprendizaje automático:
 
 \begin{itemize}
     \item \textbf{Supervisado}: el modelo se entrena con datos etiquetados, es decir, conjuntos de datos en los que cada entrada está asociada a una salida conocida. (por ejemplo, ventas históricas con cantidades reales).
@@ -40,13 +40,13 @@ En contraste con la programación tradicional —donde se define explícitamente
     \item \textbf{Por refuerzo}:  el agente aprende a tomar decisiones mediante un sistema de recompensas y penalizaciones asociadas a sus acciones dentro de un entorno. \parencite{sutton2018}.
 \end{itemize}
 
-En el ámbito de la predicción de demanda y la gestión comercial, el ML ha demostrado ser altamente efectivo. Algoritmos como regresiones, árboles de decisión, \textit{random forest}, redes neuronales o XGBoost permiten prever comportamientos complejos en entornos de alta variabilidad, como el retail alimentario o los productos perecederos \parencite{carbonneau2008}.
+En el ámbito de la predicción de demanda y la gestión comercial, el ML ha demostrado ser altamente efectivo. Algoritmos como regresión, árboles de decisión, \textit{random forest}, redes neuronales o XGBoost permiten prever comportamientos complejos en entornos de alta variabilidad, como el retail alimentario o los productos perecederos \parencite{carbonneau2008}.
 
 Gracias a su capacidad para adaptarse a datos históricos y variables externas —como el clima, promociones o eventos locales—, el ML se ha convertido en una herramienta estratégica para reducir mermas, optimizar la producción y tomar decisiones basadas en evidencia, alineándose con los objetivos del presente proyecto.
 
 \subsection{Series temporales}
 
-Una serie temporal es una secuencia de observaciones recolectadas en intervalos regulares a lo largo del tiempo. Este tipo de datos permite analizar la evolución de un fenómeno y modelar su comportamiento futuro mediante técnicas estadísticas o de aprendizaje automático \parencite{chatfield2004}. En el caso del comercio minorista, las ventas históricas diarias o semanales de un producto conforman una serie temporal típica.\\
+Una serie temporal es una secuencia de observaciones recolectadas en intervalos regulares a lo largo del tiempo. Este tipo de datos permite analizar la evolución de un fenómeno y modelar su comportamiento futuro mediante técnicas estadísticas o de aprendizaje automático \parencite{chatfield2004}. En el caso del comercio minorista, las ventas históricas diarias o semanales de un producto conforman una serie temporal típica.
 
 Las series temporales suelen contener tres componentes principales:
 
@@ -85,7 +85,7 @@ Estos modelos son apreciados por su simplicidad y bajo costo computacional, aunq
 
 
 Como se observa en la Figura~\ref{fig:ols}, la regresión lineal busca ajustar una línea de mejor ajuste que minimice la distancia entre los valores observados y los valores predichos. 
-Cada punto representa una observación del conjunto de datos (por ejemplo, las ventas diarias de un producto), mientras que la pendiente (\(\beta\)) indica la dirección y magnitud de la relación entre las variables. 
+Cada punto representa una observación del conjunto de datos (por ejemplo, las ventas diarias de un producto), mientras que la pendiente indica la dirección y magnitud de la relación entre las variables. 
 Las diferencias verticales entre los puntos y la línea representan los \textit{errores} o \textit{residuos}, es decir, la parte de la variabilidad que el modelo no logra explicar. 
 Este enfoque resulta útil para comprender tendencias generales y estimar relaciones simples entre variables, aunque puede no capturar dinámicas temporales o no lineales más complejas.
 
@@ -145,7 +145,7 @@ Estas herramientas también permiten monitorear el desempeño del modelo en prod
 
 \subsection{Modelos de lenguaje extensos}
 
-\indent Los Modelos de Lenguaje Extensos (Large Language Models, LLM) son un tipo avanzado de modelo de IA entrenado con enormes cantidades de texto para comprender, generar y manipular lenguaje natural de forma coherente y contextual. Se basan en arquitecturas como transformers, que han demostrado ser altamente eficaces para tareas complejas de procesamiento del lenguaje natural (Vaswani et al., 2017).
+\indent Los Modelos de Lenguaje Extensos (Large Language Models, LLM) son un tipo avanzado de modelo de inteligencia artificial entrenado con enormes cantidades de texto para comprender, generar y manipular lenguaje natural de forma coherente y contextual. Se basan en arquitecturas como transformers, que han demostrado ser altamente eficaces para tareas complejas de procesamiento del lenguaje natural (Vaswani et al., 2017).
 
 \indent Los LLM aprenden a predecir la siguiente palabra en una secuencia, lo que les permite ejecutar tareas como generación de texto, traducción, resumen automático, respuestas a preguntas y análisis semántico. Modelos como GPT-3, PaLM, BERT o LLaMA han alcanzado niveles de rendimiento cercanos al humano en una variedad de benchmarks lingüísticos (Brown et al., 2020; OpenAI, 2023).
 
@@ -155,9 +155,9 @@ Estas herramientas también permiten monitorear el desempeño del modelo en prod
 
 \subsection{Chatbots conversacionales}
 
-Los chatbots conversacionales son sistemas informáticos diseñados para interactuar con los usuarios mediante lenguaje natural, ya sea por texto o voz. Su objetivo principal es simular una conversación humana para asistir, informar, resolver consultas o ejecutar acciones específicas dentro de una plataforma digital \parencite{radziwill2017}.
+Los chatbots conversacionales son sistemas informáticos diseñados para interactuar con los usuarios mediante lenguaje natural, ya sea por texto o voz. Su objetivo principal es simular una conversación humana para asistir, informar, resolver consultas o ejecutar acciones específicas dentro de una plataforma digital \parencite{adamopoulou2020}.
 
-Originalmente basados en reglas fijas y árboles de decisión, los chatbots han evolucionado significativamente gracias a los avances en procesamiento de lenguaje natural (PLN), generación de lenguaje natural (GLN) y, más recientemente, en modelos de lenguaje extensos (or Large Language Models,LLM). Estas tecnologías les permiten comprender intenciones y entidades, responder con mayor coherencia y adaptarse al contexto de las interacciones \parencite{shum2018}.
+Originalmente basados en reglas fijas y árboles de decisión, los chatbots han evolucionado significativamente gracias a los avances en procesamiento de lenguaje natural (PLN), generación de lenguaje natural (GLN) y, más recientemente, en modelos de lenguaje extensos (o Large Language Models, LLM). Estas tecnologías les permiten comprender intenciones y entidades, responder con mayor coherencia y adaptarse al contexto de las interacciones \parencite{shum2018}.
 
 Existen distintos tipos de chatbots, entre ellos:
 
@@ -169,7 +169,7 @@ Existen distintos tipos de chatbots, entre ellos:
     \item \textbf{Chatbots híbridos}: combinan ambos enfoques, lo que los hace flexibles y eficientes.
 \end{itemize}
 
-En aplicaciones empresariales, los chatbots se utilizan cada vez más para consultas sobre datos, gestión de operaciones y soporte a decisiones, especialmente en entornos con usuarios no técnicos. Estudios recientes demuestran que la incorporación de asistentes conversacionales mejora la adopción de sistemas analíticos complejos, reduce barreras de entrada y mejora la experiencia del usuario \parencite{knote2021}.
+En aplicaciones empresariales, los chatbots se utilizan cada vez más para consultas sobre datos, gestión de operaciones y soporte a decisiones, especialmente en entornos con usuarios no técnicos. Estudios recientes demuestran que la incorporación de asistentes conversacionales mejora la adopción de sistemas analíticos complejos, reduce barreras de entrada y mejora la experiencia del usuario \parencite{Mariani2023}.
 
 En este proyecto, el chatbot actuará como interfaz principal del sistema, permitiendo al comerciante consultar predicciones de demanda, indicadores clave (KPIs), alertas de sobreproducción y sugerencias de acción, sin necesidad de navegar por menús complejos ni interpretar gráficos técnicos.
 
@@ -236,9 +236,9 @@ Entre las principales limitaciones que afectan a las PYMEs se encuentran:
 \begin{itemize}
     \item Falta de acceso a infraestructura tecnológica adecuada (hardware, software, conectividad).
     \item Baja disponibilidad de talento digital o personal capacitado.
-    \item Costos percibidos como elevados, especialmente en soluciones basadas en IA o big data.
+    \item Costos percibidos como elevados, especialmente en soluciones basadas en inteligencia artificial o big data.
     \item Desconocimiento de herramientas existentes y sus beneficios.
-    \item Miedo al cambio o resistencia organizacional \parencite{jordao2022}.
+    \item Miedo al cambio o resistencia organizacional.
 \end{itemize}
 
 En América Latina y particularmente en Argentina, estas brechas son aún más pronunciadas. Estudios del BID señalan que solo 1 de cada 4 PYMEs en la región adopta tecnologías digitales avanzadas, y que más del 60~\% se encuentra en niveles básicos de digitalización \parencite{bid2020}.
@@ -293,7 +293,7 @@ Estos estudios confirman que los modelos neuronales como LSTM y Bi-LSTM superan 
 \begin{table}[t]
     \centering
     \renewcommand{\arraystretch}{1.3}
-    \caption{Comparación de enfoques y diferenciales de AIVA}
+    \caption{Comparación de enfoques y diferenciales de AIVA -- Fuente: elaboración propia}
     \label{tab:comparacion}
     \begin{tabular}{|p{3cm}|p{4.2cm}|p{6.3cm}|}
         \hline
@@ -336,7 +336,7 @@ El sistema propuesto en este proyecto se distingue de las soluciones analizadas 
 
     \item \textbf{Multimodalidad en la captura de datos}: además de la carga manual, AIVA permite registrar información mediante imágenes de tickets o planillas utilizando OCR combinado con LLMs, ampliando la capacidad de digitalización y reduciendo la fricción de adopción en contextos de baja formalización.
 
-    \item \textbf{Sostenibilidad y eficiencia operativa}: al optimizar la producción y reducir el desperdicio de alimentos, el sistema contribuye a la economía circular y a los Objetivos de Desarrollo Sostenible (ODS 12), integrando tecnología e impacto social en un mismo marco operativo.
+    \item \textbf{Sostenibilidad y eficiencia operativa}: al optimizar la producción y reducir el desperdicio de alimentos, el sistema contribuye a la economía circular y a los Objetivos de Desarrollo Sostenible (ODS 12), integrando tecnología e impacto social en un mismo marco operativo.\\
 \end{itemize}
 
 
@@ -345,6 +345,7 @@ El sistema propuesto en este proyecto se distingue de las soluciones analizadas 
 El análisis realizado permite constatar que, si bien existen múltiples soluciones comerciales y académicas orientadas a la predicción de demanda en el sector alimentario, la mayoría presenta limitaciones significativas para su adopción en pequeños comercios. Las herramientas comerciales suelen implicar altos costos, requerimientos técnicos avanzados o infraestructuras previas de gestión, lo que las hace poco viables en entornos de baja digitalización. Por otro lado, los enfoques académicos demuestran un alto potencial predictivo, en particular mediante modelos neuronales como LSTM y Bi-LSTM, pero carecen de implementaciones accesibles y adaptadas al mercado local. En este contexto, AIVA se posiciona como una propuesta diferencial al integrar accesibilidad, multimodalidad y orientación a la realidad de las PYMEs argentinas, aportando una solución práctica y escalable que combina avances tecnológicos recientes con un enfoque inclusivo y sostenible.
 
 \newpage
+
 
 \section{User research}
 
@@ -433,7 +434,7 @@ La combinación de los resultados obtenidos a partir de la encuesta a consumidor
 
 \indent Por otro lado, la entrevista con Milena González, encargada de la confitería \textit{La Catalana}, permitió comprender en profundidad las limitaciones cotidianas que enfrentan los comercios del sector. La ausencia de sistemas formales de registro y predicción obliga a basar la producción en la intuición y experiencia del personal, lo que incrementa el riesgo de sobreproducción o quiebre de stock. Sin embargo, la disposición expresada por Milena a incorporar soluciones tecnológicas simples y accesibles refuerza la viabilidad de adopción de AIVA dentro de este tipo de entornos.  
 
-\indent En conjunto, ambos instrumentos de investigación —encuesta y entrevista— confirman que el problema de disponibilidad y desperdicio en panaderías y confiterías es real, frecuente y económicamente relevante. Además, validan la hipótesis central del proyecto: existe una oportunidad concreta para aplicar inteligencia artificial en la predicción de demanda de productos perecederos, generando beneficios medibles en eficiencia operativa, reducción de mermas y aumento de ventas.  
+\indent En conjunto, ambos instrumentos de investigación (encuesta y entrevista) confirman que el problema de disponibilidad y desperdicio en panaderías y confiterías es real, frecuente y económicamente relevante. Además, validan la hipótesis central del proyecto: existe una oportunidad concreta para aplicar inteligencia artificial en la predicción de demanda de productos perecederos, generando beneficios medibles en eficiencia operativa, reducción de mermas y aumento de ventas.  
 
-\indent Los hallazgos de esta etapa consolidan la base empírica sobre la cual se diseñará e implementará AIVA, asegurando que su arquitectura funcional y sus algoritmos respondan a las condiciones reales del mercado y a las necesidades específicas de los usuarios finales.
+\indent Los hallazgos de esta etapa consolidan la base empírica sobre la cual se diseña e implementa AIVA, asegurando que su arquitectura funcional y sus algoritmos respondan a las condiciones reales del mercado y a las necesidades específicas de los usuarios finales.
 

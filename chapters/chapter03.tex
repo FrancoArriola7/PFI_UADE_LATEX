@@ -5,7 +5,6 @@ AIVA es un sistema web orientado a pequeñas y medianas empresas de alimentos pe
 El núcleo analítico del sistema combina el historial transaccional con variables exógenas para estimar la demanda esperada a corto plazo. Este módulo implementa un enfoque heurístico transparente centrado en tendencia, estacionalidad y condiciones meteorológicas, con un diseño abierto a la incorporación de modelos estadísticos y de aprendizaje automático más avanzados. La arquitectura prioriza componentes de bajo costo y rápida adopción, asegurando trazabilidad de datos, reproducibilidad de resultados y una experiencia de usuario alineada con los flujos cotidianos del negocio.
 
 
-\vspace{1cm}
 \section{Requerimientos del sistema}
 Esta sección especifica las condiciones verificables que delimitan el alcance de AIVA. Se formulan en modo imperativo (“El sistema debe …”) para facilitar su prueba y aceptación. Se organizan en dos grupos: funcionales (capacidades observables) y no funcionales (calidades y restricciones transversales).
 
@@ -157,7 +156,6 @@ Esta sección captura, en lenguaje natural, necesidades y objetivos de los actor
 \end{enumerate}
 
 
-\vspace{1cm}
 \section{Interfaz gráfica}
 En esta sección se expone la interfaz gráfica desarrollada para la interacción cotidiana de los usuarios de AIVA en el entorno de comercio minorista de alimentos perecederos. La UI prioriza baja fricción operativa, consistencia visual y señales claras para la toma de decisiones, con patrones reutilizables que reducen la curva de aprendizaje. A continuación se describen las dos pantallas más relevantes por su impacto en el trabajo diario: el asistente conversacional (chatbot) y el módulo de predicción de demanda.
 
@@ -320,11 +318,11 @@ escalabilidad. El diseño busca un equilibrio entre simplicidad
 en el desarrollo y robustez en la operación, integrando 
 componentes internos con servicios externos especializados.
 
-\subsection{Capa de presentación (Front-end)}
+\subsection{Capa de presentación (Frontend)}
 
 La interfaz de usuario está implementada en \textbf{Next.js}, que cumple un doble rol:
 \begin{itemize}
-    \item Renderizado del front-end (formularios, dashboards, carga de datos).
+    \item Renderizado del frontend (formularios, dashboards, carga de datos).
     \item Exposición de endpoints internos (/api) que conectan directamente con los servicios del backend.
 \end{itemize}
 

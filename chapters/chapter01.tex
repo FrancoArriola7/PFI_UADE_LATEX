@@ -2,15 +2,13 @@
 
 El desperdicio de alimentos constituye uno de los desafíos socio-ambientales más apremiantes de la actualidad. Estudios sobre retail alimentario local muestran, además, que por cada 100 pesos vendidos en categorías de frescos y almacén se pierden más de 3 pesos en mermas y obsolescencia, afectando márgenes ya de por sí estrechos \parencite{weteam2021}. Además, en la Argentina se pierde y desperdicia anualmente el 12,5\% de la producción agroalimentaria, equivalente a 16 millones de toneladas, de las cuales solo el 1,2\% corresponde a desperdicio en la etapa de comercialización, mientras que el resto se debe a pérdidas a lo largo de la cadena \parencite{tiscornia2022}. Esta situación implica un derroche de recursos naturales y económicos que afecta de manera directa la rentabilidad de los comercios que operan con productos frescos y perecederos.
 
-El segmento de panaderías y pastelerías ilustra con crudeza esta problemática: en 2024 cerraron más de 400 locales, reflejando la dificultad de muchos pequeños y medianos negocios para ajustar su producción a una demanda cada vez más volátil (Pinto, 2024). 
-
 Frente a este escenario, el presente Proyecto Final de Ingeniería propone el desarrollo de un sistema de análisis y predicción con inteligencia artificial para tiendas de productos perecederos, concebido como una plataforma web de fácil adopción. El sistema integrará modelos de series temporales y aprendizaje automático para pronosticar la demanda diaria a nivel de artículo, procesará registros de ventas capturados mediante carga de imágenes y empleará un motor analítico que —por medio de un dashboard interactivo y un chatbot conversacional— ofrecerá indicadores clave (KPIs) y recomendaciones operativas. El MVP contempla un módulo de predicción, visualización de métricas, ingestión inteligente de imágenes, alertas de sobreproducción o faltantes y comparaciones semana a semana.
 
 Además de sus aportes técnicos, la propuesta busca contribuir al \emph{Objetivo de Desarrollo Sostenible 12} (Producción y Consumo Responsables) mediante la minimización de desperdicios y el uso eficiente de recursos. Al acercar tecnologías de IA a actores tradicionalmente rezagados en digitalización, se espera profesionalizar la gestión operativa, optimizar la compra de insumos y fortalecer la competitividad de cientos de unidades comerciales que conforman el tejido económico local.
 
 \section{Objetivo General}
 
-Desarrollar una plataforma web de predicción con inteligencia artificial para optimizar la producción diaria y reducir el desperdicio de productos perecederos en comercios, ajustando la oferta a la demanda real mediante datos históricos en el contexto de Buenos Aires 2025.\\
+Desarrollar una plataforma web de predicción con inteligencia artificial para optimizar la producción diaria y reducir el desperdicio de productos perecederos en comercios, ajustando la oferta a la demanda real mediante datos históricos en el contexto de Buenos Aires 2025.
 
 \noindent\textbf{Objetivos específicos:}
 
@@ -35,7 +33,7 @@ El producto de software consiste en una aplicación web que incluye las siguient
     \item Un módulo de predicción de demanda diaria por producto, que utiliza como variables de entrada el historial de ventas, día de la semana, condiciones climáticas y feriados, generando como salida una estimación de la producción correspondiente a cada artículo.
     \item Un dashboard que permite visualizar los KPIs más relevantes para la organización, tales como márgenes de ganancia, predicciones realizadas, productos más vendidos y ventas por franja horaria. 
     \item Un chatbot que actúa como interfaz principal de interacción con el sistema, mediante el cual el usuario puede realizar consultas.
-    \item Un sistema de carga de imágenes que permite al usuario subir registros de ventas directamente desde la interfaz web, extrayendo y almacenando automáticamente los datos a partir de las imágenes mediante LLMs.
+    \item Un sistema de carga de imágenes que permite al usuario subir registros de ventas directamente desde la interfaz web, extrayendo y almacenando automáticamente los datos a partir de las imágenes mediante LLMs multimodales.
     \item Un módulo de alertas que advierte al usuario en casos de potencial sobreproducción o faltantes de stock, con antelación, en base a la comparación entre los valores proyectados y los datos de producción ingresados. 
     \item Una herramienta de comparación de ventas semana a semana, que facilita la identificación de patrones de consumo y permite evaluar la evolución del desempeño comercial a lo largo del tiempo.
 \end{itemize}
