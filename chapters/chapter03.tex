@@ -351,6 +351,103 @@ La persistencia está gestionada por \textbf{Supabase}, que provee:
 La comunicación entre backend y Supabase se realiza a través de 
 consultas SQL, garantizando consistencia y trazabilidad de los datos.
 
+\subsection{Motor de consultas conversacionales (Text-to-SQL)}
+\label{subsec:text-to-sql}
+
+El asistente conversacional de AIVA no se limita a generar respuestas
+genéricas a partir del modelo de lenguaje, sino que actúa como una capa de
+acceso controlado a los datos operativos del comercio. Para ello, se
+implementó un motor \textit{Text-to-SQL} que traduce las consultas en
+lenguaje natural en instrucciones SQL parametrizadas, manteniendo en todo
+momento restricciones de seguridad y gobernanza sobre la base de datos.
+
+En términos arquitectónicos, el flujo puede resumirse en cinco etapas
+principales:
+
+\begin{enumerate}[label=\arabic*., leftmargin=*, nosep]
+  \item \textbf{Clasificación de la intención y extracción de parámetros.}
+  El mensaje del usuario se analiza con el modelo de lenguaje para
+  identificar la intención (por ejemplo, ``ventas por producto'',
+  ``comparar días'' o ``ver predicciones'') y extraer parámetros
+  estructurados como fechas, productos o períodos.
+
+  \item \textbf{Generación de una consulta SQL candidata.} A partir de esa
+  representación estructurada, el asistente propone una instrucción SQL de
+  solo lectura sobre un subconjunto acotado de tablas y vistas. La plantilla
+  de la consulta se construye siempre de forma parametrizada (sin
+  concatenación de texto libre), de modo que los valores dinámicos se
+  inyectan mediante \textit{placeholders}.
+
+  \item \textbf{Validación de seguridad y gobernanza.} Antes de ejecutar la
+  consulta, una capa de validación independiente verifica que:
+  \begin{itemize}[nosep]
+    \item sólo se utilicen sentencias \texttt{SELECT}
+          (se bloquean \texttt{INSERT}, \texttt{UPDATE},
+          \texttt{DELETE}, \texttt{DROP}, etc.);
+    \item las tablas y columnas referenciadas pertenezcan a una lista
+          blanca predefinida;
+    \item se respete el filtrado por \texttt{user\_id}, alineado con las
+          políticas RLS de Supabase;
+    \item se impongan límites razonables (por ejemplo, \texttt{LIMIT}
+          máximo) para evitar consultas costosas o que devuelvan datos
+          innecesarios.
+  \end{itemize}
+
+  \item \textbf{Ejecución sobre la base de datos.} Sólo si la consulta
+  supera las validaciones anteriores se envía al motor PostgreSQL de
+  Supabase para su ejecución. El resultado devuelto se trata como un
+  conjunto de datos intermedio, que puede agruparse, ordenarse o
+  transformarse antes de ser comunicado al usuario.
+
+  \item \textbf{Post-procesamiento y redacción de la respuesta.} Finalmente,
+  el asistente resume los resultados en un lenguaje natural comprensible,
+  incorporando métricas (totales, variaciones, promedios) y, cuando
+  corresponde, enlaces directos a vistas del \textit{dashboard} o a
+  reportes detallados.
+\end{enumerate}
+
+Este motor convierte al chatbot en una interfaz conversacional sobre la
+base de datos transaccional, pero sin otorgarle al modelo de lenguaje
+control directo sobre las operaciones de escritura ni sobre el esquema
+completo de la base.
+
+\paragraph{Comparación con MCP.}
+
+El \textit{Model Context Protocol} (MCP) propone un estándar para conectar
+modelos de lenguaje con herramientas y fuentes de datos de manera
+interoperable, describiendo de forma uniforme qué operaciones puede
+invocar el modelo y qué parámetros acepta cada una. En ese sentido, MCP
+resuelve principalmente el \emph{cómo conectarse} a distintos recursos
+(bases de datos, APIs, archivos) y facilita que un mismo modelo pueda
+reutilizarse en diferentes entornos sin cambios en el código de
+integración.
+
+El enfoque adoptado en AIVA comparte esta idea de encapsular los recursos
+como herramientas, pero introduce una capa adicional de gobierno específica
+para el dominio del sistema. En particular:
+
+\begin{itemize}[nosep]
+  \item el motor \textit{Text-to-SQL} de AIVA restringe explícitamente las
+        operaciones a consultas de lectura sobre un conjunto reducido de
+        tablas y vistas, mientras que MCP, por diseño, no impone políticas
+        de sólo lectura ni reglas de negocio sobre las acciones que un
+        modelo puede solicitar;
+  \item la validación sintáctica y semántica de cada consulta se realiza
+        fuera del modelo de lenguaje, de modo que el LLM nunca ejecuta
+        directamente lo que propone, sino que sus salidas pasan por una
+        capa de revisión determinística;
+  \item las decisiones de seguridad (bloqueo de acciones destructivas,
+        límites de resultados, filtrado por \texttt{user\_id}) se codifican
+        en el backend de AIVA y no dependen de instrucciones implícitas
+        dentro del \textit{prompt}.
+\end{itemize}
+
+En síntesis, mientras que MCP se centra en estandarizar la forma de
+conectar modelos de lenguaje con herramientas externas, el motor
+\textit{Text-to-SQL} de AIVA combina esa idea con una capa de control que
+impide acciones destructivas, garantiza el aislamiento por comercio y hace
+auditables todas las consultas generadas.
+
 \subsection{Integraciones externas}
 
 El sistema se enriquece con dos servicios externos:
