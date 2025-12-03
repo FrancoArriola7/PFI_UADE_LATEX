@@ -55,11 +55,9 @@ El objetivo del presente análisis es examinar la posición estratégica del sis
 
 \subsection{Análisis interno}
 
-En el análisis interno se identifican las principales fortalezas y debilidades del proyecto. 
+En el análisis interno se identifican las principales fortalezas y debilidades del proyecto. Entre las fortalezas más relevantes, se destaca la propuesta tecnológica integral de AIVA, que combina predicción de demanda mediante algoritmos de inteligencia artificial, un asistente conversacional basado en lenguaje natural y carga automatizada de registros mediante tecnologías OCR y modelos de lenguaje extensos (LLMs). Esta integración de herramientas convierte al sistema en una solución innovadora y de alto valor agregado para pequeños comercios. Asimismo, su diseño centrado en la usabilidad y accesibilidad favorece la adopción por parte de usuarios sin conocimientos técnicos, a diferencia de las soluciones corporativas que demandan infraestructura avanzada. 
 
-Entre las fortalezas más relevantes, se destaca la propuesta tecnológica integral de AIVA, que combina predicción de demanda mediante algoritmos de inteligencia artificial, un asistente conversacional basado en lenguaje natural y carga automatizada de registros mediante tecnologías OCR y modelos de lenguaje extensos (LLMs). Esta integración de herramientas convierte al sistema en una solución innovadora y de alto valor agregado para pequeños comercios. Asimismo, su diseño centrado en la usabilidad y accesibilidad favorece la adopción por parte de usuarios sin conocimientos técnicos, a diferencia de las soluciones corporativas que demandan infraestructura avanzada. 
-
-Otro aspecto sobresaliente es la adaptación del modelo al contexto local, incorporando variables como condiciones climáticas, feriados y patrones de consumo característicos del Área Metropolitana de Buenos Aires, lo que incrementa la precisión de las predicciones. Desde el punto de vista estratégico, AIVA contribuye al \textit{Objetivo de Desarrollo Sostenible N.º 12 (Producción y Consumo Responsables)} al promover la reducción del desperdicio alimentario y el uso eficiente de recursos. Además, su modelo de negocio, basado en un esquema de suscripción mensual con período de prueba gratuito (free trial), presenta indicadores financieros favorables, con un valor actual neto positivo, una tasa interna de retorno superior al 50\,\% y un período de recupero estimado en aproximadamente dos años. Finalmente, la arquitectura moderna y modular del sistema, basada en tecnologías como Next.js, Supabase y OpenWeather API, asegura un funcionamiento eficiente, escalable y de mantenimiento simple.
+Otro aspecto sobresaliente es la adaptación del modelo al contexto local, incorporando variables como condiciones climáticas, feriados y patrones de consumo característicos del Área Metropolitana de Buenos Aires, lo que incrementa la precisión de las predicciones. Desde el punto de vista estratégico, AIVA contribuye al \textit{Objetivo de Desarrollo Sostenible N.º 12 (Producción y Consumo Responsables)} al promover la reducción del desperdicio alimentario y el uso eficiente de recursos. Además, su modelo de negocio, basado en un esquema de suscripción mensual con período de prueba gratuito (free trial), presenta indicadores financieros favorables, con un valor actual neto positivo, una tasa interna de retorno superior al 50\% y un período de recupero estimado en aproximadamente dos años. Finalmente, la arquitectura moderna y modular del sistema, basada en tecnologías como Next.js, Supabase y OpenWeather API, asegura un funcionamiento eficiente, escalable y de mantenimiento simple.
 
 Entre las debilidades, se identifica la dependencia de la calidad y cantidad de los datos iniciales que los usuarios carguen en el sistema, dado que la precisión de los modelos predictivos se encuentra directamente relacionada con la disponibilidad y consistencia de dichos registros. Asimismo, la continuidad del proyecto requiere inversión constante y recursos técnicos especializados para el mantenimiento y actualización de los modelos de inteligencia artificial, lo cual puede representar una limitación en etapas tempranas de expansión. Otro desafío relevante es la curva de adopción tecnológica: algunos usuarios, especialmente en comercios tradicionales, pueden mostrar resistencia o dificultades al incorporar nuevas herramientas digitales, lo que exige estrategias de acompañamiento y capacitación. Finalmente, la dependencia de proveedores externos como OpenAI o Supabase introduce vulnerabilidades ante posibles variaciones en costos, políticas de uso o disponibilidad de servicios.
 
@@ -300,13 +298,8 @@ Conjunto de utilidades para ingesta histórica.
 \noindent\textbf{Motivación.} Simplicidad y compatibilidad con exportaciones comunes.
 
 \subsection{Buenas prácticas de configuración y seguridad}
-\begin{itemize}
-    \item Gestión de credenciales mediante variables de entorno (\texttt{.env}), evitando su versionado.
-    \item Separación de entornos (desarrollo/producción) y rotación periódica de claves.
-    \item En despliegues gestionados, aplicación de RLS por \textit{user\_id} para segmentación de datos.
-\end{itemize}
 
-
+La aplicación debe seguir buenas prácticas de configuración y seguridad, utilizando variables de entorno (\texttt{.env}) para gestionar credenciales y evitando su inclusión en el control de versiones. Es fundamental mantener una separación clara entre los entornos de desarrollo y producción, junto con la rotación periódica de claves sensibles para minimizar riesgos. En los despliegues gestionados, además, se recomienda aplicar políticas de Row Level Security (RLS) basadas en el \textit{user\_id} para asegurar una correcta segmentación y protección de los datos.
 
 
 \section{Arquitectura del sistema}
@@ -459,8 +452,8 @@ El sistema se enriquece con dos servicios externos:
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.92\textwidth]{images/arquitecturaAIVA.png} % <-- reemplazar por tu archivo
-  \caption{Arquitectura -- Fuente :elaboración propia. Los logotipos pertenecen a sus respectivas marcas.}
+  \includegraphics[width=0.92\textwidth]{images/Arquitectura1.png}
+  \caption{Arquitectura -- Fuente: elaboración propia. Los logotipos pertenecen a sus respectivas marcas.}
   \label{fig:arquitectura-aiva}
 \end{figure}
 \vspace{1cm}
@@ -489,16 +482,13 @@ En conjunto, este modelo de datos respalda la lógica analítica de AIVA, permit
   \caption{Modelo de datos de AIVA 1-- Fuente: elaboración propia.}
   \label{fig:arquitectura-db}
 \end{figure}
-\vspace{1cm}
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{images/ArquitecturaDB2.png}
     \caption{Modelo de datos de AIVA 2-- Fuente: elaboración propia.}
     \label{fig:arquitectura-db2}
-  \end{figure}
-  \vspace{2cm}
-
+\end{figure}
 
 \vspace{1cm}
 \section{Diagrama de flujos}
@@ -506,35 +496,35 @@ En conjunto, este modelo de datos respalda la lógica analítica de AIVA, permit
 Para describir el comportamiento dinámico del sistema se incorporan diagramas de flujo que muestran, paso a paso, cómo se procesan las operaciones clave. Estos esquemas complementan a los requerimientos y a la arquitectura estática, al hacer explícitas las secuencias, los puntos de decisión, los caminos alternativos y el manejo de errores, lo que facilita la validación funcional y el diseño de casos de prueba.
 
 
-\subsection{DF-A · Autenticación}
+\subsection{DF-A - Autenticación}
 El diagrama modela el control de acceso y el alta de usuarios. Se definió así para equilibrar seguridad (validaciones en el servicio de autenticación y verificación de correo), usabilidad (separación clara entre registro e inicio de sesión) y recuperabilidad (manejo de errores con retroalimentación inmediata). La convergencia final en el dashboard establece un único criterio de éxito y facilita la trazabilidad de estados; el objetivo es registrar las decisiones críticas del acceso sin describir pantallas intermedias.
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.92\textwidth]{images/FlujoAutenticación.png}
-  \caption{DF-A · Autenticación -- Fuente: elaboración propia}
+  \includegraphics[width=0.99\textwidth]{images/FlujoAutenticación.png}
+  \caption{DF-A - Autenticación -- Fuente: elaboración propia}
   \label{fig:df-a-autenticacion}
 \end{figure}
 
 
-\subsection{DF-B · Carga de ventas}
+\subsection{DF-B - Carga de ventas}
 El diagrama describe el proceso de registro de ventas desde dos orígenes complementarios: ingreso manual tipo POS y carga automática (OCR/CSV). Se define así para cubrir los escenarios operativos más frecuentes con validaciones progresivas y una confirmación explícita antes del alta, incorporando puntos de corrección para minimizar errores y preservar trazabilidad. La bifurcación temprana optimiza tiempos según la fuente de datos y el cierre en confirmación establece una única condición de éxito.
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.92\textwidth]{images/FlujoVentas.drawio.png}
-  \caption{DF-B · Carga de ventas -- Fuente: elaboración propia}
+  \includegraphics[width=0.99\textwidth]{images/FlujoVentas.drawio.png}
+  \caption{DF-B - Carga de ventas -- Fuente: elaboración propia}
   \label{fig:df-b-ventas}
 \end{figure}
 
 
-\subsection{DF-C · Planes y suscripciones}
+\subsection{DF-C - Planes y suscripciones}
 El diagrama describe la gestión de planes dentro de la aplicación. Al crear una cuenta, el usuario recibe automáticamente el plan gratuito; por este motivo, cualquier cambio de plan se realiza exclusivamente desde la app. El flujo contempla verificación de identidad y estado de suscripción, selección del nuevo plan y confirmación (incluida la validación de pago si corresponde). Ante éxito se actualiza la suscripción y se reflejan las capacidades en sesión; ante error se conserva el plan previo. El enfoque prioriza control de acceso, trazabilidad y una transición segura entre planes.
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.92\textwidth]{images/FlujoPlanes.drawio.png}
-  \caption{DF-C · Planes y suscripciones -- Fuente: elaboración propia}
+  \includegraphics[width=0.99\textwidth]{images/FlujoPlanes.drawio.png}
+  \caption{DF-C - Planes y suscripciones -- Fuente: elaboración propia}
   \label{fig:df-c-planes}
 \end{figure}
 
