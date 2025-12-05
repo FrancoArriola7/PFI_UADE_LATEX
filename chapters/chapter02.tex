@@ -319,8 +319,6 @@ Estos estudios confirman que los modelos neuronales como LSTM y Bi-LSTM superan 
 
 
 
-
-
 \subsection{Aporte diferencial del proyecto}
 
 El sistema propuesto en este proyecto se distingue de las soluciones analizadas por integrar de forma coherente técnicas de predicción de demanda, inteligencia artificial aplicada al lenguaje natural y una arquitectura abierta orientada a la sostenibilidad. Sus principales aportes diferenciales son los siguientes:
@@ -334,14 +332,14 @@ El sistema propuesto en este proyecto se distingue de las soluciones analizadas 
 
     \item \textbf{Predicción adaptativa y evaluación continua}: el sistema selecciona dinámicamente el mejor modelo de predicción (Holt-Winters o regresión OLS) según métricas de error (MAE, RMSE, MAPE), lo que permite mantener la precisión sin intervención manual y adaptarse a los cambios en el comportamiento de la demanda.
 
-    \item \textbf{Multimodalidad en la captura de datos}: además de la carga manual, AIVA permite registrar información mediante imágenes de tickets o planillas utilizando OCR combinado con LLMs, ampliando la capacidad de digitalización y reduciendo la fricción de adopción en contextos de baja formalización.
+    \item \textbf{Multimodalidad en la captura de datos}: además de la carga manual, AIVA incorpora la posibilidad de interpretar imágenes de tickets o planillas mediante modelos de lenguaje multimodales (LLMs). Si bien estos modelos pueden desempeñar funciones similares a un sistema tradicional de (OCR), su operación es distinta: no extraen caracteres de forma determinística, sino que procesan la imagen de forma integral y generan una salida basada en la probabilidad de que dicha respuesta represente adecuadamente el contenido observado. Esta aproximación reduce la complejidad de la implementación y permite corregir inconsistencias o errores presentes en la imagen, aportando una capa adicional de interpretación que los sistemas OCR tradicionales no contemplan.
 
     \item \textbf{Sostenibilidad y eficiencia operativa}: al optimizar la producción y reducir el desperdicio de alimentos, el sistema contribuye a la economía circular y a los Objetivos de Desarrollo Sostenible (ODS 12), integrando tecnología e impacto social en un mismo marco operativo.\\
 \end{itemize}
 
 
 
-\subsection{Conclusión del estado del arte}
+\subsection{Reflexión final del estado del arte}
 El análisis realizado permite constatar que, si bien existen múltiples soluciones comerciales y académicas orientadas a la predicción de demanda en el sector alimentario, la mayoría presenta limitaciones significativas para su adopción en pequeños comercios. Las herramientas comerciales suelen implicar altos costos, requerimientos técnicos avanzados o infraestructuras previas de gestión, lo que las hace poco viables en entornos de baja digitalización. Por otro lado, los enfoques académicos demuestran un alto potencial predictivo, en particular mediante modelos neuronales como LSTM y Bi-LSTM, pero carecen de implementaciones accesibles y adaptadas al mercado local. En este contexto, AIVA se posiciona como una propuesta diferencial al integrar accesibilidad, multimodalidad y orientación a la realidad de las PYMEs argentinas, aportando una solución práctica y escalable que combina avances tecnológicos recientes con un enfoque inclusivo y sostenible.
 
 \newpage
@@ -426,15 +424,56 @@ Milena expresó además un claro interés en incorporar tecnologías que ayuden 
 En síntesis, la entrevista a Milena pone de manifiesto la necesidad de herramientas accesibles que faciliten la gestión de la producción en panaderías y confiterías tradicionales. Su testimonio refuerza la relevancia de desarrollar soluciones tecnológicas simples, pero efectivas, que permitan transformar la experiencia empírica de los dueños y encargados en decisiones basadas en datos. Esto valida el enfoque del presente proyecto, orientado a ofrecer una solución de predicción de demanda que contribuya a la eficiencia operativa y sostenibilidad económica de este tipo de negocios.
 
 
-\subsection{Conclusión del user research}
+\subsection{Entrevista a Bruno, dueño de la confitería ``Salvador''}
 
-La combinación de los resultados obtenidos a partir de la encuesta a consumidores y la entrevista en profundidad a una comerciante del rubro permitió validar empíricamente la necesidad y el potencial de una herramienta como AIVA.  
+Con el objetivo de comprender de manera más profunda el contexto operativo de los
+pequeños comercios de productos perecederos, se entrevistó a Bruno, propietario de la confitería
+“Salvador”, un negocio con más de 20 años de trayectoria en la ciudad. Esta entrevista buscó obtener información cualitativa para validar el desarrollo de una herramienta de predicción de
+demanda y conocer el grado de adopción tecnológica actual.
 
-\indent Por un lado, la encuesta evidenció un patrón de consumo regular y predecible en el mercado de panificados, con picos de compra concentrados en franjas horarias específicas y una fuerte dependencia de variables externas como el clima y el día de la semana. Asimismo, se constató una alta frecuencia de faltantes: tres de cada cuatro personas experimentaron la ausencia de algún producto en el último mes, y en una de cada cuatro ocasiones esto derivó en una venta perdida. Este hallazgo cuantifica con claridad la magnitud del problema operativo que AIVA busca resolver: la ineficiencia en la planificación y reposición de productos perecederos.  
+La confitería Salvador se especializa en la venta de café y postres, y emplea a más de 10
+personas. Bruno señaló que el café y productos relacionados son los más demandados, mientras
+que los postres presentan una menor rotación. Según indicó, los productos tienen una duración
+estimada de un día en inventario, lo que evidencia una rotación diaria muy alta y la necesidad de
+una planificación precisa.
 
-\indent Por otro lado, la entrevista con Milena González, encargada de la confitería \textit{La Catalana}, permitió comprender en profundidad las limitaciones cotidianas que enfrentan los comercios del sector. La ausencia de sistemas formales de registro y predicción obliga a basar la producción en la intuición y experiencia del personal, lo que incrementa el riesgo de sobreproducción o quiebre de stock. Sin embargo, la disposición expresada por Milena a incorporar soluciones tecnológicas simples y accesibles refuerza la viabilidad de adopción de AIVA dentro de este tipo de entornos.  
+Respecto a la gestión operativa, cada local es responsable de su propia reposición de
+productos. La producción diaria se define en función de los faltantes observados y de estimaciones
+realizadas a partir del comportamiento histórico de ventas. Entre los factores considerados para
+estas estimaciones, se destacó la influencia de los fines de semana, dado que la demanda suele
+incrementarse en esos días.
 
-\indent En conjunto, ambos instrumentos de investigación (encuesta y entrevista) confirman que el problema de disponibilidad y desperdicio en panaderías y confiterías es real, frecuente y económicamente relevante. Además, validan la hipótesis central del proyecto: existe una oportunidad concreta para aplicar inteligencia artificial en la predicción de demanda de productos perecederos, generando beneficios medibles en eficiencia operativa, reducción de mermas y aumento de ventas.  
+Bruno remarcó que la precisión en la estimación de la demanda es muy importante para
+el negocio, ya que permite evitar tanto el quiebre de stock como la sobreproducción. Si bien
+actualmente el desperdicio no representa un problema crítico, sí es una preocupación constante
+por sus implicancias en los costos y la eficiencia operativa.
+
+En cuanto a la tecnología utilizada, la confitería ya emplea el sistema Maxirest para la
+gestión de inventario. Sin embargo, Bruno manifestó su disposición a adoptar nuevas herramientas
+siempre que aporten mejoras tangibles, como la reducción de desperdicios o el incremento de
+ventas.
+
+Particularmente, se mostró interesado en una herramienta que permita predecir la demanda
+de forma más precisa incorporando datos históricos, variables climáticas y otros factores externos.
+Considera que una solución de este tipo le permitiría ajustar la producción diaria de manera más
+eficiente, reducir mermas y mejorar la toma de decisiones operativas.
+
+Este testimonio pone de manifiesto la necesidad de soluciones accesibles, basadas en
+inteligencia artificial, que puedan integrarse fácilmente en los procesos de pequeños comercios.
+Además, valida el enfoque propuesto por este proyecto, que busca dotar a estos actores de
+herramientas tecnológicas que mejoren la eficiencia y la sustentabilidad de sus operaciones.
+
+
+
+\subsection{Interpretación del user research}
+
+La combinación de los resultados obtenidos a partir de la encuesta a consumidores y de las entrevistas realizadas a comerciantes del rubro permitió validar empíricamente la necesidad y el potencial de una herramienta como AIVA.
+
+\indent Por un lado, la encuesta evidenció un patrón de consumo regular y predecible en el mercado de panificados, con picos de compra concentrados en franjas horarias específicas y una fuerte dependencia de variables externas como el clima y el día de la semana. Asimismo, se constató una alta frecuencia de faltantes: tres de cada cuatro personas experimentaron la ausencia de algún producto en el último mes, y en una de cada cuatro ocasiones esto derivó en una venta perdida. Este hallazgo cuantifica con claridad la magnitud del problema operativo que AIVA busca resolver: la ineficiencia en la planificación y reposición de productos perecederos.
+
+\indent Por otro lado, las entrevistas con comerciantes, entre ellas Milena González de \textit{La Catalana} y Bruno, dueño de la confitería \textit{Salvador}, permitieron comprender en profundidad las limitaciones cotidianas que enfrentan los negocios del sector. La ausencia de sistemas formales de registro y predicción obliga a basar la producción en la intuición y experiencia del personal, lo que incrementa el riesgo de sobreproducción o quiebre de stock. Si bien el nivel de madurez tecnológica varía entre comercios, ambos entrevistados manifestaron interés en incorporar herramientas simples y accesibles que aporten precisión en la estimación de la demanda y reduzcan desperdicios, lo que refuerza la viabilidad de adopción de AIVA dentro de este tipo de entornos.
+
+\indent En conjunto, estos instrumentos de investigación (encuesta y entrevistas) confirman que el problema de disponibilidad y desperdicio en panaderías y confiterías es real, frecuente y económicamente relevante. Además, validan la hipótesis central del proyecto: existe una oportunidad concreta para aplicar inteligencia artificial en la predicción de demanda de productos perecederos, generando beneficios medibles en eficiencia operativa, reducción de mermas y aumento de ventas.
 
 \indent Los hallazgos de esta etapa consolidan la base empírica sobre la cual se diseña e implementa AIVA, asegurando que su arquitectura funcional y sus algoritmos respondan a las condiciones reales del mercado y a las necesidades específicas de los usuarios finales.
 

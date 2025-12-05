@@ -4,17 +4,31 @@ En el desarrollo de AIVA se llevaron a cabo pruebas orientadas a garantizar la f
 
 \section{Pruebas de usabilidad}
 
-Las pruebas de usabilidad se realizaron con Milena González, encargada de la confitería \textit{La Catalana}, quien también participó en la etapa de user research.  
-El objetivo fue evaluar la facilidad de uso del sistema, la claridad visual de la interfaz y la utilidad de las funcionalidades implementadas.
+Las pruebas de usabilidad se realizaron con Milena González, encargada de la confitería La Catalana y participante de la etapa de user research. El objetivo fue evaluar la facilidad de uso del sistema, la claridad visual de la interfaz y la eficacia con la que un usuario no técnico puede completar acciones cotidianas dentro de AIVA.
 
-Durante la sesión de prueba, Milena exploró los principales módulos de AIVA: el tablero de indicadores (dashboard), el asistente conversacional y la sección de carga de ventas.  
-En general, manifestó una impresión positiva sobre la aplicación, destacando su diseño simple, la coherencia entre las distintas secciones y la facilidad con la que se pueden consultar métricas o generar reportes sin necesidad de conocimientos técnicos avanzados.  
-También resaltó la utilidad del asistente conversacional como medio rápido para obtener información sobre las ventas o productos, considerando que “ahorra tiempo en tareas cotidianas” y “presenta los resultados de forma clara y comprensible”.
+Durante la sesión, Milena interactuó de manera libre con los principales módulos, comenzando por el tablero de indicadores (dashboard). Allí logró identificar sin dificultad los productos más vendidos de la última semana, interpretar los gráficos de tendencia y comparar valores respecto a días previos. Esta exploración se realizó sin necesidad de asistencia, y en menos de un minuto ya había comprendido la estructura general del tablero. Señaló que la disposición visual “permite encontrar rápido lo que uno necesita”, lo cual coincide con el diseño orientado a minimizar la carga cognitiva en usuarios con tiempos operativos reducidos.
 
-Sin embargo, su participación permitió además identificar oportunidades de mejora. Entre los puntos más relevantes, sugirió incorporar la funcionalidad de permitir la carga de archivos o imágenes directamente desde el chat del asistente, de modo que el sistema pueda interpretarlos automáticamente y generar respuestas o registros asociados.  
-Esta última propuesta fue incorporada al \textit{roadmap} de futuras versiones, ya que se alinea con el objetivo de AIVA de simplificar la gestión de datos mediante tecnologías de visión artificial y modelos de lenguaje.
+Posteriormente accedió a la sección de carga de ventas. Registró cinco ventas consecutivas correspondientes a un día real de operación y verificó que el sistema actualizara automáticamente los totales diarios y el ranking de productos. La carga se completó sin errores de validación y las métricas mostradas coincidieron con los valores ingresados, lo cual permitió confirmar el funcionamiento correcto del flujo de actualización. Milena indicó que este proceso “lleva pocos segundos y no requiere aprender nada nuevo”, aunque sugirió como mejora futura la inclusión de autocompletado para productos frecuentes.
 
-Las observaciones recogidas fueron de gran valor para ajustar la interfaz y mejorar la experiencia de usuario, contribuyendo a que AIVA sea una herramienta accesible, intuitiva y adaptable a las necesidades reales de pequeños comercios.
+Además se evaluó el módulo de carga de ventas mediante imagen. Milena subió una foto de un ticket y el sistema identificó correctamente el producto, la cantidad vendida y el monto total. La validación y confirmación de la venta se completó en menos de 20 segundos. Este flujo permitió comprobar que el procesamiento visual y la interpretación del ticket funcionan de forma estable y sin requerir correcciones manuales. Milena resaltó que este mecanismo “evita tener que tipear todo” y reduce posibles errores de carga.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.80\textwidth]{images/Prueba.png}
+  \caption{Procesamiento de imagen con OCR -- Fuente: elaboración propia}
+  \label{fig:ui-OCR2}
+\end{figure}
+
+Por otro lado, la interacción con el asistente conversacional permitió recoger observaciones particularmente relevantes. Milena realizó consultas habituales del negocio como “¿Qué vendí más ayer?” y “Muéstrame las predicciones de demanda para hoy”. El asistente generó la respuesta en menos de dos segundos, presentando un listado de KPIs, unidades esperadas por producto y recomendaciones de stock, obteniendo en todos los casos respuestas correctas y consistentes con los datos previamente cargados. Incluso cuando consultó por un producto sin registros “¿Vendí algo de pan integral hoy?”, el sistema devolvió una aclaración adecuada indicando la ausencia de datos. Estas interacciones evidenciaron que el asistente comprende adecuadamente consultas naturales, responde con precisión y ofrece un acceso rápido a métricas sin necesidad de navegar manualmente por distintas secciones. La consulta completa (ingreso del mensaje, generación de respuesta y lectura del resultado) tomó aproximadamente 15 segundos, un tiempo significativamente menor al que demanda consultar reportes manuales o revisar historiales. La usuaria destacó que “ahorra tiempo en tareas cotidianas”, especialmente durante momentos de mayor demanda en el local.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.80\textwidth]{images/PruebaChat.PNG}
+  \caption{Asistente conversacional -- Fuente: elaboración propia}
+  \label{fig:ui-chatbot2}
+\end{figure}
+
+Finalmente, surgió una sugerencia clave: incorporar la posibilidad de subir imágenes o archivos directamente desde el chat del asistente, de modo que AIVA pueda procesarlos e integrarlos automáticamente al registro de ventas. Esta propuesta fue incluida en el \textit{roadmap} de desarrollo por su potencial para reducir aún más la fricción en la carga de datos y aprovechar modelos de visión y lenguaje de manera integrada.
 
 \section{Pruebas unitarias e integración}
 
@@ -24,7 +38,7 @@ Por su parte, las pruebas de integración verificaron la correcta comunicación 
 
 Asimismo, se evaluó el correcto funcionamiento de la interacción con servicios externos (como OpenWeather para el registro de variables climáticas y OpenAI para el asistente conversacional) garantizando una respuesta estable incluso ante errores de conexión o variaciones en los endpoints.
 
-\section{Conclusión de pruebas}
+\section{Evaluación general de las pruebas}
 
 Las pruebas implementadas permitieron comprobar que AIVA posee un funcionamiento estable, preciso y coherente con los objetivos definidos en la etapa de diseño.  
 El sistema demostró una adecuada capacidad de respuesta, integrando correctamente sus distintos módulos y ofreciendo una experiencia de uso fluida para el usuario final.  
